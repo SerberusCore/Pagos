@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Pagos.Models.Ordenes>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenCodigo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenTipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenFecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenSubtotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenIgv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenPlazoEntrega)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenFormaPago)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenContactoInterno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenLugarEntrega)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenEstado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenObservacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenMotivoRechazo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Proveedores.ProveedorRuc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenCodigo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenTipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenFecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenSubtotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenIgv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenPlazoEntrega)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenFormaPago)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenContactoInterno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenLugarEntrega)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenEstado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenObservacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenMotivoRechazo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Proveedores.ProveedorRuc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OrdenId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OrdenId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OrdenId })
+        </td>
+    </tr>
+}
+
+</table>
