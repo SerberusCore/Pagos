@@ -2,3 +2,4 @@
 /.vs
 /Pagos/bin
 /Pagos/obj
+/Pagos/*.user
