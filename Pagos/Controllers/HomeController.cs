@@ -26,5 +26,10 @@ namespace Pagos.Controllers
 
             return View();
         }
+
+        public ActionResult Principal()
+        {
+            return View();
+        }
     }
 }
