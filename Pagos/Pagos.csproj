@@ -137,6 +137,7 @@
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdenesController.cs" />
+    <Compile Include="Controllers\OrdenesDetallesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -316,6 +317,9 @@
     <Content Include="Views\Ordenes\Details.cshtml" />
     <Content Include="Views\Ordenes\Edit.cshtml" />
     <Content Include="Views\Ordenes\Index.cshtml" />
+    <Content Include="Views\Shared\_confirmar.cshtml" />
+    <Content Include="Views\OrdenesDetalles\_CrearDetalle.cshtml" />
+    <Content Include="Views\OrdenesDetalles\_Lista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
