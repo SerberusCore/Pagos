@@ -136,6 +136,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdenesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -310,6 +311,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Principal.cshtml" />
     <Content Include="Views\Factura\Index.cshtml" />
+    <Content Include="Views\Ordenes\Create.cshtml" />
+    <Content Include="Views\Ordenes\Delete.cshtml" />
+    <Content Include="Views\Ordenes\Details.cshtml" />
+    <Content Include="Views\Ordenes\Edit.cshtml" />
+    <Content Include="Views\Ordenes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
