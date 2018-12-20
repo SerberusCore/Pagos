@@ -5,3 +5,5 @@
 /Pagos/*.user
 .vs/Pagos/v15/.suo
 .vs/Pagos/v15/Server/sqlite3/storage.ide-wal
+*.suo
+*.ide-wal
