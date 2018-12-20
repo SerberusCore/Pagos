@@ -3,3 +3,6 @@
 /Pagos/bin
 /Pagos/obj
 /Pagos/*.user
+.vs/Pagos/v15/.suo
+*.ide-wal
+.vs/Pagos/v15/.suo
