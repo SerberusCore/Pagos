@@ -1,9 +1,4 @@
 /packages
-/Pagos/bin
-obj
-packages
 /.vs
-.vs/Pagos/v15/.suo
-.vs/Pagos/v15/.suo
-.vs/Pagos/v15/Server/sqlite3/storage.ide-wal
-.vs/Pagos/v15/.suo
+/Pagos/bin
+/Pagos/obj
