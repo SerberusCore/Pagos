@@ -1,0 +1,160 @@
+﻿@model Pagos.Models.Facturas
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Facturas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaProyecto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaProyecto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaSerie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaSerie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaNumero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaNumero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaFechaEmision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaFechaEmision)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaFechaVencimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaFechaVencimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaMoneda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaMoneda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaEstado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaEstado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaSubtotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaSubtotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaIgv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaIgv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaImporteTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaImporteTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaFondoGarantia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaFondoGarantia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaPorcentajeDetraccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaPorcentajeDetraccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaMontoDetraccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaMontoDetraccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaImportePagar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaImportePagar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaFechaPagoProgramada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaFechaPagoProgramada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TiposFacturas.TipoFacturaCodigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TiposFacturas.TipoFacturaCodigo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

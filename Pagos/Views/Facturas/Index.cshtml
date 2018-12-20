@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Pagos.Models.Facturas>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Consultar Facturas</h2>
+
+<p>
+    @Html.ActionLink("Registrar", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FacturaProyecto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TiposFacturas.TipoFacturaCodigo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacturaSerie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacturaNumero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacturaFechaEmision)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacturaFechaVencimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacturaEstado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacturaProyecto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TiposFacturas.TipoFacturaCodigo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacturaSerie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacturaNumero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacturaFechaEmision)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacturaFechaVencimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacturaEstado)
+        </td>
+         <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.FacturaId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.FacturaId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.FacturaId })
+        </td>
+    </tr>
+}
+
+</table>
