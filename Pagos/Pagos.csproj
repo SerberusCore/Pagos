@@ -275,9 +275,6 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <EntityDeploy Include="Models\Modelo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Modelo.Designer.cs</LastGenOutput>
