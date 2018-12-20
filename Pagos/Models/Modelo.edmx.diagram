@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0d29ba678f584034a7e5177fb8c42630" Name="Diagram1">
+        <EntityTypeShape EntityType="nortonModel.Empresas" Width="1.5" PointX="14.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.EmpresasCuentasBancarias" Width="1.5" PointX="17" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.Facturas" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.FacturasDetalles" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.FacturasEstados" Width="1.5" PointX="5.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.FacturasGuiasRemision" Width="1.5" PointX="5.25" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.FacturasOrdenes" Width="1.5" PointX="8.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.FacturasPagos" Width="1.5" PointX="8.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.Monedas" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.Ordenes" Width="1.5" PointX="10.5" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.OrdenesDetalles" Width="1.5" PointX="12.75" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.OrdenesPartidas" Width="1.5" PointX="15" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.Paginas" Width="1.5" PointX="17.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.Pagos" Width="1.5" PointX="6" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.Parametros" Width="1.5" PointX="5.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.ParametrosDetalle" Width="1.5" PointX="8" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.Partidas" Width="1.5" PointX="10.5" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.Presupuestos" Width="1.5" PointX="17" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.PresupuestosItems" Width="1.5" PointX="12.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.PresupuestosItemsLogs" Width="1.5" PointX="15" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.Proveedores" Width="1.5" PointX="8.25" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.ProveedoresContactos" Width="1.5" PointX="10.5" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.ProveedoresCuentasBancarias" Width="1.5" PointX="10.5" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.Proyectos" Width="1.5" PointX="17" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.ProyectosPresupuestos" Width="1.5" PointX="19.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.ProyectosResponsables" Width="1.5" PointX="19.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.Roles" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.RolesPaginas" Width="1.5" PointX="20" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.TiposdeCambio" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.TiposDetracciones" Width="1.5" PointX="6" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.TiposFacturas" Width="1.5" PointX="0.75" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.TiposProveedores" Width="1.5" PointX="6" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.Usuarios" Width="1.5" PointX="20" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="nortonModel.FK_EmpresasCuentasBancarias_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_Proyectos_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_Usuarios_Empresas" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_Facturas_TiposFacturas" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_FacturasDetalles_Facturas" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_FacturasEstados_Facturas" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_FacturasGuiasRemision_Facturas" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_FacturasOrdenes_Facturas" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_FacturasPagos_Facturas" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_FacturasOrdenes_Ordenes" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_FacturasPagos_Pagos" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_TiposdeCambio_Monedas" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_Ordenes_Proveedores" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_OrdenesDetalles_Ordenes" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_OrdenesPartidas_OrdenesDetalles" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_OrdenesPartidas_PresupuestosItems" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_RolesPaginas_Paginas" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_ParametrosDetalle_Parametros" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_PresupuestosItems_Partidas" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_ProyectosPresupuestos_Presupuestos" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_PresupuestosItemsLogs_PresupuestosItems" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_Proveedores_TiposDetracciones" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_Proveedores_TiposProveedores" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_ProveedoresContactos_Proveedores" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_ProveedoresCuentasBancarias_Proveedores" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_ProyectosPresupuestos_Proyectos" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_ProyectosResponsables_Proyectos" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_RolesPaginas_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.FK_Usuarios_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="nortonModel.ProveedoresFacturas" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

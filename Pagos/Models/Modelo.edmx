@@ -1,0 +1,2527 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="nortonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Empresas">
+          <Key>
+            <PropertyRef Name="EmpresaId" />
+          </Key>
+          <Property Name="EmpresaId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EmpresaCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="EmpresaDescripcion" Type="varchar" MaxLength="50" />
+          <Property Name="EmpresaEstado" Type="char" MaxLength="1" />
+          <Property Name="EmpresaPorDefecto" Type="bit" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="EmpresasCuentasBancarias">
+          <Key>
+            <PropertyRef Name="EmpresaCuentaBancariaId" />
+          </Key>
+          <Property Name="EmpresaCuentaBancariaId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EmpresaId" Type="uniqueidentifier" />
+          <Property Name="EmpresaCuentaBancariaBanco" Type="char" MaxLength="1" />
+          <Property Name="EmpresaCuentaBancariaNumero" Type="varchar" MaxLength="50" />
+          <Property Name="EmpresaCuentaBancariaCCI" Type="varchar" MaxLength="50" />
+          <Property Name="EmpresaCuentaBancariaMoneda" Type="uniqueidentifier" />
+          <Property Name="EmpresaCuentaBancariaPorDefecto" Type="bit" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="FacturaId" />
+          </Key>
+          <Property Name="FacturaId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FacturaProyecto" Type="uniqueidentifier" />
+          <Property Name="FacturaTipo" Type="uniqueidentifier" />
+          <Property Name="FacturaSerie" Type="varchar" MaxLength="4" />
+          <Property Name="FacturaNumero" Type="varchar" MaxLength="8" />
+          <Property Name="FacturaFechaEmision" Type="datetime" />
+          <Property Name="FacturaFechaVencimiento" Type="datetime" />
+          <Property Name="FacturaMoneda" Type="uniqueidentifier" />
+          <Property Name="FacturaEstado" Type="char" MaxLength="1" />
+          <Property Name="FacturaSubtotal" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaIgv" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaImporteTotal" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaFondoGarantia" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaPorcentajeDetraccion" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaMontoDetraccion" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaImportePagar" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaUrl" Type="varchar" MaxLength="250" />
+          <Property Name="FacturaFechaPagoProgramada" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FacturasDetalles">
+          <Key>
+            <PropertyRef Name="FacturaDetalleId" />
+          </Key>
+          <Property Name="FacturaDetalleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FacturaId" Type="uniqueidentifier" />
+          <Property Name="FacturaDetalleDescripcion" Type="varchar" MaxLength="200" />
+          <Property Name="FacturaDetalleCantidad" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaDetallePrecioUnitario" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaDetalleImporteTotal" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="FacturasEstados">
+          <Key>
+            <PropertyRef Name="FacturaEstadoId" />
+          </Key>
+          <Property Name="FacturaEstadoId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FacturaEstadoEstado" Type="char" MaxLength="1" />
+          <Property Name="FacturaId" Type="uniqueidentifier" />
+          <Property Name="FacturaEstadoFecha" Type="datetime" />
+          <Property Name="FacturaEstadoUsuario" Type="uniqueidentifier" />
+          <Property Name="FacturaEstadoMotivosRechazo" Type="char" MaxLength="1" />
+          <Property Name="FacturaEstadoObservaciones" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FacturasGuiasRemision">
+          <Key>
+            <PropertyRef Name="FacturaGuiaRemisionId" />
+          </Key>
+          <Property Name="FacturaGuiaRemisionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FacturaId" Type="uniqueidentifier" />
+          <Property Name="FacturaGuiaRemisionSerie" Type="varchar" MaxLength="4" />
+          <Property Name="FacturaGuiaRemisionNumero" Type="varchar" MaxLength="8" />
+          <Property Name="FacturaGuiaRemisionFechaEmision" Type="datetime" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="FacturasOrdenes">
+          <Key>
+            <PropertyRef Name="FacturaOrdenId" />
+          </Key>
+          <Property Name="FacturaOrdenId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FacturaId" Type="uniqueidentifier" />
+          <Property Name="OrdenId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="FacturasPagos">
+          <Key>
+            <PropertyRef Name="FacturaPagoId" />
+          </Key>
+          <Property Name="FacturaPagoId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FacturaId" Type="uniqueidentifier" />
+          <Property Name="PagoId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Monedas">
+          <Key>
+            <PropertyRef Name="MonedaId" />
+          </Key>
+          <Property Name="MonedaId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MonedaCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="MonedaDescripcion" Type="varchar" MaxLength="50" />
+          <Property Name="MonedaBase" Type="bit" />
+        </EntityType>
+        <EntityType Name="Ordenes">
+          <Key>
+            <PropertyRef Name="OrdenId" />
+          </Key>
+          <Property Name="OrdenId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrdenCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="OrdenTipo" Type="char" MaxLength="1" />
+          <Property Name="OrdenFecha" Type="datetime" />
+          <Property Name="OrdenProveedor" Type="uniqueidentifier" />
+          <Property Name="OrdenSubtotal" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="OrdenIgv" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="OrdenTotal" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="OrdenPlazoEntrega" Type="datetime" />
+          <Property Name="OrdenFormaPago" Type="char" MaxLength="1" />
+          <Property Name="OrdenContactoInterno" Type="uniqueidentifier" />
+          <Property Name="OrdenLugarEntrega" Type="varchar" MaxLength="150" />
+          <Property Name="OrdenEstado" Type="char" MaxLength="1" />
+          <Property Name="OrdenObservacion" Type="varchar" MaxLength="50" />
+          <Property Name="OrdenMotivoRechazo" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="OrdenesDetalles">
+          <Key>
+            <PropertyRef Name="OrdenDetalleId" />
+          </Key>
+          <Property Name="OrdenDetalleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrdenId" Type="uniqueidentifier" />
+          <Property Name="OrdenDetalleItem" Type="int" />
+          <Property Name="OrdenDetalleDescripcion" Type="varchar" MaxLength="50" />
+          <Property Name="OrdenDetalleCuotas" Type="int" />
+          <Property Name="OrdenDetalleUnidad" Type="varchar" MaxLength="50" />
+          <Property Name="OrdenDetallePrecioUnitario" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="OrdenDetallePrecioTotal" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="OrdenesPartidas">
+          <Key>
+            <PropertyRef Name="OrdenPartidaId" />
+          </Key>
+          <Property Name="OrdenPartidaId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrdenId" Type="uniqueidentifier" />
+          <Property Name="ProyectoId" Type="uniqueidentifier" />
+          <Property Name="PresupuestoItemId" Type="uniqueidentifier" />
+          <Property Name="OrdenDetalleId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Paginas">
+          <Key>
+            <PropertyRef Name="PaginaId" />
+          </Key>
+          <Property Name="PaginaId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PaginaCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="PaginaNombre" Type="varchar" MaxLength="50" />
+          <Property Name="PaginaDescripcion" Type="varchar" MaxLength="50" />
+          <Property Name="PaginaUrl" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Pagos">
+          <Key>
+            <PropertyRef Name="PagoId" />
+          </Key>
+          <Property Name="PagoId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProveedorId" Type="uniqueidentifier" />
+          <Property Name="PagoCuentaOrigen" Type="uniqueidentifier" />
+          <Property Name="PagoCuentaDestino" Type="uniqueidentifier" />
+          <Property Name="PagoFecha" Type="datetime" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Parametros">
+          <Key>
+            <PropertyRef Name="ParametroId" />
+          </Key>
+          <Property Name="ParametroId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParametroCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="ParametroDescripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ParametrosDetalle">
+          <Key>
+            <PropertyRef Name="ParametroDetalleId" />
+          </Key>
+          <Property Name="ParametroDetalleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParametroDetalleCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="ParametroDetalleDescripcion" Type="varchar" MaxLength="50" />
+          <Property Name="ParametroId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Partidas">
+          <Key>
+            <PropertyRef Name="PartidaId" />
+          </Key>
+          <Property Name="PartidaId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PartidaCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="PartidaNaturaleza" Type="varchar" MaxLength="50" />
+          <Property Name="PartidaUnidad" Type="varchar" MaxLength="50" />
+          <Property Name="PartidaResumen" Type="varchar" MaxLength="50" />
+          <Property Name="PadrePartidaId" Type="uniqueidentifier" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Presupuestos">
+          <Key>
+            <PropertyRef Name="PresupuestoId" />
+          </Key>
+          <Property Name="PresupuestoId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PresupuestoFecha" Type="datetime" />
+          <Property Name="PresupuestoOrigen" Type="char" MaxLength="1" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="PresupuestosItems">
+          <Key>
+            <PropertyRef Name="PresupuestoItemId" />
+          </Key>
+          <Property Name="PresupuestoItemId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PresupuestoId" Type="uniqueidentifier" />
+          <Property Name="PartidaId" Type="uniqueidentifier" />
+          <Property Name="PadrePartidaId" Type="uniqueidentifier" />
+          <Property Name="PresupuestoItemFecha" Type="datetime" />
+          <Property Name="PresupuestoItemCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="PresupuestoItemNaturaleza" Type="varchar" MaxLength="50" />
+          <Property Name="PresupuestoItemUnidad" Type="varchar" MaxLength="50" />
+          <Property Name="PresupuestoItemResumen" Type="varchar" MaxLength="50" />
+          <Property Name="PresupuestoItemCantidad" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="PresupuestoItemPrecio" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="PresupuestoItemImporte" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="PresupuestosItemsLogs">
+          <Key>
+            <PropertyRef Name="PresupuestoItemLogId" />
+          </Key>
+          <Property Name="PresupuestoItemLogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PresupuestoItemId" Type="uniqueidentifier" />
+          <Property Name="PresupuestoItemLogFecha" Type="datetime" />
+          <Property Name="PresupuestoItemLogAccion" Type="char" MaxLength="1" />
+          <Property Name="PresupuestoItemCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="PresupuestoItemNaturaleza" Type="varchar" MaxLength="50" />
+          <Property Name="PresupuestoItemUnidad" Type="varchar" MaxLength="50" />
+          <Property Name="PresupuestoItemResumen" Type="varchar" MaxLength="50" />
+          <Property Name="PresupuestoItemCantidad" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="PresupuestoItemPrecio" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="PresupuestoItemImporte" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="ProveedorId" />
+          </Key>
+          <Property Name="ProveedorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProveedorRuc" Type="varchar" MaxLength="11" />
+          <Property Name="ProveedorEmail" Type="varchar" MaxLength="50" />
+          <Property Name="ProveedorRazonSocial" Type="varchar" MaxLength="50" />
+          <Property Name="ProveedorPassword" Type="varchar" MaxLength="10" />
+          <Property Name="ProveedorTipo" Type="uniqueidentifier" />
+          <Property Name="ProveedorDireccionFiscal" Type="varchar" MaxLength="150" />
+          <Property Name="ProveedorPlazoPago" Type="int" />
+          <Property Name="ProveedorEstado" Type="char" MaxLength="1" />
+          <Property Name="ProveedorTipoDetraccion" Type="uniqueidentifier" />
+          <Property Name="ProveedorPorcentajeDetraccion" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="ProveedorCuentaDetraccion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioValidacion" Type="uniqueidentifier" />
+          <Property Name="TipoProveedorId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="ProveedoresContactos">
+          <Key>
+            <PropertyRef Name="ProveedorContactoId" />
+          </Key>
+          <Property Name="ProveedorContactoId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProveedorId" Type="uniqueidentifier" />
+          <Property Name="ProveedorContactoTipo" Type="char" MaxLength="50" />
+          <Property Name="ProveedorContactoNombres" Type="varchar" MaxLength="100" />
+          <Property Name="ProveedorContactoApellidos" Type="varchar" MaxLength="100" />
+          <Property Name="ProveedorContactoEmail" Type="varchar" MaxLength="50" />
+          <Property Name="ProveedorContactoTelefono" Type="varchar" MaxLength="50" />
+          <Property Name="ProveedorContactoCelular" Type="varchar" MaxLength="50" />
+          <Property Name="UsuarioId" Type="uniqueidentifier" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="ProveedoresCuentasBancarias">
+          <Key>
+            <PropertyRef Name="ProveedorCuentaBancariaId" />
+          </Key>
+          <Property Name="ProveedorCuentaBancariaId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProveedorId" Type="uniqueidentifier" />
+          <Property Name="ProveedorCuentaBancariaBanco" Type="varchar" MaxLength="50" />
+          <Property Name="ProveedorCuentaBancariaNumero" Type="varchar" MaxLength="50" />
+          <Property Name="ProveedorCuentaBancariaCCI" Type="varchar" MaxLength="50" />
+          <Property Name="ProveedorCuantaBancariaMoneda" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="ProveedoresFacturas">
+          <Key>
+            <PropertyRef Name="ProveedorId" />
+            <PropertyRef Name="FacturarId" />
+          </Key>
+          <Property Name="ProveedorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FacturarId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proyectos">
+          <Key>
+            <PropertyRef Name="ProyectoId" />
+          </Key>
+          <Property Name="ProyectoId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProyectoCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="ProyectoNombre" Type="varchar" MaxLength="50" />
+          <Property Name="ProyectoMoneda" Type="uniqueidentifier" />
+          <Property Name="ProyectoUtilidadContratada" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="ProyectoUtilidad" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="ProyectoGastosGenerales" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="ProyectoIgv" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="ProyectoMontoTotal" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="ProyectoEstado" Type="char" MaxLength="1" />
+          <Property Name="ProyectoFechaInicio" Type="datetime" />
+          <Property Name="ProyectoFechaFin" Type="datetime" />
+          <Property Name="ProyectoEmpresa" Type="uniqueidentifier" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="ProyectosPresupuestos">
+          <Key>
+            <PropertyRef Name="ProyectoPresupuestoId" />
+          </Key>
+          <Property Name="ProyectoPresupuestoId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProyectoId" Type="uniqueidentifier" />
+          <Property Name="PresupuestoId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="ProyectosResponsables">
+          <Key>
+            <PropertyRef Name="ProyectoResponsableId" />
+          </Key>
+          <Property Name="ProyectoResponsableId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProyectoId" Type="uniqueidentifier" />
+          <Property Name="ResponsableId" Type="uniqueidentifier" />
+          <Property Name="ProyectoResponsableTipo" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RolId" />
+          </Key>
+          <Property Name="RolId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RolCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="RolDescripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RolesPaginas">
+          <Key>
+            <PropertyRef Name="RolId" />
+            <PropertyRef Name="PaginaId" />
+          </Key>
+          <Property Name="RolId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PaginaId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Accion" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="TiposdeCambio">
+          <Key>
+            <PropertyRef Name="TipoCambioId" />
+          </Key>
+          <Property Name="TipoCambioId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MonedaId" Type="uniqueidentifier" />
+          <Property Name="TipoCambioFecha" Type="datetime" />
+          <Property Name="TipoCambioValor" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="TipoCambioOrigen" Type="char" MaxLength="1" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="TiposDetracciones">
+          <Key>
+            <PropertyRef Name="TipoDetraccionId" />
+          </Key>
+          <Property Name="TipoDetraccionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TipoDetraccionCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="TipoDetraccionDescripcion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="TiposFacturas">
+          <Key>
+            <PropertyRef Name="TipoFacturaId" />
+          </Key>
+          <Property Name="TipoFacturaId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TipoFacturaCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="TipoFacturaDescripcion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="TiposProveedores">
+          <Key>
+            <PropertyRef Name="TipoProveedorId" />
+          </Key>
+          <Property Name="TipoProveedorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TipoProveedorCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="TipoProveedorDescripcion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
+          <Property Name="FechaActualizacion" Type="datetime" />
+          <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UsuarioCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="UsuarioNombres" Type="varchar" MaxLength="50" />
+          <Property Name="UsuarioApellidos" Type="varchar" MaxLength="50" />
+          <Property Name="UsuarioEmail" Type="varchar" MaxLength="50" />
+          <Property Name="UsuarioUsername" Type="varchar" MaxLength="50" />
+          <Property Name="UsuarioPassword" Type="varchar" MaxLength="50" />
+          <Property Name="RolId" Type="uniqueidentifier" />
+          <Property Name="EmpresaId" Type="uniqueidentifier" />
+        </EntityType>
+        <Association Name="FK_EmpresasCuentasBancarias_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="EmpresasCuentasBancarias" Type="Self.EmpresasCuentasBancarias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="EmpresaId" />
+            </Principal>
+            <Dependent Role="EmpresasCuentasBancarias">
+              <PropertyRef Name="EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_TiposFacturas">
+          <End Role="TiposFacturas" Type="Self.TiposFacturas" Multiplicity="0..1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposFacturas">
+              <PropertyRef Name="TipoFacturaId" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="FacturaTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasDetalles_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="FacturasDetalles" Type="Self.FacturasDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="FacturaId" />
+            </Principal>
+            <Dependent Role="FacturasDetalles">
+              <PropertyRef Name="FacturaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasEstados_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="FacturasEstados" Type="Self.FacturasEstados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="FacturaId" />
+            </Principal>
+            <Dependent Role="FacturasEstados">
+              <PropertyRef Name="FacturaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasGuiasRemision_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="FacturasGuiasRemision" Type="Self.FacturasGuiasRemision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="FacturaId" />
+            </Principal>
+            <Dependent Role="FacturasGuiasRemision">
+              <PropertyRef Name="FacturaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasOrdenes_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="FacturasOrdenes" Type="Self.FacturasOrdenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="FacturaId" />
+            </Principal>
+            <Dependent Role="FacturasOrdenes">
+              <PropertyRef Name="FacturaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasOrdenes_Ordenes">
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="0..1" />
+          <End Role="FacturasOrdenes" Type="Self.FacturasOrdenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="OrdenId" />
+            </Principal>
+            <Dependent Role="FacturasOrdenes">
+              <PropertyRef Name="OrdenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasPagos_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="FacturasPagos" Type="Self.FacturasPagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="FacturaId" />
+            </Principal>
+            <Dependent Role="FacturasPagos">
+              <PropertyRef Name="FacturaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasPagos_Pagos">
+          <End Role="Pagos" Type="Self.Pagos" Multiplicity="0..1" />
+          <End Role="FacturasPagos" Type="Self.FacturasPagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pagos">
+              <PropertyRef Name="PagoId" />
+            </Principal>
+            <Dependent Role="FacturasPagos">
+              <PropertyRef Name="PagoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordenes_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="ProveedorId" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="OrdenProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenesDetalles_Ordenes">
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="0..1" />
+          <End Role="OrdenesDetalles" Type="Self.OrdenesDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="OrdenId" />
+            </Principal>
+            <Dependent Role="OrdenesDetalles">
+              <PropertyRef Name="OrdenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenesPartidas_OrdenesDetalles">
+          <End Role="OrdenesDetalles" Type="Self.OrdenesDetalles" Multiplicity="0..1" />
+          <End Role="OrdenesPartidas" Type="Self.OrdenesPartidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenesDetalles">
+              <PropertyRef Name="OrdenDetalleId" />
+            </Principal>
+            <Dependent Role="OrdenesPartidas">
+              <PropertyRef Name="OrdenDetalleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenesPartidas_PresupuestosItems">
+          <End Role="PresupuestosItems" Type="Self.PresupuestosItems" Multiplicity="0..1" />
+          <End Role="OrdenesPartidas" Type="Self.OrdenesPartidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PresupuestosItems">
+              <PropertyRef Name="PresupuestoItemId" />
+            </Principal>
+            <Dependent Role="OrdenesPartidas">
+              <PropertyRef Name="PresupuestoItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParametrosDetalle_Parametros">
+          <End Role="Parametros" Type="Self.Parametros" Multiplicity="0..1" />
+          <End Role="ParametrosDetalle" Type="Self.ParametrosDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parametros">
+              <PropertyRef Name="ParametroId" />
+            </Principal>
+            <Dependent Role="ParametrosDetalle">
+              <PropertyRef Name="ParametroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresupuestosItems_Partidas">
+          <End Role="Partidas" Type="Self.Partidas" Multiplicity="0..1" />
+          <End Role="PresupuestosItems" Type="Self.PresupuestosItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partidas">
+              <PropertyRef Name="PartidaId" />
+            </Principal>
+            <Dependent Role="PresupuestosItems">
+              <PropertyRef Name="PartidaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresupuestosItemsLogs_PresupuestosItems">
+          <End Role="PresupuestosItems" Type="Self.PresupuestosItems" Multiplicity="0..1" />
+          <End Role="PresupuestosItemsLogs" Type="Self.PresupuestosItemsLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PresupuestosItems">
+              <PropertyRef Name="PresupuestoItemId" />
+            </Principal>
+            <Dependent Role="PresupuestosItemsLogs">
+              <PropertyRef Name="PresupuestoItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_TiposDetracciones">
+          <End Role="TiposDetracciones" Type="Self.TiposDetracciones" Multiplicity="0..1" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposDetracciones">
+              <PropertyRef Name="TipoDetraccionId" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="ProveedorTipoDetraccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_TiposProveedores">
+          <End Role="TiposProveedores" Type="Self.TiposProveedores" Multiplicity="0..1" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposProveedores">
+              <PropertyRef Name="TipoProveedorId" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="ProveedorTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedoresContactos_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
+          <End Role="ProveedoresContactos" Type="Self.ProveedoresContactos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="ProveedorId" />
+            </Principal>
+            <Dependent Role="ProveedoresContactos">
+              <PropertyRef Name="ProveedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedoresCuentasBancarias_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
+          <End Role="ProveedoresCuentasBancarias" Type="Self.ProveedoresCuentasBancarias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="ProveedorId" />
+            </Principal>
+            <Dependent Role="ProveedoresCuentasBancarias">
+              <PropertyRef Name="ProveedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedoresFacturas_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="ProveedoresFacturas" Type="Self.ProveedoresFacturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="FacturaId" />
+            </Principal>
+            <Dependent Role="ProveedoresFacturas">
+              <PropertyRef Name="FacturarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedoresFacturas_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="ProveedoresFacturas" Type="Self.ProveedoresFacturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="ProveedorId" />
+            </Principal>
+            <Dependent Role="ProveedoresFacturas">
+              <PropertyRef Name="ProveedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proyectos_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="EmpresaId" />
+            </Principal>
+            <Dependent Role="Proyectos">
+              <PropertyRef Name="ProyectoEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProyectosPresupuestos_Presupuestos">
+          <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="0..1" />
+          <End Role="ProyectosPresupuestos" Type="Self.ProyectosPresupuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presupuestos">
+              <PropertyRef Name="PresupuestoId" />
+            </Principal>
+            <Dependent Role="ProyectosPresupuestos">
+              <PropertyRef Name="PresupuestoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProyectosPresupuestos_Proyectos">
+          <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="0..1" />
+          <End Role="ProyectosPresupuestos" Type="Self.ProyectosPresupuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyectos">
+              <PropertyRef Name="ProyectoId" />
+            </Principal>
+            <Dependent Role="ProyectosPresupuestos">
+              <PropertyRef Name="ProyectoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProyectosResponsables_Proyectos">
+          <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="0..1" />
+          <End Role="ProyectosResponsables" Type="Self.ProyectosResponsables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyectos">
+              <PropertyRef Name="ProyectoId" />
+            </Principal>
+            <Dependent Role="ProyectosResponsables">
+              <PropertyRef Name="ProyectoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolesPaginas_Paginas">
+          <End Role="Paginas" Type="Self.Paginas" Multiplicity="1" />
+          <End Role="RolesPaginas" Type="Self.RolesPaginas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paginas">
+              <PropertyRef Name="PaginaId" />
+            </Principal>
+            <Dependent Role="RolesPaginas">
+              <PropertyRef Name="PaginaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolesPaginas_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="RolesPaginas" Type="Self.RolesPaginas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="RolesPaginas">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TiposdeCambio_Monedas">
+          <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+          <End Role="TiposdeCambio" Type="Self.TiposdeCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Monedas">
+              <PropertyRef Name="MonedaId" />
+            </Principal>
+            <Dependent Role="TiposdeCambio">
+              <PropertyRef Name="MonedaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="EmpresaId" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="nortonModelStoreContainer">
+          <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpresasCuentasBancarias" EntityType="Self.EmpresasCuentasBancarias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacturasDetalles" EntityType="Self.FacturasDetalles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacturasEstados" EntityType="Self.FacturasEstados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacturasGuiasRemision" EntityType="Self.FacturasGuiasRemision" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacturasOrdenes" EntityType="Self.FacturasOrdenes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacturasPagos" EntityType="Self.FacturasPagos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Monedas" EntityType="Self.Monedas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ordenes" EntityType="Self.Ordenes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenesDetalles" EntityType="Self.OrdenesDetalles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenesPartidas" EntityType="Self.OrdenesPartidas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paginas" EntityType="Self.Paginas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pagos" EntityType="Self.Pagos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParametrosDetalle" EntityType="Self.ParametrosDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partidas" EntityType="Self.Partidas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Presupuestos" EntityType="Self.Presupuestos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PresupuestosItems" EntityType="Self.PresupuestosItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PresupuestosItemsLogs" EntityType="Self.PresupuestosItemsLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProveedoresContactos" EntityType="Self.ProveedoresContactos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProveedoresCuentasBancarias" EntityType="Self.ProveedoresCuentasBancarias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProveedoresFacturas" EntityType="Self.ProveedoresFacturas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proyectos" EntityType="Self.Proyectos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProyectosPresupuestos" EntityType="Self.ProyectosPresupuestos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProyectosResponsables" EntityType="Self.ProyectosResponsables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolesPaginas" EntityType="Self.RolesPaginas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposdeCambio" EntityType="Self.TiposdeCambio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposDetracciones" EntityType="Self.TiposDetracciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposFacturas" EntityType="Self.TiposFacturas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposProveedores" EntityType="Self.TiposProveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EmpresasCuentasBancarias_Empresas" Association="Self.FK_EmpresasCuentasBancarias_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="EmpresasCuentasBancarias" EntitySet="EmpresasCuentasBancarias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_TiposFacturas" Association="Self.FK_Facturas_TiposFacturas">
+            <End Role="TiposFacturas" EntitySet="TiposFacturas" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasDetalles_Facturas" Association="Self.FK_FacturasDetalles_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="FacturasDetalles" EntitySet="FacturasDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasEstados_Facturas" Association="Self.FK_FacturasEstados_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="FacturasEstados" EntitySet="FacturasEstados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasGuiasRemision_Facturas" Association="Self.FK_FacturasGuiasRemision_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="FacturasGuiasRemision" EntitySet="FacturasGuiasRemision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasOrdenes_Facturas" Association="Self.FK_FacturasOrdenes_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="FacturasOrdenes" EntitySet="FacturasOrdenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasOrdenes_Ordenes" Association="Self.FK_FacturasOrdenes_Ordenes">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="FacturasOrdenes" EntitySet="FacturasOrdenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasPagos_Facturas" Association="Self.FK_FacturasPagos_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="FacturasPagos" EntitySet="FacturasPagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasPagos_Pagos" Association="Self.FK_FacturasPagos_Pagos">
+            <End Role="Pagos" EntitySet="Pagos" />
+            <End Role="FacturasPagos" EntitySet="FacturasPagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordenes_Proveedores" Association="Self.FK_Ordenes_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenesDetalles_Ordenes" Association="Self.FK_OrdenesDetalles_Ordenes">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenesPartidas_OrdenesDetalles" Association="Self.FK_OrdenesPartidas_OrdenesDetalles">
+            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+            <End Role="OrdenesPartidas" EntitySet="OrdenesPartidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenesPartidas_PresupuestosItems" Association="Self.FK_OrdenesPartidas_PresupuestosItems">
+            <End Role="PresupuestosItems" EntitySet="PresupuestosItems" />
+            <End Role="OrdenesPartidas" EntitySet="OrdenesPartidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParametrosDetalle_Parametros" Association="Self.FK_ParametrosDetalle_Parametros">
+            <End Role="Parametros" EntitySet="Parametros" />
+            <End Role="ParametrosDetalle" EntitySet="ParametrosDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresupuestosItems_Partidas" Association="Self.FK_PresupuestosItems_Partidas">
+            <End Role="Partidas" EntitySet="Partidas" />
+            <End Role="PresupuestosItems" EntitySet="PresupuestosItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresupuestosItemsLogs_PresupuestosItems" Association="Self.FK_PresupuestosItemsLogs_PresupuestosItems">
+            <End Role="PresupuestosItems" EntitySet="PresupuestosItems" />
+            <End Role="PresupuestosItemsLogs" EntitySet="PresupuestosItemsLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_TiposDetracciones" Association="Self.FK_Proveedores_TiposDetracciones">
+            <End Role="TiposDetracciones" EntitySet="TiposDetracciones" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_TiposProveedores" Association="Self.FK_Proveedores_TiposProveedores">
+            <End Role="TiposProveedores" EntitySet="TiposProveedores" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedoresContactos_Proveedores" Association="Self.FK_ProveedoresContactos_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="ProveedoresContactos" EntitySet="ProveedoresContactos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedoresCuentasBancarias_Proveedores" Association="Self.FK_ProveedoresCuentasBancarias_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="ProveedoresCuentasBancarias" EntitySet="ProveedoresCuentasBancarias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedoresFacturas_Facturas" Association="Self.FK_ProveedoresFacturas_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="ProveedoresFacturas" EntitySet="ProveedoresFacturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedoresFacturas_Proveedores" Association="Self.FK_ProveedoresFacturas_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="ProveedoresFacturas" EntitySet="ProveedoresFacturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proyectos_Empresas" Association="Self.FK_Proyectos_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Proyectos" EntitySet="Proyectos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProyectosPresupuestos_Presupuestos" Association="Self.FK_ProyectosPresupuestos_Presupuestos">
+            <End Role="Presupuestos" EntitySet="Presupuestos" />
+            <End Role="ProyectosPresupuestos" EntitySet="ProyectosPresupuestos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProyectosPresupuestos_Proyectos" Association="Self.FK_ProyectosPresupuestos_Proyectos">
+            <End Role="Proyectos" EntitySet="Proyectos" />
+            <End Role="ProyectosPresupuestos" EntitySet="ProyectosPresupuestos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProyectosResponsables_Proyectos" Association="Self.FK_ProyectosResponsables_Proyectos">
+            <End Role="Proyectos" EntitySet="Proyectos" />
+            <End Role="ProyectosResponsables" EntitySet="ProyectosResponsables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolesPaginas_Paginas" Association="Self.FK_RolesPaginas_Paginas">
+            <End Role="Paginas" EntitySet="Paginas" />
+            <End Role="RolesPaginas" EntitySet="RolesPaginas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolesPaginas_Roles" Association="Self.FK_RolesPaginas_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="RolesPaginas" EntitySet="RolesPaginas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TiposdeCambio_Monedas" Association="Self.FK_TiposdeCambio_Monedas">
+            <End Role="Monedas" EntitySet="Monedas" />
+            <End Role="TiposdeCambio" EntitySet="TiposdeCambio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Empresas" Association="Self.FK_Usuarios_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Roles" Association="Self.FK_Usuarios_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="nortonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Empresas">
+          <Key>
+            <PropertyRef Name="EmpresaId" />
+          </Key>
+          <Property Name="EmpresaId" Type="Guid" Nullable="false" />
+          <Property Name="EmpresaCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmpresaDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmpresaEstado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="EmpresaPorDefecto" Type="Boolean" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="EmpresasCuentasBancarias" Relationship="Self.FK_EmpresasCuentasBancarias_Empresas" FromRole="Empresas" ToRole="EmpresasCuentasBancarias" />
+          <NavigationProperty Name="Proyectos" Relationship="Self.FK_Proyectos_Empresas" FromRole="Empresas" ToRole="Proyectos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Empresas" FromRole="Empresas" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="EmpresasCuentasBancarias">
+          <Key>
+            <PropertyRef Name="EmpresaCuentaBancariaId" />
+          </Key>
+          <Property Name="EmpresaCuentaBancariaId" Type="Guid" Nullable="false" />
+          <Property Name="EmpresaId" Type="Guid" />
+          <Property Name="EmpresaCuentaBancariaBanco" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="EmpresaCuentaBancariaNumero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmpresaCuentaBancariaCCI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmpresaCuentaBancariaMoneda" Type="Guid" />
+          <Property Name="EmpresaCuentaBancariaPorDefecto" Type="Boolean" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_EmpresasCuentasBancarias_Empresas" FromRole="EmpresasCuentasBancarias" ToRole="Empresas" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="FacturaId" />
+          </Key>
+          <Property Name="FacturaId" Type="Guid" Nullable="false" />
+          <Property Name="FacturaProyecto" Type="Guid" />
+          <Property Name="FacturaTipo" Type="Guid" />
+          <Property Name="FacturaSerie" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="FacturaNumero" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="FacturaFechaEmision" Type="DateTime" Precision="3" />
+          <Property Name="FacturaFechaVencimiento" Type="DateTime" Precision="3" />
+          <Property Name="FacturaMoneda" Type="Guid" />
+          <Property Name="FacturaEstado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FacturaSubtotal" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaIgv" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaImporteTotal" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaFondoGarantia" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaPorcentajeDetraccion" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaMontoDetraccion" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaImportePagar" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FacturaFechaPagoProgramada" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TiposFacturas" Relationship="Self.FK_Facturas_TiposFacturas" FromRole="Facturas" ToRole="TiposFacturas" />
+          <NavigationProperty Name="FacturasDetalles" Relationship="Self.FK_FacturasDetalles_Facturas" FromRole="Facturas" ToRole="FacturasDetalles" />
+          <NavigationProperty Name="FacturasEstados" Relationship="Self.FK_FacturasEstados_Facturas" FromRole="Facturas" ToRole="FacturasEstados" />
+          <NavigationProperty Name="FacturasGuiasRemision" Relationship="Self.FK_FacturasGuiasRemision_Facturas" FromRole="Facturas" ToRole="FacturasGuiasRemision" />
+          <NavigationProperty Name="FacturasOrdenes" Relationship="Self.FK_FacturasOrdenes_Facturas" FromRole="Facturas" ToRole="FacturasOrdenes" />
+          <NavigationProperty Name="FacturasPagos" Relationship="Self.FK_FacturasPagos_Facturas" FromRole="Facturas" ToRole="FacturasPagos" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.ProveedoresFacturas" FromRole="Facturas" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="FacturasDetalles">
+          <Key>
+            <PropertyRef Name="FacturaDetalleId" />
+          </Key>
+          <Property Name="FacturaDetalleId" Type="Guid" Nullable="false" />
+          <Property Name="FacturaId" Type="Guid" />
+          <Property Name="FacturaDetalleDescripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FacturaDetalleCantidad" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaDetallePrecioUnitario" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaDetalleImporteTotal" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_FacturasDetalles_Facturas" FromRole="FacturasDetalles" ToRole="Facturas" />
+        </EntityType>
+        <EntityType Name="FacturasEstados">
+          <Key>
+            <PropertyRef Name="FacturaEstadoId" />
+          </Key>
+          <Property Name="FacturaEstadoId" Type="Guid" Nullable="false" />
+          <Property Name="FacturaEstadoEstado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FacturaId" Type="Guid" />
+          <Property Name="FacturaEstadoFecha" Type="DateTime" Precision="3" />
+          <Property Name="FacturaEstadoUsuario" Type="Guid" />
+          <Property Name="FacturaEstadoMotivosRechazo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FacturaEstadoObservaciones" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_FacturasEstados_Facturas" FromRole="FacturasEstados" ToRole="Facturas" />
+        </EntityType>
+        <EntityType Name="FacturasGuiasRemision">
+          <Key>
+            <PropertyRef Name="FacturaGuiaRemisionId" />
+          </Key>
+          <Property Name="FacturaGuiaRemisionId" Type="Guid" Nullable="false" />
+          <Property Name="FacturaId" Type="Guid" />
+          <Property Name="FacturaGuiaRemisionSerie" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="FacturaGuiaRemisionNumero" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="FacturaGuiaRemisionFechaEmision" Type="DateTime" Precision="3" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_FacturasGuiasRemision_Facturas" FromRole="FacturasGuiasRemision" ToRole="Facturas" />
+        </EntityType>
+        <EntityType Name="FacturasOrdenes">
+          <Key>
+            <PropertyRef Name="FacturaOrdenId" />
+          </Key>
+          <Property Name="FacturaOrdenId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FacturaId" Type="Guid" />
+          <Property Name="OrdenId" Type="Guid" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_FacturasOrdenes_Facturas" FromRole="FacturasOrdenes" ToRole="Facturas" />
+          <NavigationProperty Name="Ordenes" Relationship="Self.FK_FacturasOrdenes_Ordenes" FromRole="FacturasOrdenes" ToRole="Ordenes" />
+        </EntityType>
+        <EntityType Name="FacturasPagos">
+          <Key>
+            <PropertyRef Name="FacturaPagoId" />
+          </Key>
+          <Property Name="FacturaPagoId" Type="Guid" Nullable="false" />
+          <Property Name="FacturaId" Type="Guid" />
+          <Property Name="PagoId" Type="Guid" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_FacturasPagos_Facturas" FromRole="FacturasPagos" ToRole="Facturas" />
+          <NavigationProperty Name="Pagos" Relationship="Self.FK_FacturasPagos_Pagos" FromRole="FacturasPagos" ToRole="Pagos" />
+        </EntityType>
+        <EntityType Name="Monedas">
+          <Key>
+            <PropertyRef Name="MonedaId" />
+          </Key>
+          <Property Name="MonedaId" Type="Guid" Nullable="false" />
+          <Property Name="MonedaCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MonedaDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MonedaBase" Type="Boolean" />
+          <NavigationProperty Name="TiposdeCambio" Relationship="Self.FK_TiposdeCambio_Monedas" FromRole="Monedas" ToRole="TiposdeCambio" />
+        </EntityType>
+        <EntityType Name="Ordenes">
+          <Key>
+            <PropertyRef Name="OrdenId" />
+          </Key>
+          <Property Name="OrdenId" Type="Guid" Nullable="false" />
+          <Property Name="OrdenCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrdenTipo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="OrdenFecha" Type="DateTime" Precision="3" />
+          <Property Name="OrdenProveedor" Type="Guid" />
+          <Property Name="OrdenSubtotal" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="OrdenIgv" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="OrdenTotal" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="OrdenPlazoEntrega" Type="DateTime" Precision="3" />
+          <Property Name="OrdenFormaPago" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="OrdenContactoInterno" Type="Guid" />
+          <Property Name="OrdenLugarEntrega" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="OrdenEstado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="OrdenObservacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrdenMotivoRechazo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="FacturasOrdenes" Relationship="Self.FK_FacturasOrdenes_Ordenes" FromRole="Ordenes" ToRole="FacturasOrdenes" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Ordenes_Proveedores" FromRole="Ordenes" ToRole="Proveedores" />
+          <NavigationProperty Name="OrdenesDetalles" Relationship="Self.FK_OrdenesDetalles_Ordenes" FromRole="Ordenes" ToRole="OrdenesDetalles" />
+        </EntityType>
+        <EntityType Name="OrdenesDetalles">
+          <Key>
+            <PropertyRef Name="OrdenDetalleId" />
+          </Key>
+          <Property Name="OrdenDetalleId" Type="Guid" Nullable="false" />
+          <Property Name="OrdenId" Type="Guid" />
+          <Property Name="OrdenDetalleItem" Type="Int32" />
+          <Property Name="OrdenDetalleDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrdenDetalleCuotas" Type="Int32" />
+          <Property Name="OrdenDetalleUnidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrdenDetallePrecioUnitario" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="OrdenDetallePrecioTotal" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="Ordenes" Relationship="Self.FK_OrdenesDetalles_Ordenes" FromRole="OrdenesDetalles" ToRole="Ordenes" />
+          <NavigationProperty Name="OrdenesPartidas" Relationship="Self.FK_OrdenesPartidas_OrdenesDetalles" FromRole="OrdenesDetalles" ToRole="OrdenesPartidas" />
+        </EntityType>
+        <EntityType Name="OrdenesPartidas">
+          <Key>
+            <PropertyRef Name="OrdenPartidaId" />
+          </Key>
+          <Property Name="OrdenPartidaId" Type="Guid" Nullable="false" />
+          <Property Name="OrdenId" Type="Guid" />
+          <Property Name="ProyectoId" Type="Guid" />
+          <Property Name="PresupuestoItemId" Type="Guid" />
+          <Property Name="OrdenDetalleId" Type="Guid" />
+          <NavigationProperty Name="OrdenesDetalles" Relationship="Self.FK_OrdenesPartidas_OrdenesDetalles" FromRole="OrdenesPartidas" ToRole="OrdenesDetalles" />
+          <NavigationProperty Name="PresupuestosItems" Relationship="Self.FK_OrdenesPartidas_PresupuestosItems" FromRole="OrdenesPartidas" ToRole="PresupuestosItems" />
+        </EntityType>
+        <EntityType Name="Paginas">
+          <Key>
+            <PropertyRef Name="PaginaId" />
+          </Key>
+          <Property Name="PaginaId" Type="Guid" Nullable="false" />
+          <Property Name="PaginaCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PaginaNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PaginaDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PaginaUrl" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RolesPaginas" Relationship="Self.FK_RolesPaginas_Paginas" FromRole="Paginas" ToRole="RolesPaginas" />
+        </EntityType>
+        <EntityType Name="Pagos">
+          <Key>
+            <PropertyRef Name="PagoId" />
+          </Key>
+          <Property Name="PagoId" Type="Guid" Nullable="false" />
+          <Property Name="ProveedorId" Type="Guid" />
+          <Property Name="PagoCuentaOrigen" Type="Guid" />
+          <Property Name="PagoCuentaDestino" Type="Guid" />
+          <Property Name="PagoFecha" Type="DateTime" Precision="3" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="FacturasPagos" Relationship="Self.FK_FacturasPagos_Pagos" FromRole="Pagos" ToRole="FacturasPagos" />
+        </EntityType>
+        <EntityType Name="Parametros">
+          <Key>
+            <PropertyRef Name="ParametroId" />
+          </Key>
+          <Property Name="ParametroId" Type="Guid" Nullable="false" />
+          <Property Name="ParametroCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ParametroDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ParametrosDetalle" Relationship="Self.FK_ParametrosDetalle_Parametros" FromRole="Parametros" ToRole="ParametrosDetalle" />
+        </EntityType>
+        <EntityType Name="ParametrosDetalle">
+          <Key>
+            <PropertyRef Name="ParametroDetalleId" />
+          </Key>
+          <Property Name="ParametroDetalleId" Type="Guid" Nullable="false" />
+          <Property Name="ParametroDetalleCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ParametroDetalleDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ParametroId" Type="Guid" />
+          <NavigationProperty Name="Parametros" Relationship="Self.FK_ParametrosDetalle_Parametros" FromRole="ParametrosDetalle" ToRole="Parametros" />
+        </EntityType>
+        <EntityType Name="Partidas">
+          <Key>
+            <PropertyRef Name="PartidaId" />
+          </Key>
+          <Property Name="PartidaId" Type="Guid" Nullable="false" />
+          <Property Name="PartidaCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartidaNaturaleza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartidaUnidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PartidaResumen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PadrePartidaId" Type="Guid" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="PresupuestosItems" Relationship="Self.FK_PresupuestosItems_Partidas" FromRole="Partidas" ToRole="PresupuestosItems" />
+        </EntityType>
+        <EntityType Name="Presupuestos">
+          <Key>
+            <PropertyRef Name="PresupuestoId" />
+          </Key>
+          <Property Name="PresupuestoId" Type="Guid" Nullable="false" />
+          <Property Name="PresupuestoFecha" Type="DateTime" Precision="3" />
+          <Property Name="PresupuestoOrigen" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="ProyectosPresupuestos" Relationship="Self.FK_ProyectosPresupuestos_Presupuestos" FromRole="Presupuestos" ToRole="ProyectosPresupuestos" />
+        </EntityType>
+        <EntityType Name="PresupuestosItems">
+          <Key>
+            <PropertyRef Name="PresupuestoItemId" />
+          </Key>
+          <Property Name="PresupuestoItemId" Type="Guid" Nullable="false" />
+          <Property Name="PresupuestoId" Type="Guid" />
+          <Property Name="PartidaId" Type="Guid" />
+          <Property Name="PadrePartidaId" Type="Guid" />
+          <Property Name="PresupuestoItemFecha" Type="DateTime" Precision="3" />
+          <Property Name="PresupuestoItemCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PresupuestoItemNaturaleza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PresupuestoItemUnidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PresupuestoItemResumen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PresupuestoItemCantidad" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="PresupuestoItemPrecio" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="PresupuestoItemImporte" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="OrdenesPartidas" Relationship="Self.FK_OrdenesPartidas_PresupuestosItems" FromRole="PresupuestosItems" ToRole="OrdenesPartidas" />
+          <NavigationProperty Name="Partidas" Relationship="Self.FK_PresupuestosItems_Partidas" FromRole="PresupuestosItems" ToRole="Partidas" />
+          <NavigationProperty Name="PresupuestosItemsLogs" Relationship="Self.FK_PresupuestosItemsLogs_PresupuestosItems" FromRole="PresupuestosItems" ToRole="PresupuestosItemsLogs" />
+        </EntityType>
+        <EntityType Name="PresupuestosItemsLogs">
+          <Key>
+            <PropertyRef Name="PresupuestoItemLogId" />
+          </Key>
+          <Property Name="PresupuestoItemLogId" Type="Guid" Nullable="false" />
+          <Property Name="PresupuestoItemId" Type="Guid" />
+          <Property Name="PresupuestoItemLogFecha" Type="DateTime" Precision="3" />
+          <Property Name="PresupuestoItemLogAccion" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="PresupuestoItemCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PresupuestoItemNaturaleza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PresupuestoItemUnidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PresupuestoItemResumen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PresupuestoItemCantidad" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="PresupuestoItemPrecio" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="PresupuestoItemImporte" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="PresupuestosItems" Relationship="Self.FK_PresupuestosItemsLogs_PresupuestosItems" FromRole="PresupuestosItemsLogs" ToRole="PresupuestosItems" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="ProveedorId" />
+          </Key>
+          <Property Name="ProveedorId" Type="Guid" Nullable="false" />
+          <Property Name="ProveedorRuc" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="ProveedorEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProveedorRazonSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProveedorPassword" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ProveedorTipo" Type="Guid" />
+          <Property Name="ProveedorDireccionFiscal" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ProveedorPlazoPago" Type="Int32" />
+          <Property Name="ProveedorEstado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ProveedorTipoDetraccion" Type="Guid" />
+          <Property Name="ProveedorPorcentajeDetraccion" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="ProveedorCuentaDetraccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioValidacion" Type="Guid" />
+          <Property Name="TipoProveedorId" Type="Guid" />
+          <NavigationProperty Name="Ordenes" Relationship="Self.FK_Ordenes_Proveedores" FromRole="Proveedores" ToRole="Ordenes" />
+          <NavigationProperty Name="TiposDetracciones" Relationship="Self.FK_Proveedores_TiposDetracciones" FromRole="Proveedores" ToRole="TiposDetracciones" />
+          <NavigationProperty Name="TiposProveedores" Relationship="Self.FK_Proveedores_TiposProveedores" FromRole="Proveedores" ToRole="TiposProveedores" />
+          <NavigationProperty Name="ProveedoresContactos" Relationship="Self.FK_ProveedoresContactos_Proveedores" FromRole="Proveedores" ToRole="ProveedoresContactos" />
+          <NavigationProperty Name="ProveedoresCuentasBancarias" Relationship="Self.FK_ProveedoresCuentasBancarias_Proveedores" FromRole="Proveedores" ToRole="ProveedoresCuentasBancarias" />
+          <NavigationProperty Name="Facturas" Relationship="Self.ProveedoresFacturas" FromRole="Proveedores" ToRole="Facturas" />
+        </EntityType>
+        <EntityType Name="ProveedoresContactos">
+          <Key>
+            <PropertyRef Name="ProveedorContactoId" />
+          </Key>
+          <Property Name="ProveedorContactoId" Type="Guid" Nullable="false" />
+          <Property Name="ProveedorId" Type="Guid" />
+          <Property Name="ProveedorContactoTipo" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="ProveedorContactoNombres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ProveedorContactoApellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ProveedorContactoEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProveedorContactoTelefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProveedorContactoCelular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioId" Type="Guid" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_ProveedoresContactos_Proveedores" FromRole="ProveedoresContactos" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="ProveedoresCuentasBancarias">
+          <Key>
+            <PropertyRef Name="ProveedorCuentaBancariaId" />
+          </Key>
+          <Property Name="ProveedorCuentaBancariaId" Type="Guid" Nullable="false" />
+          <Property Name="ProveedorId" Type="Guid" />
+          <Property Name="ProveedorCuentaBancariaBanco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProveedorCuentaBancariaNumero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProveedorCuentaBancariaCCI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProveedorCuantaBancariaMoneda" Type="Guid" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_ProveedoresCuentasBancarias_Proveedores" FromRole="ProveedoresCuentasBancarias" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="Proyectos">
+          <Key>
+            <PropertyRef Name="ProyectoId" />
+          </Key>
+          <Property Name="ProyectoId" Type="Guid" Nullable="false" />
+          <Property Name="ProyectoCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProyectoNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProyectoMoneda" Type="Guid" />
+          <Property Name="ProyectoUtilidadContratada" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="ProyectoUtilidad" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="ProyectoGastosGenerales" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="ProyectoIgv" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="ProyectoMontoTotal" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="ProyectoEstado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ProyectoFechaInicio" Type="DateTime" Precision="3" />
+          <Property Name="ProyectoFechaFin" Type="DateTime" Precision="3" />
+          <Property Name="ProyectoEmpresa" Type="Guid" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Proyectos_Empresas" FromRole="Proyectos" ToRole="Empresas" />
+          <NavigationProperty Name="ProyectosPresupuestos" Relationship="Self.FK_ProyectosPresupuestos_Proyectos" FromRole="Proyectos" ToRole="ProyectosPresupuestos" />
+          <NavigationProperty Name="ProyectosResponsables" Relationship="Self.FK_ProyectosResponsables_Proyectos" FromRole="Proyectos" ToRole="ProyectosResponsables" />
+        </EntityType>
+        <EntityType Name="ProyectosPresupuestos">
+          <Key>
+            <PropertyRef Name="ProyectoPresupuestoId" />
+          </Key>
+          <Property Name="ProyectoPresupuestoId" Type="Guid" Nullable="false" />
+          <Property Name="ProyectoId" Type="Guid" />
+          <Property Name="PresupuestoId" Type="Guid" />
+          <NavigationProperty Name="Presupuestos" Relationship="Self.FK_ProyectosPresupuestos_Presupuestos" FromRole="ProyectosPresupuestos" ToRole="Presupuestos" />
+          <NavigationProperty Name="Proyectos" Relationship="Self.FK_ProyectosPresupuestos_Proyectos" FromRole="ProyectosPresupuestos" ToRole="Proyectos" />
+        </EntityType>
+        <EntityType Name="ProyectosResponsables">
+          <Key>
+            <PropertyRef Name="ProyectoResponsableId" />
+          </Key>
+          <Property Name="ProyectoResponsableId" Type="Guid" Nullable="false" />
+          <Property Name="ProyectoId" Type="Guid" />
+          <Property Name="ResponsableId" Type="Guid" />
+          <Property Name="ProyectoResponsableTipo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Proyectos" Relationship="Self.FK_ProyectosResponsables_Proyectos" FromRole="ProyectosResponsables" ToRole="Proyectos" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RolId" />
+          </Key>
+          <Property Name="RolId" Type="Guid" Nullable="false" />
+          <Property Name="RolCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RolDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RolesPaginas" Relationship="Self.FK_RolesPaginas_Roles" FromRole="Roles" ToRole="RolesPaginas" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Roles" FromRole="Roles" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="RolesPaginas">
+          <Key>
+            <PropertyRef Name="RolId" />
+            <PropertyRef Name="PaginaId" />
+          </Key>
+          <Property Name="RolId" Type="Guid" Nullable="false" />
+          <Property Name="PaginaId" Type="Guid" Nullable="false" />
+          <Property Name="Accion" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Paginas" Relationship="Self.FK_RolesPaginas_Paginas" FromRole="RolesPaginas" ToRole="Paginas" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_RolesPaginas_Roles" FromRole="RolesPaginas" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="TiposdeCambio">
+          <Key>
+            <PropertyRef Name="TipoCambioId" />
+          </Key>
+          <Property Name="TipoCambioId" Type="Guid" Nullable="false" />
+          <Property Name="MonedaId" Type="Guid" />
+          <Property Name="TipoCambioFecha" Type="DateTime" Precision="3" />
+          <Property Name="TipoCambioValor" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="TipoCambioOrigen" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="Monedas" Relationship="Self.FK_TiposdeCambio_Monedas" FromRole="TiposdeCambio" ToRole="Monedas" />
+        </EntityType>
+        <EntityType Name="TiposDetracciones">
+          <Key>
+            <PropertyRef Name="TipoDetraccionId" />
+          </Key>
+          <Property Name="TipoDetraccionId" Type="Guid" Nullable="false" />
+          <Property Name="TipoDetraccionCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoDetraccionDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Proveedores_TiposDetracciones" FromRole="TiposDetracciones" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="TiposFacturas">
+          <Key>
+            <PropertyRef Name="TipoFacturaId" />
+          </Key>
+          <Property Name="TipoFacturaId" Type="Guid" Nullable="false" />
+          <Property Name="TipoFacturaCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoFacturaDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_Facturas_TiposFacturas" FromRole="TiposFacturas" ToRole="Facturas" />
+        </EntityType>
+        <EntityType Name="TiposProveedores">
+          <Key>
+            <PropertyRef Name="TipoProveedorId" />
+          </Key>
+          <Property Name="TipoProveedorId" Type="Guid" Nullable="false" />
+          <Property Name="TipoProveedorCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoProveedorDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioCreacion" Type="Guid" />
+          <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioActualizacion" Type="Guid" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Proveedores_TiposProveedores" FromRole="TiposProveedores" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="Guid" Nullable="false" />
+          <Property Name="UsuarioCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioNombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioApellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioUsername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RolId" Type="Guid" />
+          <Property Name="EmpresaId" Type="Guid" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Usuarios_Empresas" FromRole="Usuarios" ToRole="Empresas" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Usuarios_Roles" FromRole="Usuarios" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK_EmpresasCuentasBancarias_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="EmpresasCuentasBancarias" Type="Self.EmpresasCuentasBancarias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="EmpresaId" />
+            </Principal>
+            <Dependent Role="EmpresasCuentasBancarias">
+              <PropertyRef Name="EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proyectos_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="EmpresaId" />
+            </Principal>
+            <Dependent Role="Proyectos">
+              <PropertyRef Name="ProyectoEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="EmpresaId" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_TiposFacturas">
+          <End Role="TiposFacturas" Type="Self.TiposFacturas" Multiplicity="0..1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposFacturas">
+              <PropertyRef Name="TipoFacturaId" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="FacturaTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasDetalles_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="FacturasDetalles" Type="Self.FacturasDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="FacturaId" />
+            </Principal>
+            <Dependent Role="FacturasDetalles">
+              <PropertyRef Name="FacturaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasEstados_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="FacturasEstados" Type="Self.FacturasEstados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="FacturaId" />
+            </Principal>
+            <Dependent Role="FacturasEstados">
+              <PropertyRef Name="FacturaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasGuiasRemision_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="FacturasGuiasRemision" Type="Self.FacturasGuiasRemision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="FacturaId" />
+            </Principal>
+            <Dependent Role="FacturasGuiasRemision">
+              <PropertyRef Name="FacturaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasOrdenes_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="FacturasOrdenes" Type="Self.FacturasOrdenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="FacturaId" />
+            </Principal>
+            <Dependent Role="FacturasOrdenes">
+              <PropertyRef Name="FacturaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasPagos_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="FacturasPagos" Type="Self.FacturasPagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="FacturaId" />
+            </Principal>
+            <Dependent Role="FacturasPagos">
+              <PropertyRef Name="FacturaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasOrdenes_Ordenes">
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="0..1" />
+          <End Role="FacturasOrdenes" Type="Self.FacturasOrdenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="OrdenId" />
+            </Principal>
+            <Dependent Role="FacturasOrdenes">
+              <PropertyRef Name="OrdenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacturasPagos_Pagos">
+          <End Role="Pagos" Type="Self.Pagos" Multiplicity="0..1" />
+          <End Role="FacturasPagos" Type="Self.FacturasPagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pagos">
+              <PropertyRef Name="PagoId" />
+            </Principal>
+            <Dependent Role="FacturasPagos">
+              <PropertyRef Name="PagoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TiposdeCambio_Monedas">
+          <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
+          <End Role="TiposdeCambio" Type="Self.TiposdeCambio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Monedas">
+              <PropertyRef Name="MonedaId" />
+            </Principal>
+            <Dependent Role="TiposdeCambio">
+              <PropertyRef Name="MonedaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordenes_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="ProveedorId" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="OrdenProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenesDetalles_Ordenes">
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="0..1" />
+          <End Role="OrdenesDetalles" Type="Self.OrdenesDetalles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="OrdenId" />
+            </Principal>
+            <Dependent Role="OrdenesDetalles">
+              <PropertyRef Name="OrdenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenesPartidas_OrdenesDetalles">
+          <End Role="OrdenesDetalles" Type="Self.OrdenesDetalles" Multiplicity="0..1" />
+          <End Role="OrdenesPartidas" Type="Self.OrdenesPartidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdenesDetalles">
+              <PropertyRef Name="OrdenDetalleId" />
+            </Principal>
+            <Dependent Role="OrdenesPartidas">
+              <PropertyRef Name="OrdenDetalleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenesPartidas_PresupuestosItems">
+          <End Role="PresupuestosItems" Type="Self.PresupuestosItems" Multiplicity="0..1" />
+          <End Role="OrdenesPartidas" Type="Self.OrdenesPartidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PresupuestosItems">
+              <PropertyRef Name="PresupuestoItemId" />
+            </Principal>
+            <Dependent Role="OrdenesPartidas">
+              <PropertyRef Name="PresupuestoItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolesPaginas_Paginas">
+          <End Role="Paginas" Type="Self.Paginas" Multiplicity="1" />
+          <End Role="RolesPaginas" Type="Self.RolesPaginas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paginas">
+              <PropertyRef Name="PaginaId" />
+            </Principal>
+            <Dependent Role="RolesPaginas">
+              <PropertyRef Name="PaginaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParametrosDetalle_Parametros">
+          <End Role="Parametros" Type="Self.Parametros" Multiplicity="0..1" />
+          <End Role="ParametrosDetalle" Type="Self.ParametrosDetalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parametros">
+              <PropertyRef Name="ParametroId" />
+            </Principal>
+            <Dependent Role="ParametrosDetalle">
+              <PropertyRef Name="ParametroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresupuestosItems_Partidas">
+          <End Role="Partidas" Type="Self.Partidas" Multiplicity="0..1" />
+          <End Role="PresupuestosItems" Type="Self.PresupuestosItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partidas">
+              <PropertyRef Name="PartidaId" />
+            </Principal>
+            <Dependent Role="PresupuestosItems">
+              <PropertyRef Name="PartidaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProyectosPresupuestos_Presupuestos">
+          <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="0..1" />
+          <End Role="ProyectosPresupuestos" Type="Self.ProyectosPresupuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presupuestos">
+              <PropertyRef Name="PresupuestoId" />
+            </Principal>
+            <Dependent Role="ProyectosPresupuestos">
+              <PropertyRef Name="PresupuestoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PresupuestosItemsLogs_PresupuestosItems">
+          <End Role="PresupuestosItems" Type="Self.PresupuestosItems" Multiplicity="0..1" />
+          <End Role="PresupuestosItemsLogs" Type="Self.PresupuestosItemsLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PresupuestosItems">
+              <PropertyRef Name="PresupuestoItemId" />
+            </Principal>
+            <Dependent Role="PresupuestosItemsLogs">
+              <PropertyRef Name="PresupuestoItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_TiposDetracciones">
+          <End Role="TiposDetracciones" Type="Self.TiposDetracciones" Multiplicity="0..1" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposDetracciones">
+              <PropertyRef Name="TipoDetraccionId" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="ProveedorTipoDetraccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_TiposProveedores">
+          <End Role="TiposProveedores" Type="Self.TiposProveedores" Multiplicity="0..1" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposProveedores">
+              <PropertyRef Name="TipoProveedorId" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="ProveedorTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedoresContactos_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
+          <End Role="ProveedoresContactos" Type="Self.ProveedoresContactos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="ProveedorId" />
+            </Principal>
+            <Dependent Role="ProveedoresContactos">
+              <PropertyRef Name="ProveedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedoresCuentasBancarias_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="0..1" />
+          <End Role="ProveedoresCuentasBancarias" Type="Self.ProveedoresCuentasBancarias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="ProveedorId" />
+            </Principal>
+            <Dependent Role="ProveedoresCuentasBancarias">
+              <PropertyRef Name="ProveedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProyectosPresupuestos_Proyectos">
+          <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="0..1" />
+          <End Role="ProyectosPresupuestos" Type="Self.ProyectosPresupuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyectos">
+              <PropertyRef Name="ProyectoId" />
+            </Principal>
+            <Dependent Role="ProyectosPresupuestos">
+              <PropertyRef Name="ProyectoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProyectosResponsables_Proyectos">
+          <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="0..1" />
+          <End Role="ProyectosResponsables" Type="Self.ProyectosResponsables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyectos">
+              <PropertyRef Name="ProyectoId" />
+            </Principal>
+            <Dependent Role="ProyectosResponsables">
+              <PropertyRef Name="ProyectoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolesPaginas_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="RolesPaginas" Type="Self.RolesPaginas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="RolesPaginas">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RolId" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="RolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProveedoresFacturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="nortonEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Empresas" EntityType="Self.Empresas" />
+          <EntitySet Name="EmpresasCuentasBancarias" EntityType="Self.EmpresasCuentasBancarias" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" />
+          <EntitySet Name="FacturasDetalles" EntityType="Self.FacturasDetalles" />
+          <EntitySet Name="FacturasEstados" EntityType="Self.FacturasEstados" />
+          <EntitySet Name="FacturasGuiasRemision" EntityType="Self.FacturasGuiasRemision" />
+          <EntitySet Name="FacturasOrdenes" EntityType="Self.FacturasOrdenes" />
+          <EntitySet Name="FacturasPagos" EntityType="Self.FacturasPagos" />
+          <EntitySet Name="Monedas" EntityType="Self.Monedas" />
+          <EntitySet Name="Ordenes" EntityType="Self.Ordenes" />
+          <EntitySet Name="OrdenesDetalles" EntityType="Self.OrdenesDetalles" />
+          <EntitySet Name="OrdenesPartidas" EntityType="Self.OrdenesPartidas" />
+          <EntitySet Name="Paginas" EntityType="Self.Paginas" />
+          <EntitySet Name="Pagos" EntityType="Self.Pagos" />
+          <EntitySet Name="Parametros" EntityType="Self.Parametros" />
+          <EntitySet Name="ParametrosDetalle" EntityType="Self.ParametrosDetalle" />
+          <EntitySet Name="Partidas" EntityType="Self.Partidas" />
+          <EntitySet Name="Presupuestos" EntityType="Self.Presupuestos" />
+          <EntitySet Name="PresupuestosItems" EntityType="Self.PresupuestosItems" />
+          <EntitySet Name="PresupuestosItemsLogs" EntityType="Self.PresupuestosItemsLogs" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
+          <EntitySet Name="ProveedoresContactos" EntityType="Self.ProveedoresContactos" />
+          <EntitySet Name="ProveedoresCuentasBancarias" EntityType="Self.ProveedoresCuentasBancarias" />
+          <EntitySet Name="Proyectos" EntityType="Self.Proyectos" />
+          <EntitySet Name="ProyectosPresupuestos" EntityType="Self.ProyectosPresupuestos" />
+          <EntitySet Name="ProyectosResponsables" EntityType="Self.ProyectosResponsables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="RolesPaginas" EntityType="Self.RolesPaginas" />
+          <EntitySet Name="TiposdeCambio" EntityType="Self.TiposdeCambio" />
+          <EntitySet Name="TiposDetracciones" EntityType="Self.TiposDetracciones" />
+          <EntitySet Name="TiposFacturas" EntityType="Self.TiposFacturas" />
+          <EntitySet Name="TiposProveedores" EntityType="Self.TiposProveedores" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK_EmpresasCuentasBancarias_Empresas" Association="Self.FK_EmpresasCuentasBancarias_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="EmpresasCuentasBancarias" EntitySet="EmpresasCuentasBancarias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proyectos_Empresas" Association="Self.FK_Proyectos_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Proyectos" EntitySet="Proyectos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Empresas" Association="Self.FK_Usuarios_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_TiposFacturas" Association="Self.FK_Facturas_TiposFacturas">
+            <End Role="TiposFacturas" EntitySet="TiposFacturas" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasDetalles_Facturas" Association="Self.FK_FacturasDetalles_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="FacturasDetalles" EntitySet="FacturasDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasEstados_Facturas" Association="Self.FK_FacturasEstados_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="FacturasEstados" EntitySet="FacturasEstados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasGuiasRemision_Facturas" Association="Self.FK_FacturasGuiasRemision_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="FacturasGuiasRemision" EntitySet="FacturasGuiasRemision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasOrdenes_Facturas" Association="Self.FK_FacturasOrdenes_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="FacturasOrdenes" EntitySet="FacturasOrdenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasPagos_Facturas" Association="Self.FK_FacturasPagos_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="FacturasPagos" EntitySet="FacturasPagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasOrdenes_Ordenes" Association="Self.FK_FacturasOrdenes_Ordenes">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="FacturasOrdenes" EntitySet="FacturasOrdenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturasPagos_Pagos" Association="Self.FK_FacturasPagos_Pagos">
+            <End Role="Pagos" EntitySet="Pagos" />
+            <End Role="FacturasPagos" EntitySet="FacturasPagos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TiposdeCambio_Monedas" Association="Self.FK_TiposdeCambio_Monedas">
+            <End Role="Monedas" EntitySet="Monedas" />
+            <End Role="TiposdeCambio" EntitySet="TiposdeCambio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordenes_Proveedores" Association="Self.FK_Ordenes_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenesDetalles_Ordenes" Association="Self.FK_OrdenesDetalles_Ordenes">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenesPartidas_OrdenesDetalles" Association="Self.FK_OrdenesPartidas_OrdenesDetalles">
+            <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+            <End Role="OrdenesPartidas" EntitySet="OrdenesPartidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenesPartidas_PresupuestosItems" Association="Self.FK_OrdenesPartidas_PresupuestosItems">
+            <End Role="PresupuestosItems" EntitySet="PresupuestosItems" />
+            <End Role="OrdenesPartidas" EntitySet="OrdenesPartidas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolesPaginas_Paginas" Association="Self.FK_RolesPaginas_Paginas">
+            <End Role="Paginas" EntitySet="Paginas" />
+            <End Role="RolesPaginas" EntitySet="RolesPaginas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParametrosDetalle_Parametros" Association="Self.FK_ParametrosDetalle_Parametros">
+            <End Role="Parametros" EntitySet="Parametros" />
+            <End Role="ParametrosDetalle" EntitySet="ParametrosDetalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresupuestosItems_Partidas" Association="Self.FK_PresupuestosItems_Partidas">
+            <End Role="Partidas" EntitySet="Partidas" />
+            <End Role="PresupuestosItems" EntitySet="PresupuestosItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProyectosPresupuestos_Presupuestos" Association="Self.FK_ProyectosPresupuestos_Presupuestos">
+            <End Role="Presupuestos" EntitySet="Presupuestos" />
+            <End Role="ProyectosPresupuestos" EntitySet="ProyectosPresupuestos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PresupuestosItemsLogs_PresupuestosItems" Association="Self.FK_PresupuestosItemsLogs_PresupuestosItems">
+            <End Role="PresupuestosItems" EntitySet="PresupuestosItems" />
+            <End Role="PresupuestosItemsLogs" EntitySet="PresupuestosItemsLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_TiposDetracciones" Association="Self.FK_Proveedores_TiposDetracciones">
+            <End Role="TiposDetracciones" EntitySet="TiposDetracciones" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_TiposProveedores" Association="Self.FK_Proveedores_TiposProveedores">
+            <End Role="TiposProveedores" EntitySet="TiposProveedores" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedoresContactos_Proveedores" Association="Self.FK_ProveedoresContactos_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="ProveedoresContactos" EntitySet="ProveedoresContactos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedoresCuentasBancarias_Proveedores" Association="Self.FK_ProveedoresCuentasBancarias_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="ProveedoresCuentasBancarias" EntitySet="ProveedoresCuentasBancarias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProyectosPresupuestos_Proyectos" Association="Self.FK_ProyectosPresupuestos_Proyectos">
+            <End Role="Proyectos" EntitySet="Proyectos" />
+            <End Role="ProyectosPresupuestos" EntitySet="ProyectosPresupuestos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProyectosResponsables_Proyectos" Association="Self.FK_ProyectosResponsables_Proyectos">
+            <End Role="Proyectos" EntitySet="Proyectos" />
+            <End Role="ProyectosResponsables" EntitySet="ProyectosResponsables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolesPaginas_Roles" Association="Self.FK_RolesPaginas_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="RolesPaginas" EntitySet="RolesPaginas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Roles" Association="Self.FK_Usuarios_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="ProveedoresFacturas" Association="Self.ProveedoresFacturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="nortonModelStoreContainer" CdmEntityContainer="nortonEntities">
+          <EntitySetMapping Name="Empresas">
+            <EntityTypeMapping TypeName="nortonModel.Empresas">
+              <MappingFragment StoreEntitySet="Empresas">
+                <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+                <ScalarProperty Name="EmpresaCodigo" ColumnName="EmpresaCodigo" />
+                <ScalarProperty Name="EmpresaDescripcion" ColumnName="EmpresaDescripcion" />
+                <ScalarProperty Name="EmpresaEstado" ColumnName="EmpresaEstado" />
+                <ScalarProperty Name="EmpresaPorDefecto" ColumnName="EmpresaPorDefecto" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpresasCuentasBancarias">
+            <EntityTypeMapping TypeName="nortonModel.EmpresasCuentasBancarias">
+              <MappingFragment StoreEntitySet="EmpresasCuentasBancarias">
+                <ScalarProperty Name="EmpresaCuentaBancariaId" ColumnName="EmpresaCuentaBancariaId" />
+                <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+                <ScalarProperty Name="EmpresaCuentaBancariaBanco" ColumnName="EmpresaCuentaBancariaBanco" />
+                <ScalarProperty Name="EmpresaCuentaBancariaNumero" ColumnName="EmpresaCuentaBancariaNumero" />
+                <ScalarProperty Name="EmpresaCuentaBancariaCCI" ColumnName="EmpresaCuentaBancariaCCI" />
+                <ScalarProperty Name="EmpresaCuentaBancariaMoneda" ColumnName="EmpresaCuentaBancariaMoneda" />
+                <ScalarProperty Name="EmpresaCuentaBancariaPorDefecto" ColumnName="EmpresaCuentaBancariaPorDefecto" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="nortonModel.Facturas">
+              <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="FacturaId" ColumnName="FacturaId" />
+                <ScalarProperty Name="FacturaProyecto" ColumnName="FacturaProyecto" />
+                <ScalarProperty Name="FacturaTipo" ColumnName="FacturaTipo" />
+                <ScalarProperty Name="FacturaSerie" ColumnName="FacturaSerie" />
+                <ScalarProperty Name="FacturaNumero" ColumnName="FacturaNumero" />
+                <ScalarProperty Name="FacturaFechaEmision" ColumnName="FacturaFechaEmision" />
+                <ScalarProperty Name="FacturaFechaVencimiento" ColumnName="FacturaFechaVencimiento" />
+                <ScalarProperty Name="FacturaMoneda" ColumnName="FacturaMoneda" />
+                <ScalarProperty Name="FacturaEstado" ColumnName="FacturaEstado" />
+                <ScalarProperty Name="FacturaSubtotal" ColumnName="FacturaSubtotal" />
+                <ScalarProperty Name="FacturaIgv" ColumnName="FacturaIgv" />
+                <ScalarProperty Name="FacturaImporteTotal" ColumnName="FacturaImporteTotal" />
+                <ScalarProperty Name="FacturaFondoGarantia" ColumnName="FacturaFondoGarantia" />
+                <ScalarProperty Name="FacturaPorcentajeDetraccion" ColumnName="FacturaPorcentajeDetraccion" />
+                <ScalarProperty Name="FacturaMontoDetraccion" ColumnName="FacturaMontoDetraccion" />
+                <ScalarProperty Name="FacturaImportePagar" ColumnName="FacturaImportePagar" />
+                <ScalarProperty Name="FacturaUrl" ColumnName="FacturaUrl" />
+                <ScalarProperty Name="FacturaFechaPagoProgramada" ColumnName="FacturaFechaPagoProgramada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacturasDetalles">
+            <EntityTypeMapping TypeName="nortonModel.FacturasDetalles">
+              <MappingFragment StoreEntitySet="FacturasDetalles">
+                <ScalarProperty Name="FacturaDetalleId" ColumnName="FacturaDetalleId" />
+                <ScalarProperty Name="FacturaId" ColumnName="FacturaId" />
+                <ScalarProperty Name="FacturaDetalleDescripcion" ColumnName="FacturaDetalleDescripcion" />
+                <ScalarProperty Name="FacturaDetalleCantidad" ColumnName="FacturaDetalleCantidad" />
+                <ScalarProperty Name="FacturaDetallePrecioUnitario" ColumnName="FacturaDetallePrecioUnitario" />
+                <ScalarProperty Name="FacturaDetalleImporteTotal" ColumnName="FacturaDetalleImporteTotal" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacturasEstados">
+            <EntityTypeMapping TypeName="nortonModel.FacturasEstados">
+              <MappingFragment StoreEntitySet="FacturasEstados">
+                <ScalarProperty Name="FacturaEstadoId" ColumnName="FacturaEstadoId" />
+                <ScalarProperty Name="FacturaEstadoEstado" ColumnName="FacturaEstadoEstado" />
+                <ScalarProperty Name="FacturaId" ColumnName="FacturaId" />
+                <ScalarProperty Name="FacturaEstadoFecha" ColumnName="FacturaEstadoFecha" />
+                <ScalarProperty Name="FacturaEstadoUsuario" ColumnName="FacturaEstadoUsuario" />
+                <ScalarProperty Name="FacturaEstadoMotivosRechazo" ColumnName="FacturaEstadoMotivosRechazo" />
+                <ScalarProperty Name="FacturaEstadoObservaciones" ColumnName="FacturaEstadoObservaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacturasGuiasRemision">
+            <EntityTypeMapping TypeName="nortonModel.FacturasGuiasRemision">
+              <MappingFragment StoreEntitySet="FacturasGuiasRemision">
+                <ScalarProperty Name="FacturaGuiaRemisionId" ColumnName="FacturaGuiaRemisionId" />
+                <ScalarProperty Name="FacturaId" ColumnName="FacturaId" />
+                <ScalarProperty Name="FacturaGuiaRemisionSerie" ColumnName="FacturaGuiaRemisionSerie" />
+                <ScalarProperty Name="FacturaGuiaRemisionNumero" ColumnName="FacturaGuiaRemisionNumero" />
+                <ScalarProperty Name="FacturaGuiaRemisionFechaEmision" ColumnName="FacturaGuiaRemisionFechaEmision" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacturasOrdenes">
+            <EntityTypeMapping TypeName="nortonModel.FacturasOrdenes">
+              <MappingFragment StoreEntitySet="FacturasOrdenes">
+                <ScalarProperty Name="FacturaOrdenId" ColumnName="FacturaOrdenId" />
+                <ScalarProperty Name="FacturaId" ColumnName="FacturaId" />
+                <ScalarProperty Name="OrdenId" ColumnName="OrdenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacturasPagos">
+            <EntityTypeMapping TypeName="nortonModel.FacturasPagos">
+              <MappingFragment StoreEntitySet="FacturasPagos">
+                <ScalarProperty Name="FacturaPagoId" ColumnName="FacturaPagoId" />
+                <ScalarProperty Name="FacturaId" ColumnName="FacturaId" />
+                <ScalarProperty Name="PagoId" ColumnName="PagoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Monedas">
+            <EntityTypeMapping TypeName="nortonModel.Monedas">
+              <MappingFragment StoreEntitySet="Monedas">
+                <ScalarProperty Name="MonedaId" ColumnName="MonedaId" />
+                <ScalarProperty Name="MonedaCodigo" ColumnName="MonedaCodigo" />
+                <ScalarProperty Name="MonedaDescripcion" ColumnName="MonedaDescripcion" />
+                <ScalarProperty Name="MonedaBase" ColumnName="MonedaBase" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ordenes">
+            <EntityTypeMapping TypeName="nortonModel.Ordenes">
+              <MappingFragment StoreEntitySet="Ordenes">
+                <ScalarProperty Name="OrdenId" ColumnName="OrdenId" />
+                <ScalarProperty Name="OrdenCodigo" ColumnName="OrdenCodigo" />
+                <ScalarProperty Name="OrdenTipo" ColumnName="OrdenTipo" />
+                <ScalarProperty Name="OrdenFecha" ColumnName="OrdenFecha" />
+                <ScalarProperty Name="OrdenProveedor" ColumnName="OrdenProveedor" />
+                <ScalarProperty Name="OrdenSubtotal" ColumnName="OrdenSubtotal" />
+                <ScalarProperty Name="OrdenIgv" ColumnName="OrdenIgv" />
+                <ScalarProperty Name="OrdenTotal" ColumnName="OrdenTotal" />
+                <ScalarProperty Name="OrdenPlazoEntrega" ColumnName="OrdenPlazoEntrega" />
+                <ScalarProperty Name="OrdenFormaPago" ColumnName="OrdenFormaPago" />
+                <ScalarProperty Name="OrdenContactoInterno" ColumnName="OrdenContactoInterno" />
+                <ScalarProperty Name="OrdenLugarEntrega" ColumnName="OrdenLugarEntrega" />
+                <ScalarProperty Name="OrdenEstado" ColumnName="OrdenEstado" />
+                <ScalarProperty Name="OrdenObservacion" ColumnName="OrdenObservacion" />
+                <ScalarProperty Name="OrdenMotivoRechazo" ColumnName="OrdenMotivoRechazo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenesDetalles">
+            <EntityTypeMapping TypeName="nortonModel.OrdenesDetalles">
+              <MappingFragment StoreEntitySet="OrdenesDetalles">
+                <ScalarProperty Name="OrdenDetalleId" ColumnName="OrdenDetalleId" />
+                <ScalarProperty Name="OrdenId" ColumnName="OrdenId" />
+                <ScalarProperty Name="OrdenDetalleItem" ColumnName="OrdenDetalleItem" />
+                <ScalarProperty Name="OrdenDetalleDescripcion" ColumnName="OrdenDetalleDescripcion" />
+                <ScalarProperty Name="OrdenDetalleCuotas" ColumnName="OrdenDetalleCuotas" />
+                <ScalarProperty Name="OrdenDetalleUnidad" ColumnName="OrdenDetalleUnidad" />
+                <ScalarProperty Name="OrdenDetallePrecioUnitario" ColumnName="OrdenDetallePrecioUnitario" />
+                <ScalarProperty Name="OrdenDetallePrecioTotal" ColumnName="OrdenDetallePrecioTotal" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenesPartidas">
+            <EntityTypeMapping TypeName="nortonModel.OrdenesPartidas">
+              <MappingFragment StoreEntitySet="OrdenesPartidas">
+                <ScalarProperty Name="OrdenPartidaId" ColumnName="OrdenPartidaId" />
+                <ScalarProperty Name="OrdenId" ColumnName="OrdenId" />
+                <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+                <ScalarProperty Name="PresupuestoItemId" ColumnName="PresupuestoItemId" />
+                <ScalarProperty Name="OrdenDetalleId" ColumnName="OrdenDetalleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paginas">
+            <EntityTypeMapping TypeName="nortonModel.Paginas">
+              <MappingFragment StoreEntitySet="Paginas">
+                <ScalarProperty Name="PaginaId" ColumnName="PaginaId" />
+                <ScalarProperty Name="PaginaCodigo" ColumnName="PaginaCodigo" />
+                <ScalarProperty Name="PaginaNombre" ColumnName="PaginaNombre" />
+                <ScalarProperty Name="PaginaDescripcion" ColumnName="PaginaDescripcion" />
+                <ScalarProperty Name="PaginaUrl" ColumnName="PaginaUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pagos">
+            <EntityTypeMapping TypeName="nortonModel.Pagos">
+              <MappingFragment StoreEntitySet="Pagos">
+                <ScalarProperty Name="PagoId" ColumnName="PagoId" />
+                <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
+                <ScalarProperty Name="PagoCuentaOrigen" ColumnName="PagoCuentaOrigen" />
+                <ScalarProperty Name="PagoCuentaDestino" ColumnName="PagoCuentaDestino" />
+                <ScalarProperty Name="PagoFecha" ColumnName="PagoFecha" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parametros">
+            <EntityTypeMapping TypeName="nortonModel.Parametros">
+              <MappingFragment StoreEntitySet="Parametros">
+                <ScalarProperty Name="ParametroId" ColumnName="ParametroId" />
+                <ScalarProperty Name="ParametroCodigo" ColumnName="ParametroCodigo" />
+                <ScalarProperty Name="ParametroDescripcion" ColumnName="ParametroDescripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParametrosDetalle">
+            <EntityTypeMapping TypeName="nortonModel.ParametrosDetalle">
+              <MappingFragment StoreEntitySet="ParametrosDetalle">
+                <ScalarProperty Name="ParametroDetalleId" ColumnName="ParametroDetalleId" />
+                <ScalarProperty Name="ParametroDetalleCodigo" ColumnName="ParametroDetalleCodigo" />
+                <ScalarProperty Name="ParametroDetalleDescripcion" ColumnName="ParametroDetalleDescripcion" />
+                <ScalarProperty Name="ParametroId" ColumnName="ParametroId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partidas">
+            <EntityTypeMapping TypeName="nortonModel.Partidas">
+              <MappingFragment StoreEntitySet="Partidas">
+                <ScalarProperty Name="PartidaId" ColumnName="PartidaId" />
+                <ScalarProperty Name="PartidaCodigo" ColumnName="PartidaCodigo" />
+                <ScalarProperty Name="PartidaNaturaleza" ColumnName="PartidaNaturaleza" />
+                <ScalarProperty Name="PartidaUnidad" ColumnName="PartidaUnidad" />
+                <ScalarProperty Name="PartidaResumen" ColumnName="PartidaResumen" />
+                <ScalarProperty Name="PadrePartidaId" ColumnName="PadrePartidaId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presupuestos">
+            <EntityTypeMapping TypeName="nortonModel.Presupuestos">
+              <MappingFragment StoreEntitySet="Presupuestos">
+                <ScalarProperty Name="PresupuestoId" ColumnName="PresupuestoId" />
+                <ScalarProperty Name="PresupuestoFecha" ColumnName="PresupuestoFecha" />
+                <ScalarProperty Name="PresupuestoOrigen" ColumnName="PresupuestoOrigen" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PresupuestosItems">
+            <EntityTypeMapping TypeName="nortonModel.PresupuestosItems">
+              <MappingFragment StoreEntitySet="PresupuestosItems">
+                <ScalarProperty Name="PresupuestoItemId" ColumnName="PresupuestoItemId" />
+                <ScalarProperty Name="PresupuestoId" ColumnName="PresupuestoId" />
+                <ScalarProperty Name="PartidaId" ColumnName="PartidaId" />
+                <ScalarProperty Name="PadrePartidaId" ColumnName="PadrePartidaId" />
+                <ScalarProperty Name="PresupuestoItemFecha" ColumnName="PresupuestoItemFecha" />
+                <ScalarProperty Name="PresupuestoItemCodigo" ColumnName="PresupuestoItemCodigo" />
+                <ScalarProperty Name="PresupuestoItemNaturaleza" ColumnName="PresupuestoItemNaturaleza" />
+                <ScalarProperty Name="PresupuestoItemUnidad" ColumnName="PresupuestoItemUnidad" />
+                <ScalarProperty Name="PresupuestoItemResumen" ColumnName="PresupuestoItemResumen" />
+                <ScalarProperty Name="PresupuestoItemCantidad" ColumnName="PresupuestoItemCantidad" />
+                <ScalarProperty Name="PresupuestoItemPrecio" ColumnName="PresupuestoItemPrecio" />
+                <ScalarProperty Name="PresupuestoItemImporte" ColumnName="PresupuestoItemImporte" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PresupuestosItemsLogs">
+            <EntityTypeMapping TypeName="nortonModel.PresupuestosItemsLogs">
+              <MappingFragment StoreEntitySet="PresupuestosItemsLogs">
+                <ScalarProperty Name="PresupuestoItemLogId" ColumnName="PresupuestoItemLogId" />
+                <ScalarProperty Name="PresupuestoItemId" ColumnName="PresupuestoItemId" />
+                <ScalarProperty Name="PresupuestoItemLogFecha" ColumnName="PresupuestoItemLogFecha" />
+                <ScalarProperty Name="PresupuestoItemLogAccion" ColumnName="PresupuestoItemLogAccion" />
+                <ScalarProperty Name="PresupuestoItemCodigo" ColumnName="PresupuestoItemCodigo" />
+                <ScalarProperty Name="PresupuestoItemNaturaleza" ColumnName="PresupuestoItemNaturaleza" />
+                <ScalarProperty Name="PresupuestoItemUnidad" ColumnName="PresupuestoItemUnidad" />
+                <ScalarProperty Name="PresupuestoItemResumen" ColumnName="PresupuestoItemResumen" />
+                <ScalarProperty Name="PresupuestoItemCantidad" ColumnName="PresupuestoItemCantidad" />
+                <ScalarProperty Name="PresupuestoItemPrecio" ColumnName="PresupuestoItemPrecio" />
+                <ScalarProperty Name="PresupuestoItemImporte" ColumnName="PresupuestoItemImporte" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedores">
+            <EntityTypeMapping TypeName="nortonModel.Proveedores">
+              <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
+                <ScalarProperty Name="ProveedorRuc" ColumnName="ProveedorRuc" />
+                <ScalarProperty Name="ProveedorEmail" ColumnName="ProveedorEmail" />
+                <ScalarProperty Name="ProveedorRazonSocial" ColumnName="ProveedorRazonSocial" />
+                <ScalarProperty Name="ProveedorPassword" ColumnName="ProveedorPassword" />
+                <ScalarProperty Name="ProveedorTipo" ColumnName="ProveedorTipo" />
+                <ScalarProperty Name="ProveedorDireccionFiscal" ColumnName="ProveedorDireccionFiscal" />
+                <ScalarProperty Name="ProveedorPlazoPago" ColumnName="ProveedorPlazoPago" />
+                <ScalarProperty Name="ProveedorEstado" ColumnName="ProveedorEstado" />
+                <ScalarProperty Name="ProveedorTipoDetraccion" ColumnName="ProveedorTipoDetraccion" />
+                <ScalarProperty Name="ProveedorPorcentajeDetraccion" ColumnName="ProveedorPorcentajeDetraccion" />
+                <ScalarProperty Name="ProveedorCuentaDetraccion" ColumnName="ProveedorCuentaDetraccion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioValidacion" ColumnName="UsuarioValidacion" />
+                <ScalarProperty Name="TipoProveedorId" ColumnName="TipoProveedorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedoresContactos">
+            <EntityTypeMapping TypeName="nortonModel.ProveedoresContactos">
+              <MappingFragment StoreEntitySet="ProveedoresContactos">
+                <ScalarProperty Name="ProveedorContactoId" ColumnName="ProveedorContactoId" />
+                <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
+                <ScalarProperty Name="ProveedorContactoTipo" ColumnName="ProveedorContactoTipo" />
+                <ScalarProperty Name="ProveedorContactoNombres" ColumnName="ProveedorContactoNombres" />
+                <ScalarProperty Name="ProveedorContactoApellidos" ColumnName="ProveedorContactoApellidos" />
+                <ScalarProperty Name="ProveedorContactoEmail" ColumnName="ProveedorContactoEmail" />
+                <ScalarProperty Name="ProveedorContactoTelefono" ColumnName="ProveedorContactoTelefono" />
+                <ScalarProperty Name="ProveedorContactoCelular" ColumnName="ProveedorContactoCelular" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedoresCuentasBancarias">
+            <EntityTypeMapping TypeName="nortonModel.ProveedoresCuentasBancarias">
+              <MappingFragment StoreEntitySet="ProveedoresCuentasBancarias">
+                <ScalarProperty Name="ProveedorCuentaBancariaId" ColumnName="ProveedorCuentaBancariaId" />
+                <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
+                <ScalarProperty Name="ProveedorCuentaBancariaBanco" ColumnName="ProveedorCuentaBancariaBanco" />
+                <ScalarProperty Name="ProveedorCuentaBancariaNumero" ColumnName="ProveedorCuentaBancariaNumero" />
+                <ScalarProperty Name="ProveedorCuentaBancariaCCI" ColumnName="ProveedorCuentaBancariaCCI" />
+                <ScalarProperty Name="ProveedorCuantaBancariaMoneda" ColumnName="ProveedorCuantaBancariaMoneda" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proyectos">
+            <EntityTypeMapping TypeName="nortonModel.Proyectos">
+              <MappingFragment StoreEntitySet="Proyectos">
+                <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+                <ScalarProperty Name="ProyectoCodigo" ColumnName="ProyectoCodigo" />
+                <ScalarProperty Name="ProyectoNombre" ColumnName="ProyectoNombre" />
+                <ScalarProperty Name="ProyectoMoneda" ColumnName="ProyectoMoneda" />
+                <ScalarProperty Name="ProyectoUtilidadContratada" ColumnName="ProyectoUtilidadContratada" />
+                <ScalarProperty Name="ProyectoUtilidad" ColumnName="ProyectoUtilidad" />
+                <ScalarProperty Name="ProyectoGastosGenerales" ColumnName="ProyectoGastosGenerales" />
+                <ScalarProperty Name="ProyectoIgv" ColumnName="ProyectoIgv" />
+                <ScalarProperty Name="ProyectoMontoTotal" ColumnName="ProyectoMontoTotal" />
+                <ScalarProperty Name="ProyectoEstado" ColumnName="ProyectoEstado" />
+                <ScalarProperty Name="ProyectoFechaInicio" ColumnName="ProyectoFechaInicio" />
+                <ScalarProperty Name="ProyectoFechaFin" ColumnName="ProyectoFechaFin" />
+                <ScalarProperty Name="ProyectoEmpresa" ColumnName="ProyectoEmpresa" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProyectosPresupuestos">
+            <EntityTypeMapping TypeName="nortonModel.ProyectosPresupuestos">
+              <MappingFragment StoreEntitySet="ProyectosPresupuestos">
+                <ScalarProperty Name="ProyectoPresupuestoId" ColumnName="ProyectoPresupuestoId" />
+                <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+                <ScalarProperty Name="PresupuestoId" ColumnName="PresupuestoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProyectosResponsables">
+            <EntityTypeMapping TypeName="nortonModel.ProyectosResponsables">
+              <MappingFragment StoreEntitySet="ProyectosResponsables">
+                <ScalarProperty Name="ProyectoResponsableId" ColumnName="ProyectoResponsableId" />
+                <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+                <ScalarProperty Name="ResponsableId" ColumnName="ResponsableId" />
+                <ScalarProperty Name="ProyectoResponsableTipo" ColumnName="ProyectoResponsableTipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="nortonModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="RolCodigo" ColumnName="RolCodigo" />
+                <ScalarProperty Name="RolDescripcion" ColumnName="RolDescripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolesPaginas">
+            <EntityTypeMapping TypeName="nortonModel.RolesPaginas">
+              <MappingFragment StoreEntitySet="RolesPaginas">
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="PaginaId" ColumnName="PaginaId" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposdeCambio">
+            <EntityTypeMapping TypeName="nortonModel.TiposdeCambio">
+              <MappingFragment StoreEntitySet="TiposdeCambio">
+                <ScalarProperty Name="TipoCambioId" ColumnName="TipoCambioId" />
+                <ScalarProperty Name="MonedaId" ColumnName="MonedaId" />
+                <ScalarProperty Name="TipoCambioFecha" ColumnName="TipoCambioFecha" />
+                <ScalarProperty Name="TipoCambioValor" ColumnName="TipoCambioValor" />
+                <ScalarProperty Name="TipoCambioOrigen" ColumnName="TipoCambioOrigen" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposDetracciones">
+            <EntityTypeMapping TypeName="nortonModel.TiposDetracciones">
+              <MappingFragment StoreEntitySet="TiposDetracciones">
+                <ScalarProperty Name="TipoDetraccionId" ColumnName="TipoDetraccionId" />
+                <ScalarProperty Name="TipoDetraccionCodigo" ColumnName="TipoDetraccionCodigo" />
+                <ScalarProperty Name="TipoDetraccionDescripcion" ColumnName="TipoDetraccionDescripcion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposFacturas">
+            <EntityTypeMapping TypeName="nortonModel.TiposFacturas">
+              <MappingFragment StoreEntitySet="TiposFacturas">
+                <ScalarProperty Name="TipoFacturaId" ColumnName="TipoFacturaId" />
+                <ScalarProperty Name="TipoFacturaCodigo" ColumnName="TipoFacturaCodigo" />
+                <ScalarProperty Name="TipoFacturaDescripcion" ColumnName="TipoFacturaDescripcion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposProveedores">
+            <EntityTypeMapping TypeName="nortonModel.TiposProveedores">
+              <MappingFragment StoreEntitySet="TiposProveedores">
+                <ScalarProperty Name="TipoProveedorId" ColumnName="TipoProveedorId" />
+                <ScalarProperty Name="TipoProveedorCodigo" ColumnName="TipoProveedorCodigo" />
+                <ScalarProperty Name="TipoProveedorDescripcion" ColumnName="TipoProveedorDescripcion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
+                <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="nortonModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="UsuarioCodigo" ColumnName="UsuarioCodigo" />
+                <ScalarProperty Name="UsuarioNombres" ColumnName="UsuarioNombres" />
+                <ScalarProperty Name="UsuarioApellidos" ColumnName="UsuarioApellidos" />
+                <ScalarProperty Name="UsuarioEmail" ColumnName="UsuarioEmail" />
+                <ScalarProperty Name="UsuarioUsername" ColumnName="UsuarioUsername" />
+                <ScalarProperty Name="UsuarioPassword" ColumnName="UsuarioPassword" />
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ProveedoresFacturas" TypeName="nortonModel.ProveedoresFacturas" StoreEntitySet="ProveedoresFacturas">
+            <EndProperty Name="Facturas">
+              <ScalarProperty Name="FacturaId" ColumnName="FacturarId" />
+            </EndProperty>
+            <EndProperty Name="Proveedores">
+              <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
