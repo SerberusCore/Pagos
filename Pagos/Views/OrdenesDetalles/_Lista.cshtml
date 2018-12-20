@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Pagos.Models.OrdenesDetalles>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenDetalleItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ordenes.OrdenCodigo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenDetalleDescripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenDetalleCuotas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenDetalleUnidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenDetallePrecioUnitario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrdenDetallePrecioTotal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenDetalleItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ordenes.OrdenCodigo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenDetalleDescripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenDetalleCuotas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenDetalleUnidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenDetallePrecioUnitario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrdenDetallePrecioTotal)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.OrdenDetalleId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.OrdenDetalleId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.OrdenDetalleId })
+        </td>
+    </tr>
+}
+
+</table>
