@@ -31,7 +31,7 @@ namespace Pagos.Controllers
             }
             Ordenes ordenes = db.Ordenes.Find(id);
             if (ordenes == null)
-            {
+            {               
                 return HttpNotFound();
             }
             return View(ordenes);
@@ -47,7 +47,7 @@ namespace Pagos.Controllers
                 .Where(x => x.ParametroCodigo == RParametros.TipoOrden)
                 .First()
                 .ParametrosDetalle
-                .ToList();
+                .ToList();                  
             tipo.AgregarSeleccione();
 
             var formaPago = db.Parametros

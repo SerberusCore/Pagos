@@ -15,7 +15,7 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(model => model.FacturaProyecto, "FacturaProyecto", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.FacturaProyecto, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("FacturaProyecto", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.FacturaProyecto, "", new { @class = "text-danger" })
@@ -23,7 +23,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.FacturaTipo, "FacturaTipo", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.FacturaTipo, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("FacturaTipo", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.FacturaTipo, "", new { @class = "text-danger" })
@@ -63,7 +63,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.FacturaMoneda, "FacturaMoneda", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.FacturaMoneda, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("FacturaMoneda", null, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.FacturaMoneda, "", new { @class = "text-danger" })
