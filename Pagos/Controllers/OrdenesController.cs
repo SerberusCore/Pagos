@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Pagos.Models;
+using Pagos.Recursos;
 
 namespace Pagos.Controllers
 {
@@ -39,7 +40,9 @@ namespace Pagos.Controllers
         // GET: Ordenes/Create
         public ActionResult Create()
         {
-            ViewBag.OrdenProveedor = new SelectList(db.Proveedores, "ProveedorId", "ProveedorRuc");
+            ViewBag.OrdenProveedor = new SelectList(db.Proveedores, "ProveedorId", "ProveedorRazonSocial");
+            ViewBag.OrdenTipo = new SelectList(db.Parametros.Where(x => x.ParametroCodigo == RParametros.TipoOrden).First().ParametrosDetalle,
+                "ParametroDetalleId", "ParametroDetalleDescripcion");
             return View();
         }
 
@@ -58,7 +61,7 @@ namespace Pagos.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.OrdenProveedor = new SelectList(db.Proveedores, "ProveedorId", "ProveedorRuc", ordenes.OrdenProveedor);
+            ViewBag.OrdenProveedor = new SelectList(db.Proveedores, "ProveedorId", "ProveedorRazonSocial", ordenes.OrdenProveedor);
             return View(ordenes);
         }
 
