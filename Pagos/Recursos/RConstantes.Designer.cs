@@ -70,7 +70,7 @@ namespace Pagos.Recursos {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a 000-000-000-000.
+        ///   Busca una cadena traducida similar a 00000000-0000-0000-0000-000000000000.
         /// </summary>
         public static string ValorSeleccione {
             get {

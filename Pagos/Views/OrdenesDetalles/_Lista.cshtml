@@ -26,36 +26,37 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrdenDetalleItem)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ordenes.OrdenCodigo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrdenDetalleDescripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrdenDetalleCuotas)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrdenDetalleUnidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrdenDetallePrecioUnitario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrdenDetallePrecioTotal)
-        </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrdenDetalleItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ordenes.OrdenCodigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrdenDetalleDescripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrdenDetalleCuotas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrdenDetalleUnidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrdenDetallePrecioUnitario)
+            </td>
+            <td data-content="Total">
+                @Html.DisplayFor(modelItem => item.OrdenDetallePrecioTotal)
+            </td>
 
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.OrdenDetalleId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.OrdenDetalleId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.OrdenDetalleId })
-        </td>
-    </tr>
-}
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { data_id = item.OrdenDetalleId, data_target = "#EdicionDetalle" },null) |
+                @Html.ActionLink("Details", "Details", new { id = item.OrdenDetalleId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.OrdenDetalleId })
+            </td>
+        </tr>
+    }
 
 </table>

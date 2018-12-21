@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Principal.cshtml";
 }
 
 @using (Html.BeginForm())
@@ -109,7 +109,9 @@
     </div>
 }
 <button class="btn btn-default" data-toggle="modal" data-target="#EdicionDetalle">Nuevo Detalle</button>
-<div id="divListaDetalle"></div>
+<div id="divListaDetalle">
+@Html.Partial("~/Views/OrdenesDetalles/_Lista.cshtml")
+</div>
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
@@ -119,14 +121,24 @@
     var id;
     var confirmador;
         $(document).ready(function () {
+            $("#OrdenIgv").prop("disabled", true);
+            $("#OrdenTotal").prop("disabled",true);
+            $("#OrdenSubtotal").change(function () {
+                var subtotal = parseFloat($("#OrdenSubtotal").val());
+                var igv = subtotal * 18 / 100
+                $("#OrdenIgv").val(igv.toFixed(2));
+                var total = subtotal + igv;
+                $("#OrdenTotal").val(total.toFixed(2));
+            });
+
             $("#OrdenProveedor").change(function () {
                 $.get('@Url.Action("ObtenerContactos")', { proveedorId: $("#OrdenProveedor").val() }, function (data, status, jq) {
                     var combo = $("#OrdenContactoInterno");
                     combo.empty();
                     combo.append("<option selected value='@Pagos.Recursos.RConstantes.ValorSeleccione'>@Pagos.Recursos.RConstantes.Seleccione</option>")
 
-                    $.each(data, function (i, item) {
-                        var option = "<option selected value='" + item.ProveedorContactoId + "'>" + item.ProveedorContactoApellidos + ", " + item.ProveedorContactoNombres + "</option>"
+                    $.each(data.Data, function (i, item) {
+                        var option = "<option value='" + item.ProveedorContactoId + "'>" + item.ProveedorContactoApellidos + ", " + item.ProveedorContactoNombres + "</option>"
                         combo.append(option);
                     });
                 });
@@ -164,6 +176,22 @@
                 $("#OrdenDetalleUnidad").val('');
                 $("#OrdenDetallePrecioUnitario").val('');
                 $("#OrdenDetallePrecioTotal").val('');
+                var accion = function () {
+                    var cuotas = $("#OrdenDetalleCuotas").val();
+                    if (cuotas == '') {
+                        cuotas = 0;
+                    }
+                    cuotas = parseInt(cuotas);
+                    var pu = $("#OrdenDetallePrecioUnitario").val();
+                    if (pu == '') {
+                        pu = 0;
+                    }
+                    pu = parseFloat(pu);
+                    $("#OrdenDetallePrecioTotal").val((cuotas * pu).toFixed(2));
+                };
+                $("#OrdenDetalleCuotas").change(accion);
+                $("#OrdenDetallePrecioUnitario").change(accion);
+                $("#OrdenDetallePrecioTotal").prop("disabled", true)
             });
             $("#GuardarDetalle").click(function () {
                 $.validator.unobtrusive.parse("#OrdenDetalle");
@@ -187,13 +215,25 @@
                 $.post('@Url.Action("Create","OrdenesDetalles")', detalle, function (data, status, jq) {
                     $("#divListaDetalle").html(data);
                 }).always(function () {
-                    $("#divListaDetalle").find("[data-target=#EdicionDetalle]").click(function () {
+                    $("#divListaDetalle").find("[data-target='#EdicionDetalle']").click(function () {
                         id = $(this).attr("data-id");
                         $.get('@Url.Action("Edit")', { id: id }, function (data, status, jq) {
                             $("#EdicionDetalle").find(".modal-body").html(data);
-                        });
+                                                    });
                         $("#EdicionDetalle").modal('show');
                     });
+
+                    var sum = 0;
+                    $("#divListaDetalle").find("[data-content='Total']").each(function () {
+                        var valor = $(this).text().trim();
+                        if (!isNaN(valor) && valor.length != 0) {
+                            sum += parseFloat(valor);
+                        }
+                    });
+                    $("#OrdenSubtotal").val(sum.toFixed(2));
+                    $("#OrdenSubtotal").change();
+
+
                     $("#divListaDetalle").find("[data-target=#confirmar]").click(function () {
                         id = $(this).attr("data-id");
                         confirmador = confirmar(function (id) {
