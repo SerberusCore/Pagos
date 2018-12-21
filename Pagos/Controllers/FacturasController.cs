@@ -63,6 +63,7 @@ namespace Pagos.Controllers
             if (ModelState.IsValid)
             {
                 facturas.FacturaId = Guid.NewGuid();
+                facturas.FacturaEstado = "A";
                 db.Facturas.Add(facturas);
                 db.SaveChanges();
                 return RedirectToAction("Index");

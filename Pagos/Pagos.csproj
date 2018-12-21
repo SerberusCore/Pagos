@@ -135,6 +135,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
+    <Compile Include="Controllers\FacturasDetallesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdenesController.cs" />
     <Compile Include="Controllers\OrdenesDetallesController.cs" />
@@ -340,6 +341,11 @@
     <Content Include="Views\Facturas\Details.cshtml" />
     <Content Include="Views\Facturas\Edit.cshtml" />
     <Content Include="Views\Facturas\Index.cshtml" />
+    <Content Include="Views\FacturasDetalles\Create.cshtml" />
+    <Content Include="Views\FacturasDetalles\Delete.cshtml" />
+    <Content Include="Views\FacturasDetalles\Details.cshtml" />
+    <Content Include="Views\FacturasDetalles\Edit.cshtml" />
+    <Content Include="Views\FacturasDetalles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

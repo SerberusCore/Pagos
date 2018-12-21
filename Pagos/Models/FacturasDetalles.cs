@@ -11,14 +11,19 @@ namespace Pagos.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class FacturasDetalles
     {
         public System.Guid FacturaDetalleId { get; set; }
         public Nullable<System.Guid> FacturaId { get; set; }
+        [DisplayName("Descripción")]
         public string FacturaDetalleDescripcion { get; set; }
+        [DisplayName("Cantidad")]
         public Nullable<decimal> FacturaDetalleCantidad { get; set; }
+        [DisplayName("Precio Unitario")]
         public Nullable<decimal> FacturaDetallePrecioUnitario { get; set; }
+        [DisplayName("Importe Total")]
         public Nullable<decimal> FacturaDetalleImporteTotal { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public Nullable<System.Guid> UsuarioCreacion { get; set; }

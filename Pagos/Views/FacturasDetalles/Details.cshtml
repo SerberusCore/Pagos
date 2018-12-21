@@ -1,0 +1,90 @@
+﻿@model Pagos.Models.FacturasDetalles
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FacturasDetalles</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaDetalleDescripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaDetalleDescripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaDetalleCantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaDetalleCantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaDetallePrecioUnitario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaDetallePrecioUnitario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacturaDetalleImporteTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacturaDetalleImporteTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaActualizacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaActualizacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioActualizacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioActualizacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Facturas.FacturaSerie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Facturas.FacturaSerie)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FacturaDetalleId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
