@@ -12,13 +12,14 @@ namespace Pagos.Controllers
         {
             get
             {
-                if(Session["OrdenesDetalles"]==null)
+                if (Session["OrdenesDetalles"] == null)
                 {
                     Session.Add("OrdenesDetalles", new List<Models.OrdenesDetalles>());
                 }
                 return Session["OrdenesDetalles"] as List<Models.OrdenesDetalles>;
             }
-            set {
+            set
+            {
                 Session.Add("OrdenesDetalles", value);
             }
         }
@@ -58,7 +59,7 @@ namespace Pagos.Controllers
                     Detalles.RemoveAt(index);
                     Detalles.Insert(index, detalle);
                 }
-                return PartialView("_Lista",Detalles);
+                return PartialView("_Lista", Detalles);
             }
             catch
             {
@@ -67,9 +68,10 @@ namespace Pagos.Controllers
         }
 
         // GET: OrdenesDetalles/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var detalle = Detalles.FirstOrDefault(x => x.OrdenDetalleId == id);
+            return PartialView("_CrearDetalle", detalle);
         }
 
         // POST: OrdenesDetalles/Edit/5

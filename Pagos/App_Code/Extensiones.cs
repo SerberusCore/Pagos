@@ -14,7 +14,7 @@ namespace Pagos
                 new ParametrosDetalle
                 {
                     ParametroDetalleId = guid,
-                    ParametroDetalleDescripcion = "--Seleccione--"
+                    ParametroDetalleDescripcion = Recursos.RConstantes.Seleccione
                 });
         }
         public static void AgregarSeleccione<T>(this List<T> lista, string id, string value) where T : new()
@@ -24,7 +24,7 @@ namespace Pagos
             var propiedades = tipo.GetProperties();
             foreach (var propiedad in propiedades)
             {
-                if(propiedad.Name==id)
+                if (propiedad.Name == id)
                 {
                     propiedad.SetValue(newT, guid);
                     break;
@@ -34,7 +34,7 @@ namespace Pagos
             {
                 if (propiedad.Name == value)
                 {
-                    propiedad.SetValue(newT, "--Seleccione--");
+                    propiedad.SetValue(newT, Recursos.RConstantes.Seleccione);
                     break;
                 }
             }
