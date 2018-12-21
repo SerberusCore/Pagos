@@ -7,56 +7,55 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Pagos.Models
+using Pagos.Models;
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+
+public partial class nortonEntities : DbContext
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
-    
-    public partial class nortonEntities : DbContext
+    public nortonEntities()
+        : base("name=nortonEntities")
     {
-        public nortonEntities()
-            : base("name=nortonEntities")
-        {
-        }
-    
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
-        }
-    
-        public virtual DbSet<Empresas> Empresas { get; set; }
-        public virtual DbSet<EmpresasCuentasBancarias> EmpresasCuentasBancarias { get; set; }
-        public virtual DbSet<Facturas> Facturas { get; set; }
-        public virtual DbSet<FacturasDetalles> FacturasDetalles { get; set; }
-        public virtual DbSet<FacturasEstados> FacturasEstados { get; set; }
-        public virtual DbSet<FacturasGuiasRemision> FacturasGuiasRemision { get; set; }
-        public virtual DbSet<FacturasOrdenes> FacturasOrdenes { get; set; }
-        public virtual DbSet<FacturasPagos> FacturasPagos { get; set; }
-        public virtual DbSet<Monedas> Monedas { get; set; }
-        public virtual DbSet<Ordenes> Ordenes { get; set; }
-        public virtual DbSet<OrdenesDetalles> OrdenesDetalles { get; set; }
-        public virtual DbSet<OrdenesPartidas> OrdenesPartidas { get; set; }
-        public virtual DbSet<Paginas> Paginas { get; set; }
-        public virtual DbSet<Pagos> Pagos { get; set; }
-        public virtual DbSet<Parametros> Parametros { get; set; }
-        public virtual DbSet<ParametrosDetalle> ParametrosDetalle { get; set; }
-        public virtual DbSet<Partidas> Partidas { get; set; }
-        public virtual DbSet<Presupuestos> Presupuestos { get; set; }
-        public virtual DbSet<PresupuestosItems> PresupuestosItems { get; set; }
-        public virtual DbSet<PresupuestosItemsLogs> PresupuestosItemsLogs { get; set; }
-        public virtual DbSet<Proveedores> Proveedores { get; set; }
-        public virtual DbSet<ProveedoresContactos> ProveedoresContactos { get; set; }
-        public virtual DbSet<ProveedoresCuentasBancarias> ProveedoresCuentasBancarias { get; set; }
-        public virtual DbSet<Proyectos> Proyectos { get; set; }
-        public virtual DbSet<ProyectosPresupuestos> ProyectosPresupuestos { get; set; }
-        public virtual DbSet<ProyectosResponsables> ProyectosResponsables { get; set; }
-        public virtual DbSet<Roles> Roles { get; set; }
-        public virtual DbSet<RolesPaginas> RolesPaginas { get; set; }
-        public virtual DbSet<TiposdeCambio> TiposdeCambio { get; set; }
-        public virtual DbSet<TiposDetracciones> TiposDetracciones { get; set; }
-        public virtual DbSet<TiposFacturas> TiposFacturas { get; set; }
-        public virtual DbSet<TiposProveedores> TiposProveedores { get; set; }
-        public virtual DbSet<Usuarios> Usuarios { get; set; }
     }
+
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    {
+        throw new UnintentionalCodeFirstException();
+    }
+
+    public virtual DbSet<Empresas> Empresas { get; set; }
+    public virtual DbSet<EmpresasCuentasBancarias> EmpresasCuentasBancarias { get; set; }
+    public virtual DbSet<Facturas> Facturas { get; set; }
+    public virtual DbSet<FacturasDetalles> FacturasDetalles { get; set; }
+    public virtual DbSet<FacturasEstados> FacturasEstados { get; set; }
+    public virtual DbSet<FacturasGuiasRemision> FacturasGuiasRemision { get; set; }
+    public virtual DbSet<FacturasOrdenes> FacturasOrdenes { get; set; }
+    public virtual DbSet<FacturasPagos> FacturasPagos { get; set; }
+    public virtual DbSet<Monedas> Monedas { get; set; }
+    public virtual DbSet<Ordenes> Ordenes { get; set; }
+    public virtual DbSet<OrdenesDetalles> OrdenesDetalles { get; set; }
+    public virtual DbSet<OrdenesPartidas> OrdenesPartidas { get; set; }
+    public virtual DbSet<Paginas> Paginas { get; set; }
+    public virtual DbSet<Pagos.Models.Pagos> Pagos { get; set; }
+    public virtual DbSet<Parametros> Parametros { get; set; }
+    public virtual DbSet<ParametrosDetalle> ParametrosDetalle { get; set; }
+    public virtual DbSet<Partidas> Partidas { get; set; }
+    public virtual DbSet<Presupuestos> Presupuestos { get; set; }
+    public virtual DbSet<PresupuestosItems> PresupuestosItems { get; set; }
+    public virtual DbSet<PresupuestosItemsLogs> PresupuestosItemsLogs { get; set; }
+    public virtual DbSet<Proveedores> Proveedores { get; set; }
+    public virtual DbSet<ProveedoresContactos> ProveedoresContactos { get; set; }
+    public virtual DbSet<ProveedoresCuentasBancarias> ProveedoresCuentasBancarias { get; set; }
+    public virtual DbSet<Proyectos> Proyectos { get; set; }
+    public virtual DbSet<ProyectosPresupuestos> ProyectosPresupuestos { get; set; }
+    public virtual DbSet<ProyectosResponsables> ProyectosResponsables { get; set; }
+    public virtual DbSet<Roles> Roles { get; set; }
+    public virtual DbSet<RolesPaginas> RolesPaginas { get; set; }
+    public virtual DbSet<TiposdeCambio> TiposdeCambio { get; set; }
+    public virtual DbSet<TiposDetracciones> TiposDetracciones { get; set; }
+    public virtual DbSet<TiposFacturas> TiposFacturas { get; set; }
+    public virtual DbSet<TiposProveedores> TiposProveedores { get; set; }
+    public virtual DbSet<Usuarios> Usuarios { get; set; }
+    public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
 }

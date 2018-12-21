@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Pagos.Models.Facturas>
+﻿@model IEnumerable<Pagos.Dtos.DtoFactura>
 
 @{
     ViewBag.Title = "Index";
@@ -12,25 +12,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FacturaProyecto)
+            @Html.DisplayNameFor(model => model.Factura.FacturaProyecto)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TiposFacturas.TipoFacturaCodigo)
+            @Html.DisplayNameFor(model => model.Factura.TiposFacturas.TipoFacturaCodigo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FacturaSerie)
+            @Html.DisplayNameFor(model => model.Factura.FacturaSerie)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FacturaNumero)
+            @Html.DisplayNameFor(model => model.Factura.FacturaNumero)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FacturaFechaEmision)
+            @Html.DisplayNameFor(model => model.Factura.FacturaFechaEmision)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FacturaFechaVencimiento)
+            @Html.DisplayNameFor(model => model.Factura.FacturaFechaVencimiento)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FacturaEstado)
+            @Html.DisplayNameFor(model => model.Factura.FacturaEstado)
         </th>
         <th></th>
     </tr>
@@ -38,30 +38,31 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.FacturaProyecto)
+            @Html.DisplayFor(modelItem => item.Factura.Proyectos.ProyectoNombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FacturaTipo)
+            @Html.DisplayFor(modelItem => item.Factura.TiposFacturas.TipoFacturaDescripcion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FacturaSerie)
+            @Html.DisplayFor(modelItem => item.Factura.FacturaSerie)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FacturaNumero)
+            @Html.DisplayFor(modelItem => item.Factura.FacturaNumero)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FacturaFechaEmision)
+            @Html.DisplayFor(modelItem => item.Factura.FacturaFechaEmision)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FacturaFechaVencimiento)
+            @Html.DisplayFor(modelItem => item.Factura.FacturaFechaVencimiento)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FacturaEstado)
+            @Html.DisplayFor(modelItem => item.Factura.FacturaEstado)
         </td>
-         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.FacturaId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.FacturaId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.FacturaId })
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Factura.FacturaId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Factura.FacturaId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Factura.FacturaId })|
+            @Html.DisplayFor(modelItem => item.Moneda.MonedaDescripcion)
         </td>
     </tr>
 }

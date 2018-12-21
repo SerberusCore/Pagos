@@ -19,6 +19,7 @@ namespace Pagos.Models
         {
             this.ProyectosPresupuestos = new HashSet<ProyectosPresupuestos>();
             this.ProyectosResponsables = new HashSet<ProyectosResponsables>();
+            this.Facturas = new HashSet<Facturas>();
         }
     
         public System.Guid ProyectoId { get; set; }
@@ -44,5 +45,7 @@ namespace Pagos.Models
         public virtual ICollection<ProyectosPresupuestos> ProyectosPresupuestos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProyectosResponsables> ProyectosResponsables { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Facturas> Facturas { get; set; }
     }
 }

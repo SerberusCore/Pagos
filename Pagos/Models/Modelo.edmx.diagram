@@ -68,6 +68,8 @@
         <AssociationConnector Association="nortonModel.FK_RolesPaginas_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="nortonModel.FK_Usuarios_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="nortonModel.ProveedoresFacturas" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="nortonModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="5.75" />
+        <AssociationConnector Association="nortonModel.FK_Facturas_Proyectos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

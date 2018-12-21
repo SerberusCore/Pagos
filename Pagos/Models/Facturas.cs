@@ -66,5 +66,6 @@ namespace Pagos.Models
         public virtual ICollection<FacturasPagos> FacturasPagos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proveedores> Proveedores { get; set; }
+        public virtual Proyectos Proyectos { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="nortonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="nortonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Empresas">
           <Key>
             <PropertyRef Name="EmpresaId" />
@@ -395,6 +395,16 @@
           <Property Name="PaginaId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Accion" Type="char" MaxLength="1" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="TiposdeCambio">
           <Key>
             <PropertyRef Name="TipoCambioId" />
@@ -468,6 +478,18 @@
             </Principal>
             <Dependent Role="EmpresasCuentasBancarias">
               <PropertyRef Name="EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facturas_Proyectos">
+          <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="0..1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyectos">
+              <PropertyRef Name="ProyectoId" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="FacturaProyecto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -861,6 +883,7 @@
           <EntitySet Name="ProyectosResponsables" EntityType="Self.ProyectosResponsables" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolesPaginas" EntityType="Self.RolesPaginas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposdeCambio" EntityType="Self.TiposdeCambio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposDetracciones" EntityType="Self.TiposDetracciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposFacturas" EntityType="Self.TiposFacturas" Schema="dbo" store:Type="Tables" />
@@ -869,6 +892,10 @@
           <AssociationSet Name="FK_EmpresasCuentasBancarias_Empresas" Association="Self.FK_EmpresasCuentasBancarias_Empresas">
             <End Role="Empresas" EntitySet="Empresas" />
             <End Role="EmpresasCuentasBancarias" EntitySet="EmpresasCuentasBancarias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facturas_Proyectos" Association="Self.FK_Facturas_Proyectos">
+            <End Role="Proyectos" EntitySet="Proyectos" />
+            <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
           <AssociationSet Name="FK_Facturas_TiposFacturas" Association="Self.FK_Facturas_TiposFacturas">
             <End Role="TiposFacturas" EntitySet="TiposFacturas" />
@@ -991,8 +1018,7 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="nortonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1059,6 +1085,7 @@
           <NavigationProperty Name="FacturasOrdenes" Relationship="Self.FK_FacturasOrdenes_Facturas" FromRole="Facturas" ToRole="FacturasOrdenes" />
           <NavigationProperty Name="FacturasPagos" Relationship="Self.FK_FacturasPagos_Facturas" FromRole="Facturas" ToRole="FacturasPagos" />
           <NavigationProperty Name="Proveedores" Relationship="Self.ProveedoresFacturas" FromRole="Facturas" ToRole="Proveedores" />
+          <NavigationProperty Name="Proyectos" Relationship="nortonModel.FK_Facturas_Proyectos" FromRole="Facturas" ToRole="Proyectos" />
         </EntityType>
         <EntityType Name="FacturasDetalles">
           <Key>
@@ -1390,6 +1417,7 @@
           <NavigationProperty Name="Empresas" Relationship="Self.FK_Proyectos_Empresas" FromRole="Proyectos" ToRole="Empresas" />
           <NavigationProperty Name="ProyectosPresupuestos" Relationship="Self.FK_ProyectosPresupuestos_Proyectos" FromRole="Proyectos" ToRole="ProyectosPresupuestos" />
           <NavigationProperty Name="ProyectosResponsables" Relationship="Self.FK_ProyectosResponsables_Proyectos" FromRole="Proyectos" ToRole="ProyectosResponsables" />
+          <NavigationProperty Name="Facturas" Relationship="nortonModel.FK_Facturas_Proyectos" FromRole="Proyectos" ToRole="Facturas" />
         </EntityType>
         <EntityType Name="ProyectosPresupuestos">
           <Key>
@@ -2008,7 +2036,34 @@
             <End Role="Facturas" EntitySet="Facturas" />
             <End Role="Proveedores" EntitySet="Proveedores" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="nortonModel.sysdiagrams" />
+          <AssociationSet Name="FK_Facturas_Proyectos" Association="nortonModel.FK_Facturas_Proyectos">
+            <End Role="Proyectos" EntitySet="Proyectos" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Facturas_Proyectos">
+          <End Type="nortonModel.Proyectos" Role="Proyectos" Multiplicity="0..1" />
+          <End Type="nortonModel.Facturas" Role="Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyectos">
+              <PropertyRef Name="ProyectoId" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="FacturaProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2501,6 +2556,17 @@
               <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="nortonModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

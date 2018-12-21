@@ -24,7 +24,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenTipo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OrdenTipo",null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("OrdenTipo", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.OrdenTipo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.OrdenProveedor, "OrdenProveedor", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.OrdenProveedor, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("OrdenProveedor", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.OrdenProveedor, "", new { @class = "text-danger" })
@@ -88,7 +88,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenContactoInterno, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OrdenContactoInterno, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("OrdenContactoInterno", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.OrdenContactoInterno, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -119,6 +119,18 @@
     var id;
     var confirmador;
         $(document).ready(function () {
+            $("#OrdenProveedor").change(function () {
+                $.get('@Url.Action("ObtenerContactos")', { proveedorId: $("#OrdenProveedor").val() }, function (data, status, jq) {
+                    var combo = $("#OrdenContactoInterno");
+                    combo.empty();
+                    combo.append("<option selected value='@Pagos.Recursos.RConstantes.ValorSeleccione'>@Pagos.Recursos.RConstantes.Seleccione</option>")
+
+                    $.each(data, function (i, item) {
+                        var option = "<option selected value='" + item.ProveedorContactoId + "'>" + item.ProveedorContactoApellidos + ", " + item.ProveedorContactoNombres + "</option>"
+                        combo.append(option);
+                    });
+                });
+            });
             $("#GuardarOrden").click(function () {
                 $.validator.unobtrusive.parse("#OrdenDetalle");
                 if ($("#OrdenDetalle").validate()) {

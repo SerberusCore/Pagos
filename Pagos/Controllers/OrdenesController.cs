@@ -15,6 +15,28 @@ namespace Pagos.Controllers
     {
         private nortonEntities db = new nortonEntities();
 
+        public JsonResult ObtenerContactos(Guid proveedorId)
+        {
+            var proveedor = db.Proveedores.FirstOrDefault();
+            if (proveedor != null)
+            {
+                return
+                    new JsonResult
+                    {
+                        Data = Json(proveedor.ProveedoresContactos.Select(x => new
+                        {
+                            x.ProveedorContactoId,
+                            x.ProveedorContactoNombres,
+                            x.ProveedorContactoApellidos
+                        })),
+                        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                        MaxJsonLength = int.MaxValue
+                    };
+
+            }
+            return Json(null);
+        }
+
         // GET: Ordenes
         public ActionResult Index()
         {
@@ -57,9 +79,13 @@ namespace Pagos.Controllers
                 .ToList();
             formaPago.AgregarSeleccione();
 
+            var contactos = new List<ProveedoresContactos>();
+            contactos.AgregarSeleccione("ProveedorContactoId", "ProveedorContactoNombres");
+
             ViewBag.OrdenProveedor = new SelectList(proveedores, "ProveedorId", "ProveedorRazonSocial");
             ViewBag.OrdenTipo = new SelectList(tipo, "ParametroDetalleId", "ParametroDetalleDescripcion");
             ViewBag.OrdenFormaPago = new SelectList(formaPago, "ParametroDetalleId", "ParametroDetalleDescripcion");
+            ViewBag.OrdenContactoInterno = new SelectList(contactos, "ProveedorContactoId", "ProveedorContactoNombres");
             return View();
         }
 
