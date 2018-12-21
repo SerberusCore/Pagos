@@ -14,6 +14,22 @@ namespace Pagos.Controllers
     {
         private nortonEntities db = new nortonEntities();
 
+        public List<Models.FacturasDetalles> Detalles
+        {
+            get
+            {
+                if (Session["FacturasDetalles"] == null)
+                {
+                    Session.Add("FacturasDetalles", new List<Models.FacturasDetalles>());
+                }
+                return Session["FacturasDetalles"] as List<Models.FacturasDetalles>;
+            }
+            set
+            {
+                Session.Add("FacturasDetalles", value);
+            }
+        }
+
         // GET: FacturasDetalles
         public ActionResult Index()
         {
@@ -47,19 +63,28 @@ namespace Pagos.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FacturaDetalleId,FacturaId,FacturaDetalleDescripcion,FacturaDetalleCantidad,FacturaDetallePrecioUnitario,FacturaDetalleImporteTotal,FechaCreacion,UsuarioCreacion,FechaActualizacion,UsuarioActualizacion")] FacturasDetalles facturasDetalles)
+        public ActionResult Create(Models.FacturasDetalles detalle)
         {
-            if (ModelState.IsValid)
+            try
             {
-                facturasDetalles.FacturaDetalleId = Guid.NewGuid();
-                db.FacturasDetalles.Add(facturasDetalles);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (detalle.FacturaDetalleId == Guid.Empty)
+                {
+                    detalle.FacturaDetalleId = Guid.NewGuid();
+                    Detalles.Add(detalle);
+                }
+                else
+                {
+                    var old = Detalles.FirstOrDefault(x => x.FacturaDetalleId == detalle.FacturaDetalleId);
+                    var index = Detalles.IndexOf(old);
+                    Detalles.RemoveAt(index);
+                    Detalles.Insert(index, detalle);
+                }
+                return PartialView("_Lista", Detalles);
             }
-
-            ViewBag.FacturaId = new SelectList(db.Facturas, "FacturaId", "FacturaSerie", facturasDetalles.FacturaId);
-            return View(facturasDetalles);
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: FacturasDetalles/Edit/5
