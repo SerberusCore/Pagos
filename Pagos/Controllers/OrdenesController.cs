@@ -40,9 +40,26 @@ namespace Pagos.Controllers
         // GET: Ordenes/Create
         public ActionResult Create()
         {
-            ViewBag.OrdenProveedor = new SelectList(db.Proveedores, "ProveedorId", "ProveedorRazonSocial");
-            ViewBag.OrdenTipo = new SelectList(db.Parametros.Where(x => x.ParametroCodigo == RParametros.TipoOrden).First().ParametrosDetalle,
-                "ParametroDetalleId", "ParametroDetalleDescripcion");
+            var proveedores = db.Proveedores.ToList();
+            proveedores.AgregarSeleccione("ProveedorId", "ProveedorRazonSocial");
+
+            var tipo = db.Parametros
+                .Where(x => x.ParametroCodigo == RParametros.TipoOrden)
+                .First()
+                .ParametrosDetalle
+                .ToList();
+            tipo.AgregarSeleccione();
+
+            var formaPago = db.Parametros
+                .Where(x => x.ParametroCodigo == RParametros.FormaPago)
+                .First()
+                .ParametrosDetalle
+                .ToList();
+            formaPago.AgregarSeleccione();
+
+            ViewBag.OrdenProveedor = new SelectList(proveedores, "ProveedorId", "ProveedorRazonSocial");
+            ViewBag.OrdenTipo = new SelectList(tipo, "ParametroDetalleId", "ParametroDetalleDescripcion");
+            ViewBag.OrdenFormaPago = new SelectList(formaPago, "ParametroDetalleId", "ParametroDetalleDescripcion");
             return View();
         }
 
