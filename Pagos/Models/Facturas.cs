@@ -12,6 +12,7 @@ namespace Pagos.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Facturas
     {
@@ -36,8 +37,12 @@ namespace Pagos.Models
         [DisplayName("Número de Orden")]
         public string FacturaNumero { get; set; }
         [DisplayName("Fecha Emisión")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> FacturaFechaEmision { get; set; }
         [DisplayName("Fecha Vencimiento")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> FacturaFechaVencimiento { get; set; }
         [DisplayName("Tipo Moneda")]
         public Nullable<System.Guid> FacturaMoneda { get; set; }

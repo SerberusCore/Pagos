@@ -47,7 +47,9 @@ namespace Pagos.Controllers
         // GET: Facturas/Create
         public ActionResult Create()
         {
-            ViewBag.FacturaTipo = new SelectList(db.TiposFacturas, "TipoFacturaId", "TipoFacturaCodigo");
+            ViewBag.FacturaTipo = new SelectList(db.TiposFacturas, "TipoFacturaId", "TipoFacturaDescripcion");
+            ViewBag.FacturaMoneda = new SelectList(db.Monedas, "MonedaId", "MonedaDescripcion");
+            ViewBag.FacturaProyecto = new SelectList(db.Proyectos, "ProyectoId", "ProyectoNombre");
             return View();
         }
 
@@ -66,7 +68,9 @@ namespace Pagos.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.FacturaTipo = new SelectList(db.TiposFacturas, "TipoFacturaId", "TipoFacturaCodigo", facturas.FacturaTipo);
+            ViewBag.FacturaTipo = new SelectList(db.TiposFacturas, "TipoFacturaId", "TipoFacturaDescripcion", facturas.FacturaTipo);
+            ViewBag.FacturaMoneda = new SelectList(db.Monedas, "MonedaId", "MonedaDescripcion", facturas.FacturaMoneda);
+            ViewBag.FacturaProyecto = new SelectList(db.Proyectos, "ProyectoId", "ProyectoNombre", facturas.FacturaProyecto);
             return View(facturas);
         }
 
@@ -83,6 +87,8 @@ namespace Pagos.Controllers
                 return HttpNotFound();
             }
             ViewBag.FacturaTipo = new SelectList(db.TiposFacturas, "TipoFacturaId", "TipoFacturaCodigo", facturas.FacturaTipo);
+            ViewBag.FacturaMoneda = new SelectList(db.Monedas, "MonedaId", "MonedaDescripcion", facturas.FacturaMoneda);
+            ViewBag.FacturaProyecto = new SelectList(db.Proyectos, "ProyectoId", "ProyectoNombre", facturas.FacturaProyecto);
             return View(facturas);
         }
 
@@ -100,6 +106,8 @@ namespace Pagos.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.FacturaTipo = new SelectList(db.TiposFacturas, "TipoFacturaId", "TipoFacturaCodigo", facturas.FacturaTipo);
+            ViewBag.FacturaMoneda = new SelectList(db.Monedas, "MonedaId", "MonedaDescripcion", facturas.FacturaMoneda);
+            ViewBag.FacturaProyecto = new SelectList(db.Proyectos, "ProyectoId", "ProyectoNombre", facturas.FacturaProyecto);
             return View(facturas);
         }
 
