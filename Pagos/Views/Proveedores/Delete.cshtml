@@ -1,0 +1,152 @@
+﻿@model Pagos.Models.Proveedores
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar Proveedores</h2>
+
+<h3>¿Está seguro de eliminar los datos?</h3>
+<div>
+    <h4>Proveedores</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProveedorRuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProveedorRuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProveedorEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProveedorEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProveedorRazonSocial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProveedorRazonSocial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProveedorPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProveedorPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProveedorDireccionFiscal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProveedorDireccionFiscal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProveedorPlazoPago)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProveedorPlazoPago)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProveedorEstado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProveedorEstado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProveedorPorcentajeDetraccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProveedorPorcentajeDetraccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProveedorCuentaDetraccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProveedorCuentaDetraccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaActualizacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaActualizacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioValidacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioValidacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoProveedorId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoProveedorId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TiposDetracciones.TipoDetraccionCodigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TiposDetracciones.TipoDetraccionCodigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TiposProveedores.TipoProveedorCodigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TiposProveedores.TipoProveedorCodigo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    }
+</div>

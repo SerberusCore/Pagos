@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Pagos.Models.Proveedores>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Consulta Proveedor</h2>
+
+<p>
+    @Html.ActionLink("Añadir", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProveedorRazonSocial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProveedorRuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProveedorDireccionFiscal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProveedorEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProveedorEstado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProveedorRazonSocial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProveedorRuc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProveedorDireccionFiscal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProveedorEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProveedorEstado)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.ProveedorId }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.ProveedorId })
+        </td>
+    </tr>
+}
+
+</table>

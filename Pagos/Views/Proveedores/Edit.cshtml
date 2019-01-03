@@ -1,0 +1,155 @@
+﻿@model Pagos.Models.Proveedores
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <br>
+    <div class="form-horizontal">
+        <h4>Datos Generales</h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProveedorRazonSocial, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProveedorRazonSocial, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProveedorRazonSocial, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                Nombre Contacto Comercial
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProveedorTipo, "ProveedorTipo", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("ProveedorTipo", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ProveedorTipo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                Email Contacto Comercial
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProveedorDireccionFiscal, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProveedorDireccionFiscal, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProveedorDireccionFiscal, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="form-horizontal">
+        <h4>Condiciones de Pago y Datos Bancarios</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProveedorPlazoPago, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProveedorPlazoPago, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProveedorPlazoPago, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="form-horizontal">
+        <h4>Datos de Cuenta de Detracciones</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProveedorTipoDetraccion, "ProveedorTipoDetraccion", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("ProveedorTipoDetraccion", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ProveedorTipoDetraccion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProveedorPorcentajeDetraccion, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProveedorPorcentajeDetraccion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProveedorPorcentajeDetraccion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProveedorCuentaDetraccion, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProveedorCuentaDetraccion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProveedorCuentaDetraccion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar Ficha" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regresar", "Index")
+</div>
