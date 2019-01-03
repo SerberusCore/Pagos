@@ -99,6 +99,8 @@ namespace Pagos.Controllers
             if (ModelState.IsValid)
             {
                 ordenes.OrdenId = Guid.NewGuid();
+                var detalles = Session["OrdenesDetalles"] as List<OrdenesDetalles>;
+                ordenes.OrdenesDetalles = detalles;
                 db.Ordenes.Add(ordenes);
                 db.SaveChanges();
                 return RedirectToAction("Index");

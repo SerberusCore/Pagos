@@ -11,9 +11,7 @@ namespace Pagos.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Facturas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,25 +26,13 @@ namespace Pagos.Models
         }
     
         public System.Guid FacturaId { get; set; }
-        [DisplayName("Proyecto")]
         public Nullable<System.Guid> FacturaProyecto { get; set; }
-        [DisplayName("Tipo Factura")]
         public Nullable<System.Guid> FacturaTipo { get; set; }
-        [DisplayName("Serie y Número")]
         public string FacturaSerie { get; set; }
-        [DisplayName("Número de Orden")]
         public string FacturaNumero { get; set; }
-        [DisplayName("Fecha Emisión")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> FacturaFechaEmision { get; set; }
-        [DisplayName("Fecha Vencimiento")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> FacturaFechaVencimiento { get; set; }
-        [DisplayName("Tipo Moneda")]
         public Nullable<System.Guid> FacturaMoneda { get; set; }
-        [DisplayName("Estado")]
         public string FacturaEstado { get; set; }
         public Nullable<decimal> FacturaSubtotal { get; set; }
         public Nullable<decimal> FacturaIgv { get; set; }

@@ -43,6 +43,23 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+    jQuery.validator.unobtrusive.adapters.add(
+        'notequal', ['valor'], function (options) {
+            options.rules['notEqual'] = options.params.valor;
+            if (options.message) {
+                options.messages['notEqual'] = options.message;
+            }
+    });
+
+    jQuery.validator.addMethod('notEqual', function(value, element, param) {
+        return this.optional(element) || value != param
+        }, '');
+        jQuery.validator.addMethod('NoGuidEmpty', function (value, element) {
+            return $("#" + element.id).val() != '00000000-0000-0000-0000-000000000000';
+        },'Debe elegir una opción');
+    </script>
+    @RenderSection("comunes", required: false)
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -11,8 +11,7 @@ namespace Pagos.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Ordenes
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,38 +22,16 @@ namespace Pagos.Models
         }
     
         public System.Guid OrdenId { get; set; }
-        [Display(Name = "Código")]
-        [Required]
         public string OrdenCodigo { get; set; }
-        [Display(Name = "Tipo")]
-        [Required]
-        public string OrdenTipo { get; set; }
-        [Display(Name = "Fecha")]
-        [Required]
+        public Nullable<System.Guid> OrdenTipo { get; set; }
         public Nullable<System.DateTime> OrdenFecha { get; set; }
-        [Display(Name = "Proveedor")]
-        [Required]
         public Nullable<System.Guid> OrdenProveedor { get; set; }
-        [Display(Name = "Sub Total")]
-        [Required]
         public Nullable<decimal> OrdenSubtotal { get; set; }
-        [Display(Name = "I.G.V.")]
-        [Required]
         public Nullable<decimal> OrdenIgv { get; set; }
-        [Display(Name = "Total")]
-        [Required]
         public Nullable<decimal> OrdenTotal { get; set; }
-        [Display(Name = "Plazo Entrega")]
-        [Required]
         public Nullable<System.DateTime> OrdenPlazoEntrega { get; set; }
-        [Display(Name = "Forma Pago")]
-        [Required]
-        public string OrdenFormaPago { get; set; }
-        [Display(Name = "Contacto")]
-        [Required]
+        public Nullable<System.Guid> OrdenFormaPago { get; set; }
         public Nullable<System.Guid> OrdenContactoInterno { get; set; }
-        [Display(Name = "Lugar de Entrega")]
-        [Required]
         public string OrdenLugarEntrega { get; set; }
         public string OrdenEstado { get; set; }
         public string OrdenObservacion { get; set; }

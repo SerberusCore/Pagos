@@ -52,9 +52,8 @@
             </td>
 
             <td>
-                @Html.ActionLink("Editar", "Edit", new { data_id = item.OrdenDetalleId, data_target = "#EdicionDetalle" },null) |
-                @Html.ActionLink("Details", "Details", new { id = item.OrdenDetalleId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.OrdenDetalleId })
+                <a data-target="#EdicionDetalle" data-id="@item.OrdenDetalleId">Editar</a> |
+                <a data-target="#confirmar" data-id="@item.OrdenDetalleId" data-mensaje="Dese eliminar el item: @item.OrdenDetalleItem" data-titulo="Eliminar Detalle">Borrar</a>
             </td>
         </tr>
     }

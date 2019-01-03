@@ -91,9 +91,12 @@ namespace Pagos.Controllers
         }
 
         // GET: OrdenesDetalles/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid identificador)
         {
-            return View();
+            var old = Detalles.FirstOrDefault(x => x.OrdenDetalleId == identificador);
+            if (old != null)
+                Detalles.Remove(old);
+            return PartialView("_Lista", Detalles);
         }
 
         // POST: OrdenesDetalles/Delete/5

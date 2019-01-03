@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Pagos.Models.Ordenes>
+﻿@model IEnumerable<Pagos.Dtos.OrdenesDto>
 
 @{
     ViewBag.Title = "Index";
@@ -13,7 +13,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.OrdenCodigo)
+            @Html.DisplayNameFor(model => model.Ordenes.OrdenCodigo)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.OrdenTipo)

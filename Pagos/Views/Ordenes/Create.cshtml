@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Principal.cshtml";
 }
 
 @using (Html.BeginForm())
@@ -11,6 +11,7 @@
 
     <div class="form-horizontal">
         <h4>Ordenes</h4>
+        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -24,7 +25,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenTipo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OrdenTipo", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("OrdenTipo", null, htmlAttributes: new { @class = "form-control", data_rule_NoGuidEmpty="true" })
                 @Html.ValidationMessageFor(model => model.OrdenTipo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -40,7 +41,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenProveedor, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OrdenProveedor", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("OrdenProveedor", null, htmlAttributes: new { @class = "form-control",data_rule_NoGuidEmpty = "true" })
                 @Html.ValidationMessageFor(model => model.OrdenProveedor, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -80,7 +81,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenFormaPago, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OrdenFormaPago", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("OrdenFormaPago", null, htmlAttributes: new { @class = "form-control" , data_rule_NoGuidEmpty = "true" })
                 @Html.ValidationMessageFor(model => model.OrdenFormaPago, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -88,7 +89,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenContactoInterno, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OrdenContactoInterno", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("OrdenContactoInterno", null, htmlAttributes: new { @class = "form-control",data_rule_NoGuidEmpty = "true" })
                 @Html.ValidationMessageFor(model => model.OrdenContactoInterno, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -103,58 +104,98 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" id="GuardarOrden" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-                        <button class="btn btn-default" data-toggle="modal" data-target="#EdicionDetalle">Nuevo Detalle</button>
+<button class="btn btn-default" data-toggle="modal" data-target="#EdicionDetalle">Nuevo Detalle</button>
 <div id="divListaDetalle"></div>
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="modal fade" tabindex="-1" role="dialog" id="EdicionDetalle">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Detalle de Orden</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("~/Views/OrdenesDetalles/_CrearDetalle.cshtml", new Pagos.Models.OrdenesDetalles())
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="GuardarDetalle">Guardar</button>
+            </div>
+        </div>
+    </div>
 </div>
-
 @section scripts{
     <script type="text/javascript">
+        $().ready();
     var id;
     var confirmador;
         $(document).ready(function () {
+            var subtotales = function () {
+                var valores = $("#divListaDetalle").find('[data-content="Total"]');
+                var sum = 0;
+                $.each(valores, function (i, item) {
+                    var aux = $(item).text().trim();
+                    aux = isNaN(parseFloat(aux)) ? 0 : parseFloat(aux);
+                    sum += aux;
+                });
+                $("#OrdenSubtotal").val(sum.toFixed(2));
+                $("#OrdenSubtotal").change();
+            };
+
+            $("#OrdenSubtotal").prop("readonly", true);
+            $("#OrdenIgv").prop("readonly", true);
+            $("#OrdenTotal").prop("readonly", true);
+
+            $("#OrdenSubtotal").change(function () {
+                var subtotal = $(this).val();
+                subtotal = isNaN(parseFloat(subtotal)) ? 0 : parseFloat(subtotal);
+                var igv = subtotal * 18 / 100;
+                var total = subtotal + igv;
+                $(this).val(subtotal.toFixed(2));
+
+                $("#OrdenIgv").val(igv.toFixed(2));
+                $("#OrdenTotal").val(total.toFixed(2));
+            });
+
             $("#OrdenProveedor").change(function () {
                 $.get('@Url.Action("ObtenerContactos")', { proveedorId: $("#OrdenProveedor").val() }, function (data, status, jq) {
                     var combo = $("#OrdenContactoInterno");
                     combo.empty();
                     combo.append("<option selected value='@Pagos.Recursos.RConstantes.ValorSeleccione'>@Pagos.Recursos.RConstantes.Seleccione</option>")
 
-                    $.each(data, function (i, item) {
-                        var option = "<option selected value='" + item.ProveedorContactoId + "'>" + item.ProveedorContactoApellidos + ", " + item.ProveedorContactoNombres + "</option>"
+                    $.each(data.Data, function (i, item) {
+                        var option = "<option value='" + item.ProveedorContactoId + "'>" + item.ProveedorContactoApellidos + ", " + item.ProveedorContactoNombres + "</option>"
                         combo.append(option);
                     });
                 });
             });
-            $("#GuardarOrden").click(function () {
-                $.validator.unobtrusive.parse("#OrdenDetalle");
-                if ($("#OrdenDetalle").validate()) {
-                    var Orden = {
-                        OrdenCodigo: $("#OrdenCodigo").val(),
-                        OrdenTipo: $("#OrdenTipo").val(),
-                        OrdenFecha: $("#OrdenFecha").val(),
-                        OrdenProveedor: $("#OrdenProveedor").val(),
-                        OrdenSubtotal: $("#OrdenSubtotal").val(),
-                        OrdenIgv: $("#OrdenIgv").val(),
-                        OrdenTotal: $("#OrdenTotal").val(),
-                        OrdenPlazoEntrega: $("#OrdenPlazoEntrega").val(),
-                        OrdenFormaPago: $("#OrdenFormaPago").val(),
-                        OrdenContactoInterno: $("#OrdenContactoInterno").val(),
-                        OrdenEstado: $("#OrdenEstado").val(),
-                        OrdenPlazoEntrega: $("#OrdenPlazoEntrega").val(),
-                        OrdenPlazoEntrega: $("#OrdenPlazoEntrega").val(),
-                    };
-
-                    $.post('@Url.Action("Crear")', Orden, function (data, status, jq) {
-                        alert(data);
-                    });
+            $("#GuardarOrden").click(function (e) {
+                var tabla = $("#divListaDetalle").find("table")
+                if (tabla.length == 0 || tabla.find("tr").length < 2) {
+                    alert("un detalle minimo");
+                    e.preventDefault();
                 }
             });
+            var accionAbrirDetalle = function () {
+                $("#OrdenDetallePrecioTotal").prop("disabled", true);
+                var accion = function () {
+                    var cuota = $("#OrdenDetalleCuotas").val();
+                    var precioUnitario = $("#OrdenDetallePrecioUnitario").val();
+                    cuota = isNaN(parseInt(cuota)) ? 0 : parseInt(cuota);
+                    precioUnitario = isNaN(parseFloat(precioUnitario)) ? 0 : parseFloat(precioUnitario);
+                    var total = cuota * precioUnitario;
+
+                    $("#OrdenDetalleCuotas").val(cuota);
+                    $("#OrdenDetallePrecioUnitario").val(precioUnitario.toFixed(2));
+                    $("#OrdenDetallePrecioTotal").val(total.toFixed(2));
+                };
+                $("#OrdenDetalleCuotas").change(accion);
+                $("#OrdenDetallePrecioUnitario").change(accion);
+            };
             $("#EdicionDetalle").on("show.bs.modal", function (event) {
                 var button = $(event.relatedTarget);
                 $("#OrdenDetalleId").val('');
@@ -164,6 +205,8 @@
                 $("#OrdenDetalleUnidad").val('');
                 $("#OrdenDetallePrecioUnitario").val('');
                 $("#OrdenDetallePrecioTotal").val('');
+
+                accionAbrirDetalle();
             });
             $("#GuardarDetalle").click(function () {
                 $.validator.unobtrusive.parse("#OrdenDetalle");
@@ -182,47 +225,43 @@
                     $("#EdicionDetalle").modal("hide");
                 }
             });
-
-            var guardarDetalle = function (detalle) {
-                $.post('@Url.Action("Create","OrdenesDetalles")', detalle, function (data, status, jq) {
-                    $("#divListaDetalle").html(data);
-                }).always(function () {
-                    $("#divListaDetalle").find("[data-target=#EdicionDetalle]").click(function () {
-                        id = $(this).attr("data-id");
-                        $.get('@Url.Action("Edit")', { id: id }, function (data, status, jq) {
-                            $("#EdicionDetalle").find(".modal-body").html(data);
-                        });
-                        $("#EdicionDetalle").modal('show');
-                    });
-                    $("#divListaDetalle").find("[data-target=#confirmar]").click(function () {
+        var borrarDetalle = function () {
+            $("#divListaDetalle").find("[data-target='#confirmar']").click(function () {
                         id = $(this).attr("data-id");
                         confirmador = confirmar(function (id) {
-                            $.get('@Url.Action("Borrar")', { id: id }, function (data, status, jq) {
-                                $("#EdicionDetalle").find(".modal-body").html(data);
+                            $.get('@Url.Action("Delete","OrdenesDetalles")', { identificador: id }, function (data, status, jq) {
+                                $("#divListaDetalle").html(data);
+                                borrarDetalle();
+                                confirmador.cerrar();
                             });
                         });
                         confirmador.abrir();
                     });
+        };
+            var guardarDetalle = function (detalle) {
+                $.post('@Url.Action("Create","OrdenesDetalles")', detalle, function (data, status, jq) {
+                    //carga la lista de detalles
+                    $("#divListaDetalle").html(data);
+                    subtotales();
+                }).always(function () {
+                    //carga edicion de detalle
+                    $("#divListaDetalle").find("[data-target='#EdicionDetalle']").click(function () {
+                        id = $(this).attr("data-id");
+                        $.get('@Url.Action("Edit","OrdenesDetalles")', { id: id }, function (data, status, jq) {
+                            $("#EdicionDetalle").find(".modal-body").html(data);
+                            accionAbrirDetalle();
+                        });
+                        $("#EdicionDetalle").modal('show');
+                    });
+
+                    //carga accion de borrar detalle
+                    borrarDetalle();
                 });
             };
         });
     </script>
 }
-@Html.Partial("_confirmar")
-<div class="modal fade" tabindex="-1" role="dialog" id="EdicionDetalle">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Detalle de Orden</h4>
-            </div>
-            <div class="modal-body">
-                @Html.Partial("~/Views/OrdenesDetalles/_CrearDetalle.cshtml", new Pagos.Models.OrdenesDetalles())
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="GuardarDetalle">Guardar</button>
-            </div>
-        </div>
-    </div>
-</div>
+@section comunes{
+    @Html.Partial("_confirmar")
+}
+

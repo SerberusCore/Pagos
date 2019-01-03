@@ -141,6 +141,7 @@
     <Compile Include="Controllers\OrdenesDetallesController.cs" />
     <Compile Include="App_Code\Extensiones.cs" />
     <Compile Include="Dtos\DtoFactura.cs" />
+    <Compile Include="Dtos\OrdenesDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,6 +187,8 @@
     <Compile Include="Models\Monedas.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MvcDa\Ordenes.cs" />
+    <Compile Include="Models\MvcDa\OrdenesDetalles.cs" />
     <Compile Include="Models\Ordenes.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>

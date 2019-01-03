@@ -130,14 +130,14 @@
           </Key>
           <Property Name="OrdenId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OrdenCodigo" Type="varchar" MaxLength="50" />
-          <Property Name="OrdenTipo" Type="char" MaxLength="1" />
+          <Property Name="OrdenTipo" Type="uniqueidentifier" />
           <Property Name="OrdenFecha" Type="datetime" />
           <Property Name="OrdenProveedor" Type="uniqueidentifier" />
-          <Property Name="OrdenSubtotal" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="OrdenIgv" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="OrdenTotal" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="OrdenSubtotal" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="OrdenIgv" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="OrdenTotal" Type="decimal" Precision="5" Scale="2" />
           <Property Name="OrdenPlazoEntrega" Type="datetime" />
-          <Property Name="OrdenFormaPago" Type="char" MaxLength="1" />
+          <Property Name="OrdenFormaPago" Type="uniqueidentifier" />
           <Property Name="OrdenContactoInterno" Type="uniqueidentifier" />
           <Property Name="OrdenLugarEntrega" Type="varchar" MaxLength="150" />
           <Property Name="OrdenEstado" Type="char" MaxLength="1" />
@@ -154,8 +154,8 @@
           <Property Name="OrdenDetalleDescripcion" Type="varchar" MaxLength="50" />
           <Property Name="OrdenDetalleCuotas" Type="int" />
           <Property Name="OrdenDetalleUnidad" Type="varchar" MaxLength="50" />
-          <Property Name="OrdenDetallePrecioUnitario" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="OrdenDetallePrecioTotal" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="OrdenDetallePrecioUnitario" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="OrdenDetallePrecioTotal" Type="decimal" Precision="5" Scale="2" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
           <Property Name="FechaActualizacion" Type="datetime" />
@@ -1167,14 +1167,14 @@
           </Key>
           <Property Name="OrdenId" Type="Guid" Nullable="false" />
           <Property Name="OrdenCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OrdenTipo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="OrdenTipo" Type="Guid" />
           <Property Name="OrdenFecha" Type="DateTime" Precision="3" />
           <Property Name="OrdenProveedor" Type="Guid" />
-          <Property Name="OrdenSubtotal" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="OrdenIgv" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="OrdenTotal" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="OrdenSubtotal" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="OrdenIgv" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="OrdenTotal" Type="Decimal" Precision="5" Scale="2" />
           <Property Name="OrdenPlazoEntrega" Type="DateTime" Precision="3" />
-          <Property Name="OrdenFormaPago" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="OrdenFormaPago" Type="Guid" />
           <Property Name="OrdenContactoInterno" Type="Guid" />
           <Property Name="OrdenLugarEntrega" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="OrdenEstado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
@@ -1194,8 +1194,8 @@
           <Property Name="OrdenDetalleDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="OrdenDetalleCuotas" Type="Int32" />
           <Property Name="OrdenDetalleUnidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OrdenDetallePrecioUnitario" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="OrdenDetallePrecioTotal" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="OrdenDetallePrecioUnitario" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="OrdenDetallePrecioTotal" Type="Decimal" Precision="5" Scale="2" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="UsuarioCreacion" Type="Guid" />
           <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
