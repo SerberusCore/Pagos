@@ -61,6 +61,15 @@ namespace Pagos.Recursos {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a 03.
+        /// </summary>
+        public static string EstadoOrden {
+            get {
+                return ResourceManager.GetString("EstadoOrden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a 02.
         /// </summary>
         public static string FormaPago {

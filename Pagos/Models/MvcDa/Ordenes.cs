@@ -17,6 +17,7 @@ namespace Pagos.Models
             [Display(Name = "Fecha")]
             [Required]
             [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
             public Nullable<System.DateTime> OrdenFecha { get; set; }
             [Display(Name = "Proveedor")]
             [Required]
@@ -33,6 +34,7 @@ namespace Pagos.Models
             [Display(Name = "Plazo Entrega")]
             [Required]
             [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
             public Nullable<System.DateTime> OrdenPlazoEntrega { get; set; }
             [Display(Name = "Forma Pago")]
             [Required]
@@ -43,6 +45,12 @@ namespace Pagos.Models
             [Display(Name = "Lugar de Entrega")]
             [Required]
             public string OrdenLugarEntrega { get; set; }
+            [Display(Name = "Estado")]
+            public string OrdenEstado { get; set; }
+            [Display(Name = "Observacion")]
+            public string OrdenObservacion { get; set; }
+            [Display(Name = "Motivo de Rechazo")]
+            public string OrdenMotivoRechazo { get; set; }
         }
     }
 }

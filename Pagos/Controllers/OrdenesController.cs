@@ -42,22 +42,24 @@ namespace Pagos.Controllers
         public ActionResult Index()
         {
             var ordenes = (from o in db.Ordenes
-                          join to in db.ParametrosDetalle on o.OrdenTipo equals to.ParametroDetalleId
-                          join fp in db.ParametrosDetalle on o.OrdenFormaPago equals fp.ParametroDetalleId
-                          join c in db.ProveedoresContactos on o.OrdenContactoInterno equals c.ProveedorContactoId
-                          select new
-                          {
-                              Ordenes = o,
-                              TipoOrden = to.ParametroDetalleDescripcion,
-                              Proveedor = o.Proveedores.ProveedorRazonSocial,
-                              FormaPago = fp.ParametroDetalleDescripcion,
-                              Contacto = c.ProveedorContactoNombres + " " + c.ProveedorContactoApellidos
-                          }).Select(x=>new OrdenesDto {
-                              Ordenes=x.Ordenes,
-                              TipoOrden=x.TipoOrden,
-                              FormaPago=x.FormaPago,
-                              Contacto=x.Contacto
-                          });
+                           join to in db.ParametrosDetalle on o.OrdenTipo equals to.ParametroDetalleId
+                           join fp in db.ParametrosDetalle on o.OrdenFormaPago equals fp.ParametroDetalleId
+                           join c in db.ProveedoresContactos on o.OrdenContactoInterno equals c.ProveedorContactoId
+                           select new
+                           {
+                               Ordenes = o,
+                               TipoOrden = to.ParametroDetalleDescripcion,
+                               Proveedor = o.Proveedores.ProveedorRazonSocial,
+                               FormaPago = fp.ParametroDetalleDescripcion,
+                               Contacto = c.ProveedorContactoNombres + " " + c.ProveedorContactoApellidos
+                           }).Select(x => new OrdenesDto
+                           {
+                               Ordenes = x.Ordenes,
+                               TipoOrden = x.TipoOrden,
+                               FormaPago = x.FormaPago,
+                               Contacto = x.Contacto,
+                               Proveedor = x.Proveedor
+                           });
             return View(ordenes.ToList());
         }
 
@@ -70,7 +72,7 @@ namespace Pagos.Controllers
             }
             Ordenes ordenes = db.Ordenes.Find(id);
             if (ordenes == null)
-            {               
+            {
                 return HttpNotFound();
             }
             return View(ordenes);
@@ -86,7 +88,7 @@ namespace Pagos.Controllers
                 .Where(x => x.ParametroCodigo == RParametros.TipoOrden)
                 .First()
                 .ParametrosDetalle
-                .ToList();                  
+                .ToList();
             tipo.AgregarSeleccione();
 
             var formaPago = db.Parametros
@@ -186,6 +188,30 @@ namespace Pagos.Controllers
             return RedirectToAction("Index");
         }
 
+        public ViewResult Evaluar(Guid id)
+        {
+            var orden = db.Ordenes.Include(o => o.Proveedores).FirstOrDefault(x => x.OrdenId == id);
+            var proveedores = db.Proveedores.ToList();
+            proveedores.AgregarSeleccione("ProveedorId", "ProveedorRazonSocial");
+
+            var tipo = db.Parametros
+             .Where(x => x.ParametroCodigo == RParametros.TipoOrden)
+             .First()
+             .ParametrosDetalle
+             .ToList();
+            tipo.AgregarSeleccione();
+
+            var estados = db.Parametros.Where(x => x.ParametroCodigo == RParametros.EstadoOrden)
+                .First()
+                .ParametrosDetalle
+                .ToList();
+            estados.AgregarSeleccione();
+
+            ViewBag.OrdenEstado=new SelectList(estados,"ParametroDetalleId", "ParametroDetalleDescripcion", orden.OrdenEstado);
+            ViewBag.OrdenProveedor = new SelectList(proveedores, "ProveedorId", "ProveedorRazonSocial", orden.OrdenProveedor);
+            ViewBag.OrdenTipo = new SelectList(tipo, "ParametroDetalleId", "ParametroDetalleDescripcion",orden.OrdenTipo);
+            return View("_Aprobar", orden);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

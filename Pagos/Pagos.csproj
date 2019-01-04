@@ -336,9 +336,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Principal.cshtml" />
     <Content Include="Views\Ordenes\Create.cshtml" />
-    <Content Include="Views\Ordenes\Delete.cshtml" />
-    <Content Include="Views\Ordenes\Details.cshtml" />
-    <Content Include="Views\Ordenes\Edit.cshtml" />
     <Content Include="Views\Ordenes\Index.cshtml" />
     <Content Include="Views\Shared\_confirmar.cshtml" />
     <Content Include="Views\OrdenesDetalles\_CrearDetalle.cshtml" />
@@ -359,6 +356,7 @@
     <Content Include="Views\Proveedores\Details.cshtml" />
     <Content Include="Views\Proveedores\Edit.cshtml" />
     <Content Include="Views\Proveedores\Index.cshtml" />
+    <Content Include="Views\Ordenes\_Aprobar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

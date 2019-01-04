@@ -8,7 +8,7 @@
 <h2>Lista de Ordenes</h2>
 
 <p>
-    @Html.ActionLink("Crer Nueva Orden", "Create")
+    @Html.ActionLink("Crear Nueva Orden", "Create")
 </p>
 <table class="table">
     <tr>
@@ -30,29 +30,44 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ordenes.OrdenCodigo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoOrden)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ordenes.OrdenFecha)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Proveedor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ordenes.OrdenTotal)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Ordenes.OrdenId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Ordenes.OrdenId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Ordenes.OrdenId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ordenes.OrdenCodigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoOrden)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ordenes.OrdenFecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Proveedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ordenes.OrdenTotal)
+            </td>
+            <td>
+                <a id="evaluar" href="#" data-id="@item.Ordenes.OrdenId">Check</a>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Ordenes.OrdenId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Ordenes.OrdenId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Ordenes.OrdenId })*@
+            </td>
+        </tr>
+    }
 
 </table>
+
+<div id="Aprobar"></div>
+@section    scripts{
+    <script type="text/javascript">
+        $("#evaluar").click(function (e) {
+            e.preventDefault();
+            var id = $(this).attr("data-id");
+            $.get('@Url.Action("Evaluar")', { id: id }, function (data, status, jq) {
+                $("#Aprobar").html(data);
+            });
+        });
+    </script>
+}
