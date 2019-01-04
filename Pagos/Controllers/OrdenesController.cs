@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Pagos.Dtos;
 using Pagos.Models;
 using Pagos.Recursos;
 
@@ -40,7 +41,23 @@ namespace Pagos.Controllers
         // GET: Ordenes
         public ActionResult Index()
         {
-            var ordenes = db.Ordenes.Include(o => o.Proveedores);
+            var ordenes = (from o in db.Ordenes
+                          join to in db.ParametrosDetalle on o.OrdenTipo equals to.ParametroDetalleId
+                          join fp in db.ParametrosDetalle on o.OrdenFormaPago equals fp.ParametroDetalleId
+                          join c in db.ProveedoresContactos on o.OrdenContactoInterno equals c.ProveedorContactoId
+                          select new
+                          {
+                              Ordenes = o,
+                              TipoOrden = to.ParametroDetalleDescripcion,
+                              Proveedor = o.Proveedores.ProveedorRazonSocial,
+                              FormaPago = fp.ParametroDetalleDescripcion,
+                              Contacto = c.ProveedorContactoNombres + " " + c.ProveedorContactoApellidos
+                          }).Select(x=>new OrdenesDto {
+                              Ordenes=x.Ordenes,
+                              TipoOrden=x.TipoOrden,
+                              FormaPago=x.FormaPago,
+                              Contacto=x.Contacto
+                          });
             return View(ordenes.ToList());
         }
 

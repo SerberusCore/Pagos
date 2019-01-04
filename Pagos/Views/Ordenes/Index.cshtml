@@ -2,13 +2,13 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Principal.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Lista de Ordenes</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crer Nueva Orden", "Create")
 </p>
 <table class="table">
     <tr>
@@ -16,43 +16,16 @@
             @Html.DisplayNameFor(model => model.Ordenes.OrdenCodigo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OrdenTipo)
+            @Html.DisplayNameFor(model => model.TipoOrden)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OrdenFecha)
+            @Html.DisplayNameFor(model => model.Ordenes.OrdenFecha)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OrdenSubtotal)
+            @Html.DisplayNameFor(model => model.Proveedor)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OrdenIgv)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrdenTotal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrdenPlazoEntrega)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrdenFormaPago)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrdenContactoInterno)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrdenLugarEntrega)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrdenEstado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrdenObservacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrdenMotivoRechazo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Proveedores.ProveedorRuc)
+            @Html.DisplayNameFor(model => model.Ordenes.OrdenTotal)
         </th>
         <th></th>
     </tr>
@@ -60,51 +33,24 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.OrdenCodigo)
+            @Html.DisplayFor(modelItem => item.Ordenes.OrdenCodigo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.OrdenTipo)
+            @Html.DisplayFor(modelItem => item.TipoOrden)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.OrdenFecha)
+            @Html.DisplayFor(modelItem => item.Ordenes.OrdenFecha)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.OrdenSubtotal)
+            @Html.DisplayFor(modelItem => item.Proveedor)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.OrdenIgv)
+            @Html.DisplayFor(modelItem => item.Ordenes.OrdenTotal)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.OrdenTotal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrdenPlazoEntrega)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrdenFormaPago)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrdenContactoInterno)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrdenLugarEntrega)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrdenEstado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrdenObservacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrdenMotivoRechazo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Proveedores.ProveedorRuc)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.OrdenId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OrdenId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OrdenId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Ordenes.OrdenId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Ordenes.OrdenId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Ordenes.OrdenId })
         </td>
     </tr>
 }
