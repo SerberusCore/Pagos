@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Principal.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Listado de Proyectos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear Nuevo Proyecto", "Create")
 </p>
 <table class="table">
     <tr>
@@ -19,7 +19,7 @@
             @Html.DisplayNameFor(model => model.ProyectoNombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProyectoMoneda)
+            @Html.DisplayNameFor(model => model.Monedas.MonedaDescripcion)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ProyectoUtilidadPorcentaje)
@@ -47,84 +47,61 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ProyectoLugarEntrega)
-        </th>
+        </th>   
         <th>
-            @Html.DisplayNameFor(model => model.UsuarioCreacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaCreacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaActualizacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UsuarioActualizacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Empresas.EmpresaCodigo)
+            @Html.DisplayNameFor(model => model.Empresas.EmpresaDescripcion)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProyectoCodigo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProyectoNombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProyectoMoneda)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProyectoUtilidadPorcentaje)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProyectoUtilidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProyectoGastosGenerales)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProyectoIgv)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProyectoMontoTotal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProyectoEstado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProyectoFechaInicio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProyectoFechaFin)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProyectoLugarEntrega)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UsuarioCreacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaCreacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FechaActualizacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UsuarioActualizacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Empresas.EmpresaCodigo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProyectoId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProyectoId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProyectoId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProyectoCodigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProyectoNombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monedas.MonedaDescripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProyectoUtilidadPorcentaje)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProyectoUtilidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProyectoGastosGenerales)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProyectoIgv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProyectoMontoTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProyectoEstado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProyectoFechaInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProyectoFechaFin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProyectoLugarEntrega)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empresas.EmpresaDescripcion)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProyectoId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProyectoId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProyectoId })
+            </td>
+        </tr>
+    }
 
 </table>

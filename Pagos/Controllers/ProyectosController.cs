@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Pagos.Models;
+using Pagos.Recursos;
 
 namespace Pagos.Controllers
 {
@@ -17,7 +19,7 @@ namespace Pagos.Controllers
         // GET: Proyectos
         public ActionResult Index()
         {
-            var proyectos = db.Proyectos.Include(p => p.Empresas);
+            var proyectos = db.Proyectos.Include(p => p.Empresas).Include(p=>p.Monedas);
             return View(proyectos.ToList());
         }
 
@@ -39,7 +41,11 @@ namespace Pagos.Controllers
         // GET: Proyectos/Create
         public ActionResult Create()
         {
-            ViewBag.ProyectoEmpresa = new SelectList(db.Empresas, "EmpresaId", "EmpresaCodigo");
+            var monedas = db.Monedas.ToList();
+            monedas.AgregarSeleccione("MonedaId", "MonedaDescripcion");
+
+            ViewBag.ProyectoMoneda = new SelectList(monedas, "MonedaId", "MonedaDescripcion");
+            ViewBag.ProyectoEmpresa = new SelectList(db.Empresas, "EmpresaId", "EmpresaDescripcion");
             return View();
         }
 
@@ -50,16 +56,11 @@ namespace Pagos.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProyectoId,ProyectoCodigo,ProyectoNombre,ProyectoMoneda,ProyectoUtilidadPorcentaje,ProyectoUtilidad,ProyectoGastosGenerales,ProyectoIgv,ProyectoMontoTotal,ProyectoEstado,ProyectoFechaInicio,ProyectoFechaFin,ProyectoEmpresa,ProyectoLugarEntrega,UsuarioCreacion,FechaCreacion,FechaActualizacion,UsuarioActualizacion")] Proyectos proyectos)
         {
-            if (ModelState.IsValid)
-            {
-                proyectos.ProyectoId = Guid.NewGuid();
-                db.Proyectos.Add(proyectos);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.ProyectoEmpresa = new SelectList(db.Empresas, "EmpresaId", "EmpresaCodigo", proyectos.ProyectoEmpresa);
-            return View(proyectos);
+            proyectos.ProyectoEstado = RConstantes.ProyectoEstadoActivo;
+            proyectos.ProyectoId = Guid.NewGuid();
+            db.Proyectos.Add(proyectos);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Proyectos/Edit/5

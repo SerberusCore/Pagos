@@ -32,7 +32,7 @@
         <EntityTypeShape EntityType="nortonModel.ProveedoresDetracciones" Width="1.5" PointX="9" PointY="17.625" IsExpanded="true" />
         <EntityTypeShape EntityType="nortonModel.ProveedoresFacturas" Width="1.5" PointX="8.25" PointY="12.875" IsExpanded="true" />
         <EntityTypeShape EntityType="nortonModel.Proyectos" Width="1.5" PointX="3.75" PointY="23.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="nortonModel.ProyectosMontosAprobaciones" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nortonModel.ProyectosMontosAprobaciones" Width="2.875" PointX="2" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="nortonModel.ProyectosPresupuestos" Width="1.5" PointX="9" PointY="25.875" IsExpanded="true" />
         <EntityTypeShape EntityType="nortonModel.ProyectosResponsables" Width="1.5" PointX="6" PointY="27.5" IsExpanded="true" />
         <EntityTypeShape EntityType="nortonModel.Roles" Width="1.5" PointX="6.5" PointY="37.875" IsExpanded="true" />
@@ -77,6 +77,7 @@
         <AssociationConnector Association="nortonModel.FK_RolesPaginas_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="nortonModel.FK_Usuarios_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="nortonModel.FK_Facturas_Proyectos" />
+        <AssociationConnector Association="nortonModel.FK_Proyectos_Monedas" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

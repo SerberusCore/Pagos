@@ -120,6 +120,9 @@
   <data name="EstadoOrden" xml:space="preserve">
     <value>03</value>
   </data>
+  <data name="EstadoProyecto" xml:space="preserve">
+    <value>04</value>
+  </data>
   <data name="FormaPago" xml:space="preserve">
     <value>02</value>
   </data>

@@ -190,10 +190,13 @@
     <Compile Include="Models\Monedas.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MvcDa\Empresas.cs" />
     <Compile Include="Models\MvcDa\Facturas.cs" />
+    <Compile Include="Models\MvcDa\Monedas.cs" />
     <Compile Include="Models\MvcDa\Ordenes.cs" />
     <Compile Include="Models\MvcDa\OrdenesDetalles.cs" />
     <Compile Include="Models\MvcDa\Proveedores.cs" />
+    <Compile Include="Models\MvcDa\Proyectos.cs" />
     <Compile Include="Models\MvcDa\TiposFacturas.cs" />
     <Compile Include="Models\Ordenes.cs">
       <DependentUpon>Modelo.tt</DependentUpon>

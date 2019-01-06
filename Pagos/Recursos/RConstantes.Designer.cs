@@ -61,6 +61,15 @@ namespace Pagos.Recursos {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a A.
+        /// </summary>
+        public static string ProyectoEstadoActivo {
+            get {
+                return ResourceManager.GetString("ProyectoEstadoActivo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a -- Seleccione --.
         /// </summary>
         public static string Seleccione {
