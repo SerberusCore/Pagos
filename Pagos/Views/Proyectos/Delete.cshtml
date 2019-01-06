@@ -1,0 +1,161 @@
+﻿@model Pagos.Models.Proyectos
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Principal.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Proyectos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProyectoCodigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProyectoCodigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProyectoNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProyectoNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProyectoMoneda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProyectoMoneda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProyectoUtilidadPorcentaje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProyectoUtilidadPorcentaje)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProyectoUtilidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProyectoUtilidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProyectoGastosGenerales)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProyectoGastosGenerales)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProyectoIgv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProyectoIgv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProyectoMontoTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProyectoMontoTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProyectoEstado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProyectoEstado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProyectoFechaInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProyectoFechaInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProyectoFechaFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProyectoFechaFin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProyectoLugarEntrega)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProyectoLugarEntrega)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaActualizacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaActualizacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsuarioActualizacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsuarioActualizacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Empresas.EmpresaCodigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Empresas.EmpresaCodigo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

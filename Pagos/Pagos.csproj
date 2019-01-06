@@ -141,6 +141,7 @@
     <Compile Include="Controllers\OrdenesDetallesController.cs" />
     <Compile Include="App_Code\Extensiones.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
+    <Compile Include="Controllers\ProyectosController.cs" />
     <Compile Include="Dtos\DtoFactura.cs" />
     <Compile Include="Dtos\DtoProveedores.cs" />
     <Compile Include="Dtos\OrdenesDto.cs" />
@@ -306,8 +307,8 @@
     </Content>
     <Content Include="Models\Modelo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Modelo.edmx</DependentUpon>
       <LastGenOutput>Modelo.cs</LastGenOutput>
+      <DependentUpon>Modelo.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -366,6 +367,11 @@
     <Content Include="Views\Proveedores\Edit.cshtml" />
     <Content Include="Views\Proveedores\Index.cshtml" />
     <Content Include="Views\Ordenes\_Aprobar.cshtml" />
+    <Content Include="Views\Proyectos\Create.cshtml" />
+    <Content Include="Views\Proyectos\Delete.cshtml" />
+    <Content Include="Views\Proyectos\Details.cshtml" />
+    <Content Include="Views\Proyectos\Edit.cshtml" />
+    <Content Include="Views\Proyectos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

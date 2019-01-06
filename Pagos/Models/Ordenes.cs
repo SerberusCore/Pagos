@@ -24,14 +24,14 @@ namespace Pagos.Models
     
         public System.Guid OrdenId { get; set; }
         public string OrdenCodigo { get; set; }
-        public Guid OrdenTipo { get; set; }
+        public string OrdenTipo { get; set; }
         public Nullable<System.DateTime> OrdenFecha { get; set; }
         public Nullable<System.Guid> OrdenProveedor { get; set; }
         public Nullable<decimal> OrdenSubtotal { get; set; }
         public Nullable<decimal> OrdenIgv { get; set; }
         public Nullable<decimal> OrdenTotal { get; set; }
         public Nullable<System.DateTime> OrdenPlazoEntrega { get; set; }
-        public Guid OrdenFormaPago { get; set; }
+        public string OrdenFormaPago { get; set; }
         public Nullable<System.Guid> OrdenContactoInterno { get; set; }
         public string OrdenLugarEntrega { get; set; }
         public string OrdenEstado { get; set; }

@@ -14,9 +14,7 @@ namespace Pagos.Models
             [Display(Name = "Descripción")]
             [Required]
             public string OrdenDetalleDescripcion { get; set; }
-            [Display(Name = "Cuotas")]
-            [Required]
-            public Nullable<int> OrdenDetalleCuotas { get; set; }
+        
             [Display(Name = "Unidad")]
             [Required]
             public string OrdenDetalleUnidad { get; set; }

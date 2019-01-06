@@ -28,15 +28,6 @@ namespace Pagos.Models
             public Nullable<int> ProveedorPlazoPago { get; set; }
             [Display(Name = "Estado")]
             public string ProveedorEstado { get; set; }
-            [Display(Name = "Tipo Detracción")]
-            [Required]
-            public Nullable<System.Guid> ProveedorTipoDetraccion { get; set; }
-            [Display(Name = "Porcentaje Detracción")]
-            [Required]
-            public Nullable<decimal> ProveedorPorcentajeDetraccion { get; set; }
-            [Display(Name = "Cuenta Detracción")]
-            [Required]
-            public string ProveedorCuentaDetraccion { get; set; }
             public Nullable<System.DateTime> FechaCreacion { get; set; }
             public Nullable<System.Guid> UsuarioCreacion { get; set; }
             public Nullable<System.DateTime> FechaActualizacion { get; set; }
