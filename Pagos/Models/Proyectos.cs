@@ -17,6 +17,7 @@ namespace Pagos.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Proyectos()
         {
+            this.Ordenes = new HashSet<Ordenes>();
             this.ProyectosPresupuestos = new HashSet<ProyectosPresupuestos>();
             this.ProyectosResponsables = new HashSet<ProyectosResponsables>();
             this.Facturas = new HashSet<Facturas>();
@@ -26,7 +27,7 @@ namespace Pagos.Models
         public string ProyectoCodigo { get; set; }
         public string ProyectoNombre { get; set; }
         public Nullable<System.Guid> ProyectoMoneda { get; set; }
-        public Nullable<decimal> ProyectoUtilidadContratada { get; set; }
+        public Nullable<decimal> ProyectoUtilidadPorcentaje { get; set; }
         public Nullable<decimal> ProyectoUtilidad { get; set; }
         public Nullable<decimal> ProyectoGastosGenerales { get; set; }
         public Nullable<decimal> ProyectoIgv { get; set; }
@@ -35,12 +36,15 @@ namespace Pagos.Models
         public Nullable<System.DateTime> ProyectoFechaInicio { get; set; }
         public Nullable<System.DateTime> ProyectoFechaFin { get; set; }
         public Nullable<System.Guid> ProyectoEmpresa { get; set; }
+        public string ProyectoLugarEntrega { get; set; }
         public Nullable<System.Guid> UsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public Nullable<System.DateTime> FechaActualizacion { get; set; }
         public Nullable<System.Guid> UsuarioActualizacion { get; set; }
     
         public virtual Empresas Empresas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Ordenes> Ordenes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProyectosPresupuestos> ProyectosPresupuestos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

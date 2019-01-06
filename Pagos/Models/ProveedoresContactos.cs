@@ -17,9 +17,6 @@ namespace Pagos.Models
         public System.Guid ProveedorContactoId { get; set; }
         public Nullable<System.Guid> ProveedorId { get; set; }
         public string ProveedorContactoTipo { get; set; }
-        public string ProveedorContactoNombres { get; set; }
-        public string ProveedorContactoApellidos { get; set; }
-        public string ProveedorContactoEmail { get; set; }
         public string ProveedorContactoTelefono { get; set; }
         public string ProveedorContactoCelular { get; set; }
         public Nullable<System.Guid> UsuarioId { get; set; }
@@ -27,6 +24,7 @@ namespace Pagos.Models
         public Nullable<System.Guid> UsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaActualizacion { get; set; }
         public Nullable<System.Guid> UsuarioActualizacion { get; set; }
+        public Nullable<bool> ProveedorContactoEstado { get; set; }
     
         public virtual Proveedores Proveedores { get; set; }
     }

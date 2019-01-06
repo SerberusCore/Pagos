@@ -200,6 +200,9 @@
     <Compile Include="Models\OrdenesDetalles.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrdenesEstados.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OrdenesPartidas.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -236,7 +239,16 @@
     <Compile Include="Models\ProveedoresCuentasBancarias.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProveedoresDetracciones.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProveedoresFacturas.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Proyectos.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProyectosMontosAprobaciones.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProyectosPresupuestos.cs">
@@ -249,9 +261,6 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RolesPaginas.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TiposdeCambio.cs">
@@ -292,8 +301,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\Modelo.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Modelo.Context.cs</LastGenOutput>
       <DependentUpon>Modelo.edmx</DependentUpon>
+      <LastGenOutput>Modelo.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Modelo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

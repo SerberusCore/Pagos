@@ -36,6 +36,7 @@ namespace Pagos.Models
         public virtual DbSet<Monedas> Monedas { get; set; }
         public virtual DbSet<Ordenes> Ordenes { get; set; }
         public virtual DbSet<OrdenesDetalles> OrdenesDetalles { get; set; }
+        public virtual DbSet<OrdenesEstados> OrdenesEstados { get; set; }
         public virtual DbSet<OrdenesPartidas> OrdenesPartidas { get; set; }
         public virtual DbSet<Paginas> Paginas { get; set; }
         public virtual DbSet<Pagos> Pagos { get; set; }
@@ -48,7 +49,10 @@ namespace Pagos.Models
         public virtual DbSet<Proveedores> Proveedores { get; set; }
         public virtual DbSet<ProveedoresContactos> ProveedoresContactos { get; set; }
         public virtual DbSet<ProveedoresCuentasBancarias> ProveedoresCuentasBancarias { get; set; }
+        public virtual DbSet<ProveedoresDetracciones> ProveedoresDetracciones { get; set; }
+        public virtual DbSet<ProveedoresFacturas> ProveedoresFacturas { get; set; }
         public virtual DbSet<Proyectos> Proyectos { get; set; }
+        public virtual DbSet<ProyectosMontosAprobaciones> ProyectosMontosAprobaciones { get; set; }
         public virtual DbSet<ProyectosPresupuestos> ProyectosPresupuestos { get; set; }
         public virtual DbSet<ProyectosResponsables> ProyectosResponsables { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
@@ -58,6 +62,5 @@ namespace Pagos.Models
         public virtual DbSet<TiposFacturas> TiposFacturas { get; set; }
         public virtual DbSet<TiposProveedores> TiposProveedores { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

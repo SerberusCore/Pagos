@@ -24,7 +24,8 @@ namespace Pagos.Models
         public Nullable<System.Guid> OrdenId { get; set; }
         public Nullable<int> OrdenDetalleItem { get; set; }
         public string OrdenDetalleDescripcion { get; set; }
-        public Nullable<int> OrdenDetalleCuotas { get; set; }
+        public string OrdenDetalleCodigo { get; set; }
+        public Nullable<decimal> OrdenDetalleCantidad { get; set; }
         public string OrdenDetalleUnidad { get; set; }
         public Nullable<decimal> OrdenDetallePrecioUnitario { get; set; }
         public Nullable<decimal> OrdenDetallePrecioTotal { get; set; }

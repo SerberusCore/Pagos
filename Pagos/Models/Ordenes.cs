@@ -19,28 +19,33 @@ namespace Pagos.Models
         {
             this.FacturasOrdenes = new HashSet<FacturasOrdenes>();
             this.OrdenesDetalles = new HashSet<OrdenesDetalles>();
+            this.OrdenesEstados = new HashSet<OrdenesEstados>();
         }
     
         public System.Guid OrdenId { get; set; }
         public string OrdenCodigo { get; set; }
-        public Nullable<System.Guid> OrdenTipo { get; set; }
+        public Guid OrdenTipo { get; set; }
         public Nullable<System.DateTime> OrdenFecha { get; set; }
         public Nullable<System.Guid> OrdenProveedor { get; set; }
         public Nullable<decimal> OrdenSubtotal { get; set; }
         public Nullable<decimal> OrdenIgv { get; set; }
         public Nullable<decimal> OrdenTotal { get; set; }
         public Nullable<System.DateTime> OrdenPlazoEntrega { get; set; }
-        public Nullable<System.Guid> OrdenFormaPago { get; set; }
+        public Guid OrdenFormaPago { get; set; }
         public Nullable<System.Guid> OrdenContactoInterno { get; set; }
         public string OrdenLugarEntrega { get; set; }
         public string OrdenEstado { get; set; }
         public string OrdenObservacion { get; set; }
         public string OrdenMotivoRechazo { get; set; }
+        public System.Guid ProyectoId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FacturasOrdenes> FacturasOrdenes { get; set; }
         public virtual Proveedores Proveedores { get; set; }
+        public virtual Proyectos Proyectos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdenesDetalles> OrdenesDetalles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrdenesEstados> OrdenesEstados { get; set; }
     }
 }

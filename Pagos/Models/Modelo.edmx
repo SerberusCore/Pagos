@@ -48,13 +48,13 @@
           <Property Name="FacturaFechaVencimiento" Type="datetime" />
           <Property Name="FacturaMoneda" Type="uniqueidentifier" />
           <Property Name="FacturaEstado" Type="char" MaxLength="1" />
-          <Property Name="FacturaSubtotal" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaIgv" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaImporteTotal" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaFondoGarantia" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaPorcentajeDetraccion" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaMontoDetraccion" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaImportePagar" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaSubtotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaIgv" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaImporteTotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaFondoGarantia" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaPorcentajeDetraccion" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaMontoDetraccion" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaImportePagar" Type="decimal" Precision="18" Scale="2" />
           <Property Name="FacturaUrl" Type="varchar" MaxLength="250" />
           <Property Name="FacturaFechaPagoProgramada" Type="datetime" />
         </EntityType>
@@ -65,9 +65,9 @@
           <Property Name="FacturaDetalleId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FacturaId" Type="uniqueidentifier" />
           <Property Name="FacturaDetalleDescripcion" Type="varchar" MaxLength="200" />
-          <Property Name="FacturaDetalleCantidad" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaDetallePrecioUnitario" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaDetalleImporteTotal" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaDetalleCantidad" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaDetallePrecioUnitario" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaDetalleImporteTotal" Type="decimal" Precision="18" Scale="2" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
           <Property Name="FechaActualizacion" Type="datetime" />
@@ -130,19 +130,20 @@
           </Key>
           <Property Name="OrdenId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="OrdenCodigo" Type="varchar" MaxLength="50" />
-          <Property Name="OrdenTipo" Type="uniqueidentifier" />
+          <Property Name="OrdenTipo" Type="char" MaxLength="1" />
           <Property Name="OrdenFecha" Type="datetime" />
           <Property Name="OrdenProveedor" Type="uniqueidentifier" />
-          <Property Name="OrdenSubtotal" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="OrdenIgv" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="OrdenTotal" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="OrdenSubtotal" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OrdenIgv" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OrdenTotal" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OrdenPlazoEntrega" Type="datetime" />
-          <Property Name="OrdenFormaPago" Type="uniqueidentifier" />
+          <Property Name="OrdenFormaPago" Type="char" MaxLength="1" />
           <Property Name="OrdenContactoInterno" Type="uniqueidentifier" />
           <Property Name="OrdenLugarEntrega" Type="varchar" MaxLength="150" />
           <Property Name="OrdenEstado" Type="char" MaxLength="1" />
           <Property Name="OrdenObservacion" Type="varchar" MaxLength="50" />
           <Property Name="OrdenMotivoRechazo" Type="char" MaxLength="1" />
+          <Property Name="ProyectoId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="OrdenesDetalles">
           <Key>
@@ -152,14 +153,27 @@
           <Property Name="OrdenId" Type="uniqueidentifier" />
           <Property Name="OrdenDetalleItem" Type="int" />
           <Property Name="OrdenDetalleDescripcion" Type="varchar" MaxLength="50" />
-          <Property Name="OrdenDetalleCuotas" Type="int" />
+          <Property Name="OrdenDetalleCodigo" Type="varchar" MaxLength="50" />
+          <Property Name="OrdenDetalleCantidad" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OrdenDetalleUnidad" Type="varchar" MaxLength="50" />
-          <Property Name="OrdenDetallePrecioUnitario" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="OrdenDetallePrecioTotal" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="OrdenDetallePrecioUnitario" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OrdenDetallePrecioTotal" Type="decimal" Precision="18" Scale="2" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
           <Property Name="FechaActualizacion" Type="datetime" />
           <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="OrdenesEstados">
+          <Key>
+            <PropertyRef Name="OrdenEstadoId" />
+          </Key>
+          <Property Name="OrdenEstadoId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OrdenEstadoEstado" Type="char" MaxLength="1" />
+          <Property Name="OrdenId" Type="uniqueidentifier" />
+          <Property Name="OrdenEstadoFecha" Type="datetime" />
+          <Property Name="OrdenEstadoUsuario" Type="uniqueidentifier" />
+          <Property Name="OrdenEstadoMotivoRechazo" Type="char" MaxLength="1" />
+          <Property Name="OrdenEstadoObservaciones" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="OrdenesPartidas">
           <Key>
@@ -252,9 +266,9 @@
           <Property Name="PresupuestoItemNaturaleza" Type="varchar" MaxLength="50" />
           <Property Name="PresupuestoItemUnidad" Type="varchar" MaxLength="50" />
           <Property Name="PresupuestoItemResumen" Type="varchar" MaxLength="50" />
-          <Property Name="PresupuestoItemCantidad" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="PresupuestoItemPrecio" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="PresupuestoItemImporte" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="PresupuestoItemCantidad" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PresupuestoItemPrecio" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PresupuestoItemImporte" Type="decimal" Precision="18" Scale="2" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
           <Property Name="FechaActualizacion" Type="datetime" />
@@ -272,9 +286,9 @@
           <Property Name="PresupuestoItemNaturaleza" Type="varchar" MaxLength="50" />
           <Property Name="PresupuestoItemUnidad" Type="varchar" MaxLength="50" />
           <Property Name="PresupuestoItemResumen" Type="varchar" MaxLength="50" />
-          <Property Name="PresupuestoItemCantidad" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="PresupuestoItemPrecio" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="PresupuestoItemImporte" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="PresupuestoItemCantidad" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PresupuestoItemPrecio" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PresupuestoItemImporte" Type="decimal" Precision="18" Scale="2" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
           <Property Name="FechaActualizacion" Type="datetime" />
@@ -293,14 +307,12 @@
           <Property Name="ProveedorDireccionFiscal" Type="varchar" MaxLength="150" />
           <Property Name="ProveedorPlazoPago" Type="int" />
           <Property Name="ProveedorEstado" Type="char" MaxLength="1" />
-          <Property Name="ProveedorTipoDetraccion" Type="uniqueidentifier" />
-          <Property Name="ProveedorPorcentajeDetraccion" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="ProveedorCuentaDetraccion" Type="varchar" MaxLength="50" />
+          <Property Name="ProveedorEsEmisorElectronico" Type="bit" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
           <Property Name="FechaActualizacion" Type="datetime" />
-          <Property Name="UsuarioValidacion" Type="uniqueidentifier" />
           <Property Name="TipoProveedorId" Type="uniqueidentifier" />
+          <Property Name="UsuarioValidacion" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="ProveedoresContactos">
           <Key>
@@ -309,9 +321,6 @@
           <Property Name="ProveedorContactoId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ProveedorId" Type="uniqueidentifier" />
           <Property Name="ProveedorContactoTipo" Type="char" MaxLength="50" />
-          <Property Name="ProveedorContactoNombres" Type="varchar" MaxLength="100" />
-          <Property Name="ProveedorContactoApellidos" Type="varchar" MaxLength="100" />
-          <Property Name="ProveedorContactoEmail" Type="varchar" MaxLength="50" />
           <Property Name="ProveedorContactoTelefono" Type="varchar" MaxLength="50" />
           <Property Name="ProveedorContactoCelular" Type="varchar" MaxLength="50" />
           <Property Name="UsuarioId" Type="uniqueidentifier" />
@@ -319,6 +328,7 @@
           <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
           <Property Name="FechaActualizacion" Type="datetime" />
           <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+          <Property Name="ProveedorContactoEstado" Type="bit" />
         </EntityType>
         <EntityType Name="ProveedoresCuentasBancarias">
           <Key>
@@ -331,6 +341,17 @@
           <Property Name="ProveedorCuentaBancariaCCI" Type="varchar" MaxLength="50" />
           <Property Name="ProveedorCuantaBancariaMoneda" Type="uniqueidentifier" />
         </EntityType>
+        <EntityType Name="ProveedoresDetracciones">
+          <Key>
+            <PropertyRef Name="ProveedorDetraccionId" />
+          </Key>
+          <Property Name="ProveedorDetraccionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProveedorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProveedorDetraccionTipo" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProveedorDetraccionPorcentaje" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ProveedorDetraccionCuenta" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TipoDetraccionId" Type="uniqueidentifier" />
+        </EntityType>
         <EntityType Name="ProveedoresFacturas">
           <Key>
             <PropertyRef Name="ProveedorId" />
@@ -338,6 +359,7 @@
           </Key>
           <Property Name="ProveedorId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FacturarId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProveedorDetraccionId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="Proyectos">
           <Key>
@@ -347,19 +369,30 @@
           <Property Name="ProyectoCodigo" Type="varchar" MaxLength="50" />
           <Property Name="ProyectoNombre" Type="varchar" MaxLength="50" />
           <Property Name="ProyectoMoneda" Type="uniqueidentifier" />
-          <Property Name="ProyectoUtilidadContratada" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="ProyectoUtilidad" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="ProyectoGastosGenerales" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="ProyectoIgv" Type="decimal" Precision="2" Scale="0" />
-          <Property Name="ProyectoMontoTotal" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="ProyectoUtilidadPorcentaje" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProyectoUtilidad" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProyectoGastosGenerales" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProyectoIgv" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProyectoMontoTotal" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ProyectoEstado" Type="char" MaxLength="1" />
           <Property Name="ProyectoFechaInicio" Type="datetime" />
           <Property Name="ProyectoFechaFin" Type="datetime" />
           <Property Name="ProyectoEmpresa" Type="uniqueidentifier" />
+          <Property Name="ProyectoLugarEntrega" Type="varchar" MaxLength="50" />
           <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="FechaActualizacion" Type="datetime" />
           <Property Name="UsuarioActualizacion" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="ProyectosMontosAprobaciones">
+          <Key>
+            <PropertyRef Name="ProyectoMontoAprobacionId" />
+          </Key>
+          <Property Name="ProyectoMontoAprobacionId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProyectoId" Type="uniqueidentifier" />
+          <Property Name="RolId" Type="uniqueidentifier" />
+          <Property Name="ProyectoMontoAprobacionMaximo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProyectoMontoAprobacionAcumulado" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="ProyectosPresupuestos">
           <Key>
@@ -395,16 +428,6 @@
           <Property Name="PaginaId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Accion" Type="char" MaxLength="1" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="TiposdeCambio">
           <Key>
             <PropertyRef Name="TipoCambioId" />
@@ -412,7 +435,7 @@
           <Property Name="TipoCambioId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="MonedaId" Type="uniqueidentifier" />
           <Property Name="TipoCambioFecha" Type="datetime" />
-          <Property Name="TipoCambioValor" Type="decimal" Precision="2" Scale="0" />
+          <Property Name="TipoCambioValor" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TipoCambioOrigen" Type="char" MaxLength="1" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
@@ -426,6 +449,8 @@
           <Property Name="TipoDetraccionId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TipoDetraccionCodigo" Type="varchar" MaxLength="50" />
           <Property Name="TipoDetraccionDescripcion" Type="varchar" MaxLength="50" />
+          <Property Name="TipoDetraccionTipo" Type="char" MaxLength="1" />
+          <Property Name="TipoDetraccionValor" Type="decimal" Precision="18" Scale="2" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="UsuarioCreacion" Type="uniqueidentifier" />
           <Property Name="FechaActualizacion" Type="datetime" />
@@ -464,6 +489,7 @@
           <Property Name="UsuarioNombres" Type="varchar" MaxLength="50" />
           <Property Name="UsuarioApellidos" Type="varchar" MaxLength="50" />
           <Property Name="UsuarioEmail" Type="varchar" MaxLength="50" />
+          <Property Name="UsuarioEstado" Type="bit" />
           <Property Name="UsuarioUsername" Type="varchar" MaxLength="50" />
           <Property Name="UsuarioPassword" Type="varchar" MaxLength="50" />
           <Property Name="RolId" Type="uniqueidentifier" />
@@ -601,6 +627,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Ordenes_Proyectos">
+          <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="1" />
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyectos">
+              <PropertyRef Name="ProyectoId" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="ProyectoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrdenesDetalles_Ordenes">
           <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="0..1" />
           <End Role="OrdenesDetalles" Type="Self.OrdenesDetalles" Multiplicity="*" />
@@ -609,6 +647,18 @@
               <PropertyRef Name="OrdenId" />
             </Principal>
             <Dependent Role="OrdenesDetalles">
+              <PropertyRef Name="OrdenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenesEstados_Ordenes">
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="0..1" />
+          <End Role="OrdenesEstados" Type="Self.OrdenesEstados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="OrdenId" />
+            </Principal>
+            <Dependent Role="OrdenesEstados">
               <PropertyRef Name="OrdenId" />
             </Dependent>
           </ReferentialConstraint>
@@ -673,18 +723,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Proveedores_TiposDetracciones">
-          <End Role="TiposDetracciones" Type="Self.TiposDetracciones" Multiplicity="0..1" />
-          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TiposDetracciones">
-              <PropertyRef Name="TipoDetraccionId" />
-            </Principal>
-            <Dependent Role="Proveedores">
-              <PropertyRef Name="ProveedorTipoDetraccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Proveedores_TiposProveedores">
           <End Role="TiposProveedores" Type="Self.TiposProveedores" Multiplicity="0..1" />
           <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
@@ -718,6 +756,30 @@
             </Principal>
             <Dependent Role="ProveedoresCuentasBancarias">
               <PropertyRef Name="ProveedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedoresDetracciones_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="ProveedoresDetracciones" Type="Self.ProveedoresDetracciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="ProveedorId" />
+            </Principal>
+            <Dependent Role="ProveedoresDetracciones">
+              <PropertyRef Name="ProveedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedoresDetracciones_TiposDetracciones">
+          <End Role="TiposDetracciones" Type="Self.TiposDetracciones" Multiplicity="0..1" />
+          <End Role="ProveedoresDetracciones" Type="Self.ProveedoresDetracciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposDetracciones">
+              <PropertyRef Name="TipoDetraccionId" />
+            </Principal>
+            <Dependent Role="ProveedoresDetracciones">
+              <PropertyRef Name="TipoDetraccionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -865,6 +927,7 @@
           <EntitySet Name="Monedas" EntityType="Self.Monedas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ordenes" EntityType="Self.Ordenes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrdenesDetalles" EntityType="Self.OrdenesDetalles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrdenesEstados" EntityType="Self.OrdenesEstados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrdenesPartidas" EntityType="Self.OrdenesPartidas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paginas" EntityType="Self.Paginas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pagos" EntityType="Self.Pagos" Schema="dbo" store:Type="Tables" />
@@ -877,13 +940,14 @@
           <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProveedoresContactos" EntityType="Self.ProveedoresContactos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProveedoresCuentasBancarias" EntityType="Self.ProveedoresCuentasBancarias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProveedoresDetracciones" EntityType="Self.ProveedoresDetracciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProveedoresFacturas" EntityType="Self.ProveedoresFacturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proyectos" EntityType="Self.Proyectos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProyectosMontosAprobaciones" EntityType="Self.ProyectosMontosAprobaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProyectosPresupuestos" EntityType="Self.ProyectosPresupuestos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProyectosResponsables" EntityType="Self.ProyectosResponsables" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolesPaginas" EntityType="Self.RolesPaginas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposdeCambio" EntityType="Self.TiposdeCambio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposDetracciones" EntityType="Self.TiposDetracciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposFacturas" EntityType="Self.TiposFacturas" Schema="dbo" store:Type="Tables" />
@@ -933,9 +997,17 @@
             <End Role="Proveedores" EntitySet="Proveedores" />
             <End Role="Ordenes" EntitySet="Ordenes" />
           </AssociationSet>
+          <AssociationSet Name="FK_Ordenes_Proyectos" Association="Self.FK_Ordenes_Proyectos">
+            <End Role="Proyectos" EntitySet="Proyectos" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrdenesDetalles_Ordenes" Association="Self.FK_OrdenesDetalles_Ordenes">
             <End Role="Ordenes" EntitySet="Ordenes" />
             <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenesEstados_Ordenes" Association="Self.FK_OrdenesEstados_Ordenes">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="OrdenesEstados" EntitySet="OrdenesEstados" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenesPartidas_OrdenesDetalles" Association="Self.FK_OrdenesPartidas_OrdenesDetalles">
             <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
@@ -957,10 +1029,6 @@
             <End Role="PresupuestosItems" EntitySet="PresupuestosItems" />
             <End Role="PresupuestosItemsLogs" EntitySet="PresupuestosItemsLogs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proveedores_TiposDetracciones" Association="Self.FK_Proveedores_TiposDetracciones">
-            <End Role="TiposDetracciones" EntitySet="TiposDetracciones" />
-            <End Role="Proveedores" EntitySet="Proveedores" />
-          </AssociationSet>
           <AssociationSet Name="FK_Proveedores_TiposProveedores" Association="Self.FK_Proveedores_TiposProveedores">
             <End Role="TiposProveedores" EntitySet="TiposProveedores" />
             <End Role="Proveedores" EntitySet="Proveedores" />
@@ -972,6 +1040,14 @@
           <AssociationSet Name="FK_ProveedoresCuentasBancarias_Proveedores" Association="Self.FK_ProveedoresCuentasBancarias_Proveedores">
             <End Role="Proveedores" EntitySet="Proveedores" />
             <End Role="ProveedoresCuentasBancarias" EntitySet="ProveedoresCuentasBancarias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedoresDetracciones_Proveedores" Association="Self.FK_ProveedoresDetracciones_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="ProveedoresDetracciones" EntitySet="ProveedoresDetracciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedoresDetracciones_TiposDetracciones" Association="Self.FK_ProveedoresDetracciones_TiposDetracciones">
+            <End Role="TiposDetracciones" EntitySet="TiposDetracciones" />
+            <End Role="ProveedoresDetracciones" EntitySet="ProveedoresDetracciones" />
           </AssociationSet>
           <AssociationSet Name="FK_ProveedoresFacturas_Facturas" Association="Self.FK_ProveedoresFacturas_Facturas">
             <End Role="Facturas" EntitySet="Facturas" />
@@ -1069,13 +1145,13 @@
           <Property Name="FacturaFechaVencimiento" Type="DateTime" Precision="3" />
           <Property Name="FacturaMoneda" Type="Guid" />
           <Property Name="FacturaEstado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="FacturaSubtotal" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaIgv" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaImporteTotal" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaFondoGarantia" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaPorcentajeDetraccion" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaMontoDetraccion" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaImportePagar" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaSubtotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaIgv" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaImporteTotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaFondoGarantia" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaPorcentajeDetraccion" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaMontoDetraccion" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaImportePagar" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="FacturaUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="FacturaFechaPagoProgramada" Type="DateTime" Precision="3" />
           <NavigationProperty Name="TiposFacturas" Relationship="Self.FK_Facturas_TiposFacturas" FromRole="Facturas" ToRole="TiposFacturas" />
@@ -1084,7 +1160,7 @@
           <NavigationProperty Name="FacturasGuiasRemision" Relationship="Self.FK_FacturasGuiasRemision_Facturas" FromRole="Facturas" ToRole="FacturasGuiasRemision" />
           <NavigationProperty Name="FacturasOrdenes" Relationship="Self.FK_FacturasOrdenes_Facturas" FromRole="Facturas" ToRole="FacturasOrdenes" />
           <NavigationProperty Name="FacturasPagos" Relationship="Self.FK_FacturasPagos_Facturas" FromRole="Facturas" ToRole="FacturasPagos" />
-          <NavigationProperty Name="Proveedores" Relationship="Self.ProveedoresFacturas" FromRole="Facturas" ToRole="Proveedores" />
+          <NavigationProperty Name="ProveedoresFacturas" Relationship="Self.FK_ProveedoresFacturas_Facturas" FromRole="Facturas" ToRole="ProveedoresFacturas" />
           <NavigationProperty Name="Proyectos" Relationship="nortonModel.FK_Facturas_Proyectos" FromRole="Facturas" ToRole="Proyectos" />
         </EntityType>
         <EntityType Name="FacturasDetalles">
@@ -1094,9 +1170,9 @@
           <Property Name="FacturaDetalleId" Type="Guid" Nullable="false" />
           <Property Name="FacturaId" Type="Guid" />
           <Property Name="FacturaDetalleDescripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FacturaDetalleCantidad" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaDetallePrecioUnitario" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="FacturaDetalleImporteTotal" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="FacturaDetalleCantidad" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaDetallePrecioUnitario" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FacturaDetalleImporteTotal" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="UsuarioCreacion" Type="Guid" />
           <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
@@ -1167,22 +1243,25 @@
           </Key>
           <Property Name="OrdenId" Type="Guid" Nullable="false" />
           <Property Name="OrdenCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OrdenTipo" Type="Guid" />
+          <Property Name="OrdenTipo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="OrdenFecha" Type="DateTime" Precision="3" />
           <Property Name="OrdenProveedor" Type="Guid" />
-          <Property Name="OrdenSubtotal" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="OrdenIgv" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="OrdenTotal" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="OrdenSubtotal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OrdenIgv" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OrdenTotal" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OrdenPlazoEntrega" Type="DateTime" Precision="3" />
-          <Property Name="OrdenFormaPago" Type="Guid" />
+          <Property Name="OrdenFormaPago" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="OrdenContactoInterno" Type="Guid" />
           <Property Name="OrdenLugarEntrega" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="OrdenEstado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="OrdenObservacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="OrdenMotivoRechazo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ProyectoId" Type="Guid" Nullable="false" />
           <NavigationProperty Name="FacturasOrdenes" Relationship="Self.FK_FacturasOrdenes_Ordenes" FromRole="Ordenes" ToRole="FacturasOrdenes" />
           <NavigationProperty Name="Proveedores" Relationship="Self.FK_Ordenes_Proveedores" FromRole="Ordenes" ToRole="Proveedores" />
+          <NavigationProperty Name="Proyectos" Relationship="Self.FK_Ordenes_Proyectos" FromRole="Ordenes" ToRole="Proyectos" />
           <NavigationProperty Name="OrdenesDetalles" Relationship="Self.FK_OrdenesDetalles_Ordenes" FromRole="Ordenes" ToRole="OrdenesDetalles" />
+          <NavigationProperty Name="OrdenesEstados" Relationship="Self.FK_OrdenesEstados_Ordenes" FromRole="Ordenes" ToRole="OrdenesEstados" />
         </EntityType>
         <EntityType Name="OrdenesDetalles">
           <Key>
@@ -1192,16 +1271,30 @@
           <Property Name="OrdenId" Type="Guid" />
           <Property Name="OrdenDetalleItem" Type="Int32" />
           <Property Name="OrdenDetalleDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OrdenDetalleCuotas" Type="Int32" />
+          <Property Name="OrdenDetalleCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrdenDetalleCantidad" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OrdenDetalleUnidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OrdenDetallePrecioUnitario" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="OrdenDetallePrecioTotal" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="OrdenDetallePrecioUnitario" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OrdenDetallePrecioTotal" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="UsuarioCreacion" Type="Guid" />
           <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
           <Property Name="UsuarioActualizacion" Type="Guid" />
           <NavigationProperty Name="Ordenes" Relationship="Self.FK_OrdenesDetalles_Ordenes" FromRole="OrdenesDetalles" ToRole="Ordenes" />
           <NavigationProperty Name="OrdenesPartidas" Relationship="Self.FK_OrdenesPartidas_OrdenesDetalles" FromRole="OrdenesDetalles" ToRole="OrdenesPartidas" />
+        </EntityType>
+        <EntityType Name="OrdenesEstados">
+          <Key>
+            <PropertyRef Name="OrdenEstadoId" />
+          </Key>
+          <Property Name="OrdenEstadoId" Type="Guid" Nullable="false" />
+          <Property Name="OrdenEstadoEstado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="OrdenId" Type="Guid" />
+          <Property Name="OrdenEstadoFecha" Type="DateTime" Precision="3" />
+          <Property Name="OrdenEstadoUsuario" Type="Guid" />
+          <Property Name="OrdenEstadoMotivoRechazo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="OrdenEstadoObservaciones" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ordenes" Relationship="Self.FK_OrdenesEstados_Ordenes" FromRole="OrdenesEstados" ToRole="Ordenes" />
         </EntityType>
         <EntityType Name="OrdenesPartidas">
           <Key>
@@ -1302,9 +1395,9 @@
           <Property Name="PresupuestoItemNaturaleza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PresupuestoItemUnidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PresupuestoItemResumen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PresupuestoItemCantidad" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="PresupuestoItemPrecio" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="PresupuestoItemImporte" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="PresupuestoItemCantidad" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PresupuestoItemPrecio" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PresupuestoItemImporte" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="UsuarioCreacion" Type="Guid" />
           <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
@@ -1325,9 +1418,9 @@
           <Property Name="PresupuestoItemNaturaleza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PresupuestoItemUnidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PresupuestoItemResumen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PresupuestoItemCantidad" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="PresupuestoItemPrecio" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="PresupuestoItemImporte" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="PresupuestoItemCantidad" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PresupuestoItemPrecio" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PresupuestoItemImporte" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="UsuarioCreacion" Type="Guid" />
           <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
@@ -1347,20 +1440,18 @@
           <Property Name="ProveedorDireccionFiscal" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="ProveedorPlazoPago" Type="Int32" />
           <Property Name="ProveedorEstado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="ProveedorTipoDetraccion" Type="Guid" />
-          <Property Name="ProveedorPorcentajeDetraccion" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="ProveedorCuentaDetraccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProveedorEsEmisorElectronico" Type="Boolean" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="UsuarioCreacion" Type="Guid" />
           <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
-          <Property Name="UsuarioValidacion" Type="Guid" />
           <Property Name="TipoProveedorId" Type="Guid" />
+          <Property Name="UsuarioValidacion" Type="Guid" />
           <NavigationProperty Name="Ordenes" Relationship="Self.FK_Ordenes_Proveedores" FromRole="Proveedores" ToRole="Ordenes" />
-          <NavigationProperty Name="TiposDetracciones" Relationship="Self.FK_Proveedores_TiposDetracciones" FromRole="Proveedores" ToRole="TiposDetracciones" />
           <NavigationProperty Name="TiposProveedores" Relationship="Self.FK_Proveedores_TiposProveedores" FromRole="Proveedores" ToRole="TiposProveedores" />
           <NavigationProperty Name="ProveedoresContactos" Relationship="Self.FK_ProveedoresContactos_Proveedores" FromRole="Proveedores" ToRole="ProveedoresContactos" />
           <NavigationProperty Name="ProveedoresCuentasBancarias" Relationship="Self.FK_ProveedoresCuentasBancarias_Proveedores" FromRole="Proveedores" ToRole="ProveedoresCuentasBancarias" />
-          <NavigationProperty Name="Facturas" Relationship="Self.ProveedoresFacturas" FromRole="Proveedores" ToRole="Facturas" />
+          <NavigationProperty Name="ProveedoresDetracciones" Relationship="Self.FK_ProveedoresDetracciones_Proveedores" FromRole="Proveedores" ToRole="ProveedoresDetracciones" />
+          <NavigationProperty Name="ProveedoresFacturas" Relationship="Self.FK_ProveedoresFacturas_Proveedores" FromRole="Proveedores" ToRole="ProveedoresFacturas" />
         </EntityType>
         <EntityType Name="ProveedoresContactos">
           <Key>
@@ -1369,9 +1460,6 @@
           <Property Name="ProveedorContactoId" Type="Guid" Nullable="false" />
           <Property Name="ProveedorId" Type="Guid" />
           <Property Name="ProveedorContactoTipo" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
-          <Property Name="ProveedorContactoNombres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ProveedorContactoApellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ProveedorContactoEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProveedorContactoTelefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProveedorContactoCelular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UsuarioId" Type="Guid" />
@@ -1379,6 +1467,7 @@
           <Property Name="UsuarioCreacion" Type="Guid" />
           <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
           <Property Name="UsuarioActualizacion" Type="Guid" />
+          <Property Name="ProveedorContactoEstado" Type="Boolean" />
           <NavigationProperty Name="Proveedores" Relationship="Self.FK_ProveedoresContactos_Proveedores" FromRole="ProveedoresContactos" ToRole="Proveedores" />
         </EntityType>
         <EntityType Name="ProveedoresCuentasBancarias">
@@ -1393,6 +1482,30 @@
           <Property Name="ProveedorCuantaBancariaMoneda" Type="Guid" />
           <NavigationProperty Name="Proveedores" Relationship="Self.FK_ProveedoresCuentasBancarias_Proveedores" FromRole="ProveedoresCuentasBancarias" ToRole="Proveedores" />
         </EntityType>
+        <EntityType Name="ProveedoresDetracciones">
+          <Key>
+            <PropertyRef Name="ProveedorDetraccionId" />
+          </Key>
+          <Property Name="ProveedorDetraccionId" Type="Guid" Nullable="false" />
+          <Property Name="ProveedorId" Type="Guid" Nullable="false" />
+          <Property Name="ProveedorDetraccionTipo" Type="Guid" Nullable="false" />
+          <Property Name="ProveedorDetraccionPorcentaje" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ProveedorDetraccionCuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TipoDetraccionId" Type="Guid" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_ProveedoresDetracciones_Proveedores" FromRole="ProveedoresDetracciones" ToRole="Proveedores" />
+          <NavigationProperty Name="TiposDetracciones" Relationship="Self.FK_ProveedoresDetracciones_TiposDetracciones" FromRole="ProveedoresDetracciones" ToRole="TiposDetracciones" />
+        </EntityType>
+        <EntityType Name="ProveedoresFacturas">
+          <Key>
+            <PropertyRef Name="ProveedorId" />
+            <PropertyRef Name="FacturarId" />
+          </Key>
+          <Property Name="ProveedorId" Type="Guid" Nullable="false" />
+          <Property Name="FacturarId" Type="Guid" Nullable="false" />
+          <Property Name="ProveedorDetraccionId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK_ProveedoresFacturas_Facturas" FromRole="ProveedoresFacturas" ToRole="Facturas" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_ProveedoresFacturas_Proveedores" FromRole="ProveedoresFacturas" ToRole="Proveedores" />
+        </EntityType>
         <EntityType Name="Proyectos">
           <Key>
             <PropertyRef Name="ProyectoId" />
@@ -1401,23 +1514,35 @@
           <Property Name="ProyectoCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProyectoNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ProyectoMoneda" Type="Guid" />
-          <Property Name="ProyectoUtilidadContratada" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="ProyectoUtilidad" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="ProyectoGastosGenerales" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="ProyectoIgv" Type="Decimal" Precision="2" Scale="0" />
-          <Property Name="ProyectoMontoTotal" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="ProyectoUtilidadPorcentaje" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ProyectoUtilidad" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ProyectoGastosGenerales" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ProyectoIgv" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ProyectoMontoTotal" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ProyectoEstado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="ProyectoFechaInicio" Type="DateTime" Precision="3" />
           <Property Name="ProyectoFechaFin" Type="DateTime" Precision="3" />
           <Property Name="ProyectoEmpresa" Type="Guid" />
+          <Property Name="ProyectoLugarEntrega" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UsuarioCreacion" Type="Guid" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
           <Property Name="UsuarioActualizacion" Type="Guid" />
           <NavigationProperty Name="Empresas" Relationship="Self.FK_Proyectos_Empresas" FromRole="Proyectos" ToRole="Empresas" />
+          <NavigationProperty Name="Ordenes" Relationship="Self.FK_Ordenes_Proyectos" FromRole="Proyectos" ToRole="Ordenes" />
           <NavigationProperty Name="ProyectosPresupuestos" Relationship="Self.FK_ProyectosPresupuestos_Proyectos" FromRole="Proyectos" ToRole="ProyectosPresupuestos" />
           <NavigationProperty Name="ProyectosResponsables" Relationship="Self.FK_ProyectosResponsables_Proyectos" FromRole="Proyectos" ToRole="ProyectosResponsables" />
           <NavigationProperty Name="Facturas" Relationship="nortonModel.FK_Facturas_Proyectos" FromRole="Proyectos" ToRole="Facturas" />
+        </EntityType>
+        <EntityType Name="ProyectosMontosAprobaciones">
+          <Key>
+            <PropertyRef Name="ProyectoMontoAprobacionId" />
+          </Key>
+          <Property Name="ProyectoMontoAprobacionId" Type="Guid" Nullable="false" />
+          <Property Name="ProyectoId" Type="Guid" />
+          <Property Name="RolId" Type="Guid" />
+          <Property Name="ProyectoMontoAprobacionMaximo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ProyectoMontoAprobacionAcumulado" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="ProyectosPresupuestos">
           <Key>
@@ -1467,7 +1592,7 @@
           <Property Name="TipoCambioId" Type="Guid" Nullable="false" />
           <Property Name="MonedaId" Type="Guid" />
           <Property Name="TipoCambioFecha" Type="DateTime" Precision="3" />
-          <Property Name="TipoCambioValor" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="TipoCambioValor" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="TipoCambioOrigen" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="UsuarioCreacion" Type="Guid" />
@@ -1482,11 +1607,13 @@
           <Property Name="TipoDetraccionId" Type="Guid" Nullable="false" />
           <Property Name="TipoDetraccionCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TipoDetraccionDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoDetraccionTipo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="TipoDetraccionValor" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="UsuarioCreacion" Type="Guid" />
           <Property Name="FechaActualizacion" Type="DateTime" Precision="3" />
           <Property Name="UsuarioActualizacion" Type="Guid" />
-          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Proveedores_TiposDetracciones" FromRole="TiposDetracciones" ToRole="Proveedores" />
+          <NavigationProperty Name="ProveedoresDetracciones" Relationship="Self.FK_ProveedoresDetracciones_TiposDetracciones" FromRole="TiposDetracciones" ToRole="ProveedoresDetracciones" />
         </EntityType>
         <EntityType Name="TiposFacturas">
           <Key>
@@ -1523,6 +1650,7 @@
           <Property Name="UsuarioNombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UsuarioApellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UsuarioEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioEstado" Type="Boolean" />
           <Property Name="UsuarioUsername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UsuarioPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RolId" Type="Guid" />
@@ -1638,6 +1766,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProveedoresFacturas_Facturas">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="ProveedoresFacturas" Type="Self.ProveedoresFacturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="FacturaId" />
+            </Principal>
+            <Dependent Role="ProveedoresFacturas">
+              <PropertyRef Name="FacturarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FacturasOrdenes_Ordenes">
           <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="0..1" />
           <End Role="FacturasOrdenes" Type="Self.FacturasOrdenes" Multiplicity="*" />
@@ -1686,6 +1826,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Ordenes_Proyectos">
+          <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="1" />
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proyectos">
+              <PropertyRef Name="ProyectoId" />
+            </Principal>
+            <Dependent Role="Ordenes">
+              <PropertyRef Name="ProyectoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrdenesDetalles_Ordenes">
           <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="0..1" />
           <End Role="OrdenesDetalles" Type="Self.OrdenesDetalles" Multiplicity="*" />
@@ -1694,6 +1846,18 @@
               <PropertyRef Name="OrdenId" />
             </Principal>
             <Dependent Role="OrdenesDetalles">
+              <PropertyRef Name="OrdenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrdenesEstados_Ordenes">
+          <End Role="Ordenes" Type="Self.Ordenes" Multiplicity="0..1" />
+          <End Role="OrdenesEstados" Type="Self.OrdenesEstados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordenes">
+              <PropertyRef Name="OrdenId" />
+            </Principal>
+            <Dependent Role="OrdenesEstados">
               <PropertyRef Name="OrdenId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1782,18 +1946,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Proveedores_TiposDetracciones">
-          <End Role="TiposDetracciones" Type="Self.TiposDetracciones" Multiplicity="0..1" />
-          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TiposDetracciones">
-              <PropertyRef Name="TipoDetraccionId" />
-            </Principal>
-            <Dependent Role="Proveedores">
-              <PropertyRef Name="ProveedorTipoDetraccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Proveedores_TiposProveedores">
           <End Role="TiposProveedores" Type="Self.TiposProveedores" Multiplicity="0..1" />
           <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
@@ -1827,6 +1979,42 @@
             </Principal>
             <Dependent Role="ProveedoresCuentasBancarias">
               <PropertyRef Name="ProveedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedoresDetracciones_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="ProveedoresDetracciones" Type="Self.ProveedoresDetracciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="ProveedorId" />
+            </Principal>
+            <Dependent Role="ProveedoresDetracciones">
+              <PropertyRef Name="ProveedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedoresFacturas_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="ProveedoresFacturas" Type="Self.ProveedoresFacturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="ProveedorId" />
+            </Principal>
+            <Dependent Role="ProveedoresFacturas">
+              <PropertyRef Name="ProveedorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedoresDetracciones_TiposDetracciones">
+          <End Role="TiposDetracciones" Type="Self.TiposDetracciones" Multiplicity="0..1" />
+          <End Role="ProveedoresDetracciones" Type="Self.ProveedoresDetracciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposDetracciones">
+              <PropertyRef Name="TipoDetraccionId" />
+            </Principal>
+            <Dependent Role="ProveedoresDetracciones">
+              <PropertyRef Name="TipoDetraccionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1878,10 +2066,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ProveedoresFacturas">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
-          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="nortonEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Empresas" EntityType="Self.Empresas" />
           <EntitySet Name="EmpresasCuentasBancarias" EntityType="Self.EmpresasCuentasBancarias" />
@@ -1894,6 +2078,7 @@
           <EntitySet Name="Monedas" EntityType="Self.Monedas" />
           <EntitySet Name="Ordenes" EntityType="Self.Ordenes" />
           <EntitySet Name="OrdenesDetalles" EntityType="Self.OrdenesDetalles" />
+          <EntitySet Name="OrdenesEstados" EntityType="Self.OrdenesEstados" />
           <EntitySet Name="OrdenesPartidas" EntityType="Self.OrdenesPartidas" />
           <EntitySet Name="Paginas" EntityType="Self.Paginas" />
           <EntitySet Name="Pagos" EntityType="Self.Pagos" />
@@ -1906,7 +2091,10 @@
           <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
           <EntitySet Name="ProveedoresContactos" EntityType="Self.ProveedoresContactos" />
           <EntitySet Name="ProveedoresCuentasBancarias" EntityType="Self.ProveedoresCuentasBancarias" />
+          <EntitySet Name="ProveedoresDetracciones" EntityType="Self.ProveedoresDetracciones" />
+          <EntitySet Name="ProveedoresFacturas" EntityType="Self.ProveedoresFacturas" />
           <EntitySet Name="Proyectos" EntityType="Self.Proyectos" />
+          <EntitySet Name="ProyectosMontosAprobaciones" EntityType="Self.ProyectosMontosAprobaciones" />
           <EntitySet Name="ProyectosPresupuestos" EntityType="Self.ProyectosPresupuestos" />
           <EntitySet Name="ProyectosResponsables" EntityType="Self.ProyectosResponsables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
@@ -1952,6 +2140,10 @@
             <End Role="Facturas" EntitySet="Facturas" />
             <End Role="FacturasPagos" EntitySet="FacturasPagos" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProveedoresFacturas_Facturas" Association="Self.FK_ProveedoresFacturas_Facturas">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="ProveedoresFacturas" EntitySet="ProveedoresFacturas" />
+          </AssociationSet>
           <AssociationSet Name="FK_FacturasOrdenes_Ordenes" Association="Self.FK_FacturasOrdenes_Ordenes">
             <End Role="Ordenes" EntitySet="Ordenes" />
             <End Role="FacturasOrdenes" EntitySet="FacturasOrdenes" />
@@ -1968,9 +2160,17 @@
             <End Role="Proveedores" EntitySet="Proveedores" />
             <End Role="Ordenes" EntitySet="Ordenes" />
           </AssociationSet>
+          <AssociationSet Name="FK_Ordenes_Proyectos" Association="Self.FK_Ordenes_Proyectos">
+            <End Role="Proyectos" EntitySet="Proyectos" />
+            <End Role="Ordenes" EntitySet="Ordenes" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrdenesDetalles_Ordenes" Association="Self.FK_OrdenesDetalles_Ordenes">
             <End Role="Ordenes" EntitySet="Ordenes" />
             <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrdenesEstados_Ordenes" Association="Self.FK_OrdenesEstados_Ordenes">
+            <End Role="Ordenes" EntitySet="Ordenes" />
+            <End Role="OrdenesEstados" EntitySet="OrdenesEstados" />
           </AssociationSet>
           <AssociationSet Name="FK_OrdenesPartidas_OrdenesDetalles" Association="Self.FK_OrdenesPartidas_OrdenesDetalles">
             <End Role="OrdenesDetalles" EntitySet="OrdenesDetalles" />
@@ -2000,10 +2200,6 @@
             <End Role="PresupuestosItems" EntitySet="PresupuestosItems" />
             <End Role="PresupuestosItemsLogs" EntitySet="PresupuestosItemsLogs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proveedores_TiposDetracciones" Association="Self.FK_Proveedores_TiposDetracciones">
-            <End Role="TiposDetracciones" EntitySet="TiposDetracciones" />
-            <End Role="Proveedores" EntitySet="Proveedores" />
-          </AssociationSet>
           <AssociationSet Name="FK_Proveedores_TiposProveedores" Association="Self.FK_Proveedores_TiposProveedores">
             <End Role="TiposProveedores" EntitySet="TiposProveedores" />
             <End Role="Proveedores" EntitySet="Proveedores" />
@@ -2015,6 +2211,18 @@
           <AssociationSet Name="FK_ProveedoresCuentasBancarias_Proveedores" Association="Self.FK_ProveedoresCuentasBancarias_Proveedores">
             <End Role="Proveedores" EntitySet="Proveedores" />
             <End Role="ProveedoresCuentasBancarias" EntitySet="ProveedoresCuentasBancarias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedoresDetracciones_Proveedores" Association="Self.FK_ProveedoresDetracciones_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="ProveedoresDetracciones" EntitySet="ProveedoresDetracciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedoresFacturas_Proveedores" Association="Self.FK_ProveedoresFacturas_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="ProveedoresFacturas" EntitySet="ProveedoresFacturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedoresDetracciones_TiposDetracciones" Association="Self.FK_ProveedoresDetracciones_TiposDetracciones">
+            <End Role="TiposDetracciones" EntitySet="TiposDetracciones" />
+            <End Role="ProveedoresDetracciones" EntitySet="ProveedoresDetracciones" />
           </AssociationSet>
           <AssociationSet Name="FK_ProyectosPresupuestos_Proyectos" Association="Self.FK_ProyectosPresupuestos_Proyectos">
             <End Role="Proyectos" EntitySet="Proyectos" />
@@ -2032,26 +2240,11 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
-          <AssociationSet Name="ProveedoresFacturas" Association="Self.ProveedoresFacturas">
-            <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="Proveedores" EntitySet="Proveedores" />
-          </AssociationSet>
-          <EntitySet Name="sysdiagrams" EntityType="nortonModel.sysdiagrams" />
           <AssociationSet Name="FK_Facturas_Proyectos" Association="nortonModel.FK_Facturas_Proyectos">
             <End Role="Proyectos" EntitySet="Proyectos" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <Association Name="FK_Facturas_Proyectos">
           <End Type="nortonModel.Proyectos" Role="Proyectos" Multiplicity="0..1" />
           <End Type="nortonModel.Facturas" Role="Facturas" Multiplicity="*" />
@@ -2216,6 +2409,7 @@
                 <ScalarProperty Name="OrdenEstado" ColumnName="OrdenEstado" />
                 <ScalarProperty Name="OrdenObservacion" ColumnName="OrdenObservacion" />
                 <ScalarProperty Name="OrdenMotivoRechazo" ColumnName="OrdenMotivoRechazo" />
+                <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2226,7 +2420,8 @@
                 <ScalarProperty Name="OrdenId" ColumnName="OrdenId" />
                 <ScalarProperty Name="OrdenDetalleItem" ColumnName="OrdenDetalleItem" />
                 <ScalarProperty Name="OrdenDetalleDescripcion" ColumnName="OrdenDetalleDescripcion" />
-                <ScalarProperty Name="OrdenDetalleCuotas" ColumnName="OrdenDetalleCuotas" />
+                <ScalarProperty Name="OrdenDetalleCodigo" ColumnName="OrdenDetalleCodigo" />
+                <ScalarProperty Name="OrdenDetalleCantidad" ColumnName="OrdenDetalleCantidad" />
                 <ScalarProperty Name="OrdenDetalleUnidad" ColumnName="OrdenDetalleUnidad" />
                 <ScalarProperty Name="OrdenDetallePrecioUnitario" ColumnName="OrdenDetallePrecioUnitario" />
                 <ScalarProperty Name="OrdenDetallePrecioTotal" ColumnName="OrdenDetallePrecioTotal" />
@@ -2234,6 +2429,19 @@
                 <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
                 <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
                 <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrdenesEstados">
+            <EntityTypeMapping TypeName="nortonModel.OrdenesEstados">
+              <MappingFragment StoreEntitySet="OrdenesEstados">
+                <ScalarProperty Name="OrdenEstadoId" ColumnName="OrdenEstadoId" />
+                <ScalarProperty Name="OrdenEstadoEstado" ColumnName="OrdenEstadoEstado" />
+                <ScalarProperty Name="OrdenId" ColumnName="OrdenId" />
+                <ScalarProperty Name="OrdenEstadoFecha" ColumnName="OrdenEstadoFecha" />
+                <ScalarProperty Name="OrdenEstadoUsuario" ColumnName="OrdenEstadoUsuario" />
+                <ScalarProperty Name="OrdenEstadoMotivoRechazo" ColumnName="OrdenEstadoMotivoRechazo" />
+                <ScalarProperty Name="OrdenEstadoObservaciones" ColumnName="OrdenEstadoObservaciones" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2377,14 +2585,12 @@
                 <ScalarProperty Name="ProveedorDireccionFiscal" ColumnName="ProveedorDireccionFiscal" />
                 <ScalarProperty Name="ProveedorPlazoPago" ColumnName="ProveedorPlazoPago" />
                 <ScalarProperty Name="ProveedorEstado" ColumnName="ProveedorEstado" />
-                <ScalarProperty Name="ProveedorTipoDetraccion" ColumnName="ProveedorTipoDetraccion" />
-                <ScalarProperty Name="ProveedorPorcentajeDetraccion" ColumnName="ProveedorPorcentajeDetraccion" />
-                <ScalarProperty Name="ProveedorCuentaDetraccion" ColumnName="ProveedorCuentaDetraccion" />
+                <ScalarProperty Name="ProveedorEsEmisorElectronico" ColumnName="ProveedorEsEmisorElectronico" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
                 <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
-                <ScalarProperty Name="UsuarioValidacion" ColumnName="UsuarioValidacion" />
                 <ScalarProperty Name="TipoProveedorId" ColumnName="TipoProveedorId" />
+                <ScalarProperty Name="UsuarioValidacion" ColumnName="UsuarioValidacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2394,9 +2600,6 @@
                 <ScalarProperty Name="ProveedorContactoId" ColumnName="ProveedorContactoId" />
                 <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
                 <ScalarProperty Name="ProveedorContactoTipo" ColumnName="ProveedorContactoTipo" />
-                <ScalarProperty Name="ProveedorContactoNombres" ColumnName="ProveedorContactoNombres" />
-                <ScalarProperty Name="ProveedorContactoApellidos" ColumnName="ProveedorContactoApellidos" />
-                <ScalarProperty Name="ProveedorContactoEmail" ColumnName="ProveedorContactoEmail" />
                 <ScalarProperty Name="ProveedorContactoTelefono" ColumnName="ProveedorContactoTelefono" />
                 <ScalarProperty Name="ProveedorContactoCelular" ColumnName="ProveedorContactoCelular" />
                 <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
@@ -2404,6 +2607,7 @@
                 <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
                 <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
                 <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+                <ScalarProperty Name="ProveedorContactoEstado" ColumnName="ProveedorContactoEstado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2419,6 +2623,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProveedoresDetracciones">
+            <EntityTypeMapping TypeName="nortonModel.ProveedoresDetracciones">
+              <MappingFragment StoreEntitySet="ProveedoresDetracciones">
+                <ScalarProperty Name="ProveedorDetraccionId" ColumnName="ProveedorDetraccionId" />
+                <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
+                <ScalarProperty Name="ProveedorDetraccionTipo" ColumnName="ProveedorDetraccionTipo" />
+                <ScalarProperty Name="ProveedorDetraccionPorcentaje" ColumnName="ProveedorDetraccionPorcentaje" />
+                <ScalarProperty Name="ProveedorDetraccionCuenta" ColumnName="ProveedorDetraccionCuenta" />
+                <ScalarProperty Name="TipoDetraccionId" ColumnName="TipoDetraccionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProveedoresFacturas">
+            <EntityTypeMapping TypeName="nortonModel.ProveedoresFacturas">
+              <MappingFragment StoreEntitySet="ProveedoresFacturas">
+                <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
+                <ScalarProperty Name="FacturarId" ColumnName="FacturarId" />
+                <ScalarProperty Name="ProveedorDetraccionId" ColumnName="ProveedorDetraccionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Proyectos">
             <EntityTypeMapping TypeName="nortonModel.Proyectos">
               <MappingFragment StoreEntitySet="Proyectos">
@@ -2426,7 +2651,7 @@
                 <ScalarProperty Name="ProyectoCodigo" ColumnName="ProyectoCodigo" />
                 <ScalarProperty Name="ProyectoNombre" ColumnName="ProyectoNombre" />
                 <ScalarProperty Name="ProyectoMoneda" ColumnName="ProyectoMoneda" />
-                <ScalarProperty Name="ProyectoUtilidadContratada" ColumnName="ProyectoUtilidadContratada" />
+                <ScalarProperty Name="ProyectoUtilidadPorcentaje" ColumnName="ProyectoUtilidadPorcentaje" />
                 <ScalarProperty Name="ProyectoUtilidad" ColumnName="ProyectoUtilidad" />
                 <ScalarProperty Name="ProyectoGastosGenerales" ColumnName="ProyectoGastosGenerales" />
                 <ScalarProperty Name="ProyectoIgv" ColumnName="ProyectoIgv" />
@@ -2435,10 +2660,22 @@
                 <ScalarProperty Name="ProyectoFechaInicio" ColumnName="ProyectoFechaInicio" />
                 <ScalarProperty Name="ProyectoFechaFin" ColumnName="ProyectoFechaFin" />
                 <ScalarProperty Name="ProyectoEmpresa" ColumnName="ProyectoEmpresa" />
+                <ScalarProperty Name="ProyectoLugarEntrega" ColumnName="ProyectoLugarEntrega" />
                 <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
                 <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProyectosMontosAprobaciones">
+            <EntityTypeMapping TypeName="nortonModel.ProyectosMontosAprobaciones">
+              <MappingFragment StoreEntitySet="ProyectosMontosAprobaciones">
+                <ScalarProperty Name="ProyectoMontoAprobacionId" ColumnName="ProyectoMontoAprobacionId" />
+                <ScalarProperty Name="ProyectoId" ColumnName="ProyectoId" />
+                <ScalarProperty Name="RolId" ColumnName="RolId" />
+                <ScalarProperty Name="ProyectoMontoAprobacionMaximo" ColumnName="ProyectoMontoAprobacionMaximo" />
+                <ScalarProperty Name="ProyectoMontoAprobacionAcumulado" ColumnName="ProyectoMontoAprobacionAcumulado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2500,6 +2737,8 @@
                 <ScalarProperty Name="TipoDetraccionId" ColumnName="TipoDetraccionId" />
                 <ScalarProperty Name="TipoDetraccionCodigo" ColumnName="TipoDetraccionCodigo" />
                 <ScalarProperty Name="TipoDetraccionDescripcion" ColumnName="TipoDetraccionDescripcion" />
+                <ScalarProperty Name="TipoDetraccionTipo" ColumnName="TipoDetraccionTipo" />
+                <ScalarProperty Name="TipoDetraccionValor" ColumnName="TipoDetraccionValor" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
                 <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
@@ -2541,29 +2780,11 @@
                 <ScalarProperty Name="UsuarioNombres" ColumnName="UsuarioNombres" />
                 <ScalarProperty Name="UsuarioApellidos" ColumnName="UsuarioApellidos" />
                 <ScalarProperty Name="UsuarioEmail" ColumnName="UsuarioEmail" />
+                <ScalarProperty Name="UsuarioEstado" ColumnName="UsuarioEstado" />
                 <ScalarProperty Name="UsuarioUsername" ColumnName="UsuarioUsername" />
                 <ScalarProperty Name="UsuarioPassword" ColumnName="UsuarioPassword" />
                 <ScalarProperty Name="RolId" ColumnName="RolId" />
                 <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="ProveedoresFacturas" TypeName="nortonModel.ProveedoresFacturas" StoreEntitySet="ProveedoresFacturas">
-            <EndProperty Name="Facturas">
-              <ScalarProperty Name="FacturaId" ColumnName="FacturarId" />
-            </EndProperty>
-            <EndProperty Name="Proveedores">
-              <ScalarProperty Name="ProveedorId" ColumnName="ProveedorId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="nortonModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

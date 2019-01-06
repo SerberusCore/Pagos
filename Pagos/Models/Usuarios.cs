@@ -19,6 +19,7 @@ namespace Pagos.Models
         public string UsuarioNombres { get; set; }
         public string UsuarioApellidos { get; set; }
         public string UsuarioEmail { get; set; }
+        public Nullable<bool> UsuarioEstado { get; set; }
         public string UsuarioUsername { get; set; }
         public string UsuarioPassword { get; set; }
         public Nullable<System.Guid> RolId { get; set; }

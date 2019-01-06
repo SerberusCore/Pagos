@@ -12,12 +12,13 @@ namespace Pagos.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class ProveedoresFacturas
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public System.Guid ProveedorId { get; set; }
+        public System.Guid FacturarId { get; set; }
+        public System.Guid ProveedorDetraccionId { get; set; }
+    
+        public virtual Facturas Facturas { get; set; }
+        public virtual Proveedores Proveedores { get; set; }
     }
 }

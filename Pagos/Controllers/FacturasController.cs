@@ -20,7 +20,7 @@ namespace Pagos.Controllers
             //var facturas = db.Facturas.Include(f => f.TiposFacturas);
             var facturas = (from f in db.Facturas
                             join m in db.Monedas on f.FacturaMoneda equals m.MonedaId
-                            select new { f, f.TiposFacturas, f.Proyectos, Moneda=m }).
+                            select new { f, f.TiposFacturas,/* f.Proyectos,*/ Moneda=m }).
                            Select(x => new Dtos.DtoFactura
                            {
                                Moneda=x.Moneda,

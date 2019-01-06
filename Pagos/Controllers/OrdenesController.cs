@@ -27,8 +27,8 @@ namespace Pagos.Controllers
                         Data = Json(proveedor.ProveedoresContactos.Select(x => new
                         {
                             x.ProveedorContactoId,
-                            x.ProveedorContactoNombres,
-                            x.ProveedorContactoApellidos
+                            //x.ProveedorContactoNombres,
+                            //x.ProveedorContactoApellidos
                         })),
                         JsonRequestBehavior = JsonRequestBehavior.AllowGet,
                         MaxJsonLength = int.MaxValue
@@ -51,13 +51,13 @@ namespace Pagos.Controllers
                                TipoOrden = to.ParametroDetalleDescripcion,
                                Proveedor = o.Proveedores.ProveedorRazonSocial,
                                FormaPago = fp.ParametroDetalleDescripcion,
-                               Contacto = c.ProveedorContactoNombres + " " + c.ProveedorContactoApellidos
+                               //Contacto = c.ProveedorContactoNombres + " " + c.ProveedorContactoApellidos
                            }).Select(x => new OrdenesDto
                            {
                                Ordenes = x.Ordenes,
                                TipoOrden = x.TipoOrden,
                                FormaPago = x.FormaPago,
-                               Contacto = x.Contacto,
+                               //Contacto = x.Contacto,
                                Proveedor = x.Proveedor
                            });
             return View(ordenes.ToList());

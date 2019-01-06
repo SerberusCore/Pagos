@@ -17,18 +17,20 @@ namespace Pagos.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TiposDetracciones()
         {
-            this.Proveedores = new HashSet<Proveedores>();
+            this.ProveedoresDetracciones = new HashSet<ProveedoresDetracciones>();
         }
     
         public System.Guid TipoDetraccionId { get; set; }
         public string TipoDetraccionCodigo { get; set; }
         public string TipoDetraccionDescripcion { get; set; }
+        public string TipoDetraccionTipo { get; set; }
+        public Nullable<decimal> TipoDetraccionValor { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public Nullable<System.Guid> UsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaActualizacion { get; set; }
         public Nullable<System.Guid> UsuarioActualizacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proveedores> Proveedores { get; set; }
+        public virtual ICollection<ProveedoresDetracciones> ProveedoresDetracciones { get; set; }
     }
 }

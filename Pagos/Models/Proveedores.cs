@@ -20,7 +20,8 @@ namespace Pagos.Models
             this.Ordenes = new HashSet<Ordenes>();
             this.ProveedoresContactos = new HashSet<ProveedoresContactos>();
             this.ProveedoresCuentasBancarias = new HashSet<ProveedoresCuentasBancarias>();
-            this.Facturas = new HashSet<Facturas>();
+            this.ProveedoresDetracciones = new HashSet<ProveedoresDetracciones>();
+            this.ProveedoresFacturas = new HashSet<ProveedoresFacturas>();
         }
     
         public System.Guid ProveedorId { get; set; }
@@ -32,24 +33,23 @@ namespace Pagos.Models
         public string ProveedorDireccionFiscal { get; set; }
         public Nullable<int> ProveedorPlazoPago { get; set; }
         public string ProveedorEstado { get; set; }
-        public Nullable<System.Guid> ProveedorTipoDetraccion { get; set; }
-        public Nullable<decimal> ProveedorPorcentajeDetraccion { get; set; }
-        public string ProveedorCuentaDetraccion { get; set; }
+        public Nullable<bool> ProveedorEsEmisorElectronico { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public Nullable<System.Guid> UsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaActualizacion { get; set; }
-        public Nullable<System.Guid> UsuarioValidacion { get; set; }
         public Nullable<System.Guid> TipoProveedorId { get; set; }
+        public Nullable<System.Guid> UsuarioValidacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ordenes> Ordenes { get; set; }
-        public virtual TiposDetracciones TiposDetracciones { get; set; }
         public virtual TiposProveedores TiposProveedores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProveedoresContactos> ProveedoresContactos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProveedoresCuentasBancarias> ProveedoresCuentasBancarias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Facturas> Facturas { get; set; }
+        public virtual ICollection<ProveedoresDetracciones> ProveedoresDetracciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProveedoresFacturas> ProveedoresFacturas { get; set; }
     }
 }

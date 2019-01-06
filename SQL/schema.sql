@@ -1,7 +1,7 @@
 USE [master]
 GO
 
-/****** Object:  Database [norton]    Script Date: 04/01/2019 06:43:11 p.m. ******/
+/****** Object:  Database [norton]    Script Date: 06/01/2019 10:37:48 a.m. ******/
 CREATE DATABASE [norton]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -108,4 +108,5 @@ GO
 
 ALTER DATABASE [norton] SET  READ_WRITE 
 GO
+
 

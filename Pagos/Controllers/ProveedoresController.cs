@@ -17,7 +17,7 @@ namespace Pagos.Controllers
         // GET: Proveedores
         public ActionResult Index()
         {
-            var proveedores = db.Proveedores.Include(p => p.TiposDetracciones).Include(p => p.TiposProveedores);
+            var proveedores = db.Proveedores;//.Include(p => p.TiposDetracciones).Include(p => p.TiposProveedores);
             return View(proveedores.ToList());
         }
 
@@ -60,7 +60,7 @@ namespace Pagos.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProveedorTipoDetraccion = new SelectList(db.TiposDetracciones, "TipoDetraccionId", "TipoDetraccionDescripcion", proveedores.ProveedorTipoDetraccion);
+            //ViewBag.ProveedorTipoDetraccion = new SelectList(db.TiposDetracciones, "TipoDetraccionId", "TipoDetraccionDescripcion", proveedores.ProveedorTipoDetraccion);
             ViewBag.ProveedorTipo = new SelectList(db.TiposProveedores, "TipoProveedorId", "TipoProveedorDescripcion", proveedores.ProveedorTipo);
             return View(proveedores);
         }
@@ -77,7 +77,7 @@ namespace Pagos.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProveedorTipoDetraccion = new SelectList(db.TiposDetracciones, "TipoDetraccionId", "TipoDetraccionDescripcion", proveedores.ProveedorTipoDetraccion);
+            //ViewBag.ProveedorTipoDetraccion = new SelectList(db.TiposDetracciones, "TipoDetraccionId", "TipoDetraccionDescripcion", proveedores.ProveedorTipoDetraccion);
             ViewBag.ProveedorTipo = new SelectList(db.TiposProveedores, "TipoProveedorId", "TipoProveedorDescripcion", proveedores.ProveedorTipo);
             return View(proveedores);
         }
@@ -95,7 +95,7 @@ namespace Pagos.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProveedorTipoDetraccion = new SelectList(db.TiposDetracciones, "TipoDetraccionId", "TipoDetraccionDescripcion", proveedores.ProveedorTipoDetraccion);
+            //ViewBag.ProveedorTipoDetraccion = new SelectList(db.TiposDetracciones, "TipoDetraccionId", "TipoDetraccionDescripcion", proveedores.ProveedorTipoDetraccion);
             ViewBag.ProveedorTipo = new SelectList(db.TiposProveedores, "TipoProveedorId", "TipoProveedorDescripcion", proveedores.ProveedorTipo);
             return View(proveedores);
         }
