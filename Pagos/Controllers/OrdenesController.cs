@@ -42,8 +42,8 @@ namespace Pagos.Controllers
         public ActionResult Index()
         {
             var ordenes = (from o in db.Ordenes
-                           join to in db.ParametrosDetalle on o.OrdenTipo equals to.ParametroDetalleId
-                           join fp in db.ParametrosDetalle on o.OrdenFormaPago equals fp.ParametroDetalleId
+                           join to in db.ParametrosDetalle on o.OrdenTipo equals to.ParametroDetalleCodigo
+                           join fp in db.ParametrosDetalle on o.OrdenFormaPago equals fp.ParametroDetalleCodigo
                            join c in db.ProveedoresContactos on o.OrdenContactoInterno equals c.ProveedorContactoId
                            select new
                            {
