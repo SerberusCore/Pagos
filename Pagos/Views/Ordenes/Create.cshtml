@@ -11,9 +11,16 @@
 
     <div class="form-horizontal">
         <h4>Ordenes</h4>
-        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProyectoId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProyectoId", null, htmlAttributes: new { @class = "form-control", data_rule_NoGuidEmpty = "true" })
+                @Html.ValidationMessageFor(model => model.ProyectoId, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenCodigo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -25,7 +32,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenTipo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OrdenTipo", null, htmlAttributes: new { @class = "form-control", data_rule_NoGuidEmpty="true" })
+                @Html.DropDownList("OrdenTipo", null, htmlAttributes: new { @class = "form-control", data_rule_NoGuidEmpty = "true" })
                 @Html.ValidationMessageFor(model => model.OrdenTipo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -41,7 +48,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenProveedor, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OrdenProveedor", null, htmlAttributes: new { @class = "form-control",data_rule_NoGuidEmpty = "true" })
+                @Html.DropDownList("OrdenProveedor", null, htmlAttributes: new { @class = "form-control", data_rule_NoGuidEmpty = "true" })
                 @Html.ValidationMessageFor(model => model.OrdenProveedor, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -81,7 +88,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenFormaPago, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OrdenFormaPago", null, htmlAttributes: new { @class = "form-control" , data_rule_NoGuidEmpty = "true" })
+                @Html.DropDownList("OrdenFormaPago", null, htmlAttributes: new { @class = "form-control", data_rule_NoGuidEmpty = "true" })
                 @Html.ValidationMessageFor(model => model.OrdenFormaPago, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -89,16 +96,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenContactoInterno, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OrdenContactoInterno", null, htmlAttributes: new { @class = "form-control",data_rule_NoGuidEmpty = "true" })
+                @Html.DropDownList("OrdenContactoInterno", null, htmlAttributes: new { @class = "form-control", data_rule_NoGuidEmpty = "true" })
                 @Html.ValidationMessageFor(model => model.OrdenContactoInterno, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.OrdenLugarEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.OrdenLugarEntrega, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.OrdenLugarEntrega, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -168,7 +167,7 @@
                     combo.append("<option selected value='@Pagos.Recursos.RConstantes.ValorSeleccione'>@Pagos.Recursos.RConstantes.Seleccione</option>")
 
                     $.each(data.Data, function (i, item) {
-                        var option = "<option value='" + item.ProveedorContactoId + "'>" + item.ProveedorContactoApellidos + ", " + item.ProveedorContactoNombres + "</option>"
+                        var option = "<option value='" + item.ProveedorContactoId + "'>" + item.Nombres+ "</option>"
                         combo.append(option);
                     });
                 });
@@ -183,17 +182,17 @@
             var accionAbrirDetalle = function () {
                 $("#OrdenDetallePrecioTotal").prop("disabled", true);
                 var accion = function () {
-                    var cuota = $("#OrdenDetalleCuotas").val();
+                    var cuota = $("#OrdenDetalleCantidad").val();
                     var precioUnitario = $("#OrdenDetallePrecioUnitario").val();
-                    cuota = isNaN(parseInt(cuota)) ? 0 : parseInt(cuota);
+                    cuota = isNaN(parseFloat(cuota)) ? 0 : parseFloat(cuota);
                     precioUnitario = isNaN(parseFloat(precioUnitario)) ? 0 : parseFloat(precioUnitario);
                     var total = cuota * precioUnitario;
 
-                    $("#OrdenDetalleCuotas").val(cuota);
+                    $("#OrdenDetalleCantidad").val(cuota.toFixed(2));
                     $("#OrdenDetallePrecioUnitario").val(precioUnitario.toFixed(2));
                     $("#OrdenDetallePrecioTotal").val(total.toFixed(2));
                 };
-                $("#OrdenDetalleCuotas").change(accion);
+                $("#OrdenDetalleCantidad").change(accion);
                 $("#OrdenDetallePrecioUnitario").change(accion);
             };
             $("#EdicionDetalle").on("show.bs.modal", function (event) {
@@ -201,7 +200,7 @@
                 $("#OrdenDetalleId").val('');
                 $("#OrdenDetalleItem").val('');
                 $("#OrdenDetalleDescripcion").val('');
-                $("#OrdenDetalleCuotas").val('');
+                $("#OrdenDetalleCantidad").val('');
                 $("#OrdenDetalleUnidad").val('');
                 $("#OrdenDetallePrecioUnitario").val('');
                 $("#OrdenDetallePrecioTotal").val('');
@@ -216,7 +215,7 @@
                         OrdenDetalleId: $("#OrdenDetalleId").val(),
                         OrdenDetalleItem: $("#OrdenDetalleItem").val(),
                         OrdenDetalleDescripcion: $("#OrdenDetalleDescripcion").val(),
-                        OrdenDetalleCuotas: $("#OrdenDetalleCuotas").val(),
+                        OrdenDetalleCantidad: $("#OrdenDetalleCantidad").val(),
                         OrdenDetalleUnidad: $("#OrdenDetalleUnidad").val(),
                         OrdenDetallePrecioUnitario: $("#OrdenDetallePrecioUnitario").val(),
                         OrdenDetallePrecioTotal: $("#OrdenDetallePrecioTotal").val()

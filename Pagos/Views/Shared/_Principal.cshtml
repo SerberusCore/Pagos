@@ -30,6 +30,14 @@
                 <li class="nav-item">@Html.ActionLink("Ordenes", "Index", "Ordenes")</li>
                 <li class="nav-item">@Html.ActionLink("Proveedores", "Index", "Proveedores")</li>
                 <li class="nav-item">@Html.ActionLink("Facturas", "Index", "Facturas")</li>
+                <li class="nav-item">
+                    <select id="usuario">
+                        <option value="--">Seleeccionar Usuario</option>
+                        <option value="RO">Residente de Obra</option>
+                        <option value="GO">Gerente de Obra</option>
+                        <option value="GG">Gerente General</option>
+                    </select>
+                </li>
             </ul>
         </div>
     </div>
@@ -45,20 +53,20 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     <script type="text/javascript">
-    jQuery.validator.unobtrusive.adapters.add(
-        'notequal', ['valor'], function (options) {
-            options.rules['notEqual'] = options.params.valor;
-            if (options.message) {
-                options.messages['notEqual'] = options.message;
-            }
-    });
+        jQuery.validator.unobtrusive.adapters.add(
+            'notequal', ['valor'], function (options) {
+                options.rules['notEqual'] = options.params.valor;
+                if (options.message) {
+                    options.messages['notEqual'] = options.message;
+                }
+            });
 
-    jQuery.validator.addMethod('notEqual', function(value, element, param) {
-        return this.optional(element) || value != param
+        jQuery.validator.addMethod('notEqual', function (value, element, param) {
+            return this.optional(element) || value != param
         }, '');
         jQuery.validator.addMethod('NoGuidEmpty', function (value, element) {
             return $("#" + element.id).val() != '00000000-0000-0000-0000-000000000000';
-        },'Debe elegir una opción');
+        }, 'Debe elegir una opción');
     </script>
     @RenderSection("comunes", required: false)
     @RenderSection("scripts", required: false)

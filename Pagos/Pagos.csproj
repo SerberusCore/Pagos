@@ -267,6 +267,9 @@
     <Compile Include="Models\RolesPaginas.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TiposdeCambio.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -310,8 +313,8 @@
     </Content>
     <Content Include="Models\Modelo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Modelo.cs</LastGenOutput>
       <DependentUpon>Modelo.edmx</DependentUpon>
+      <LastGenOutput>Modelo.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

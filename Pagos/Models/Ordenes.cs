@@ -33,7 +33,6 @@ namespace Pagos.Models
         public Nullable<System.DateTime> OrdenPlazoEntrega { get; set; }
         public string OrdenFormaPago { get; set; }
         public Nullable<System.Guid> OrdenContactoInterno { get; set; }
-        public string OrdenLugarEntrega { get; set; }
         public string OrdenEstado { get; set; }
         public string OrdenObservacion { get; set; }
         public string OrdenMotivoRechazo { get; set; }

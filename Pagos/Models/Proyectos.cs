@@ -17,10 +17,10 @@ namespace Pagos.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Proyectos()
         {
+            this.Facturas = new HashSet<Facturas>();
             this.Ordenes = new HashSet<Ordenes>();
             this.ProyectosPresupuestos = new HashSet<ProyectosPresupuestos>();
             this.ProyectosResponsables = new HashSet<ProyectosResponsables>();
-            this.Facturas = new HashSet<Facturas>();
         }
     
         public System.Guid ProyectoId { get; set; }
@@ -44,13 +44,13 @@ namespace Pagos.Models
     
         public virtual Empresas Empresas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Facturas> Facturas { get; set; }
+        public virtual Monedas Monedas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ordenes> Ordenes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProyectosPresupuestos> ProyectosPresupuestos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProyectosResponsables> ProyectosResponsables { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Facturas> Facturas { get; set; }
-        public virtual Monedas Monedas { get; set; }
     }
 }

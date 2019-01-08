@@ -21,6 +21,10 @@ namespace Pagos.Models
             [Display(Name = "Precio Unitario")]
             [Required]
             public Nullable<decimal> OrdenDetallePrecioUnitario { get; set; }
+            [Display(Name = "Cantidad")]
+            [Required]
+            public Nullable<decimal> OrdenDetalleCantidad { get; set; }
+
             [Display(Name = "Precio Total")]
             [Required]
             public Nullable<decimal> OrdenDetallePrecioTotal { get; set; }

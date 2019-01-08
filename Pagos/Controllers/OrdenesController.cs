@@ -24,12 +24,9 @@ namespace Pagos.Controllers
                 return
                     new JsonResult
                     {
-                        Data = Json(proveedor.ProveedoresContactos.Select(x => new
-                        {
-                            x.ProveedorContactoId,
-                            //x.ProveedorContactoNombres,
-                            //x.ProveedorContactoApellidos
-                        })),
+                        Data = Json((from pc in db.ProveedoresContactos.Where(x => x.Proveedores.ProveedorId == proveedorId)
+                                    join u in db.Usuarios on pc.UsuarioId equals u.UsuarioId
+                                    select new { pc.ProveedorContactoId, Nombres = u.UsuarioNombres + " " + u.UsuarioApellidos }).ToList()),
                         JsonRequestBehavior = JsonRequestBehavior.AllowGet,
                         MaxJsonLength = int.MaxValue
                     };
@@ -81,30 +78,29 @@ namespace Pagos.Controllers
         // GET: Ordenes/Create
         public ActionResult Create()
         {
+            var proyectos = db.Proyectos.Where(x => x.ProyectoEstado == RConstantes.ProyectoEstadoActivo).ToList();
+            proyectos.AgregarSeleccione("ProyectoId","ProyectoNombre");
+
             var proveedores = db.Proveedores.ToList();
             proveedores.AgregarSeleccione("ProveedorId", "ProveedorRazonSocial");
 
-            var tipo = db.Parametros
-                .Where(x => x.ParametroCodigo == RParametros.TipoOrden)
-                .First()
-                .ParametrosDetalle
-                .ToList();
+            var tipo = db.ParametrosDetalle
+                .Where(x => x.Parametros.ParametroCodigo == RParametros.TipoOrden).ToList();
             tipo.AgregarSeleccione();
 
-            var formaPago = db.Parametros
-                .Where(x => x.ParametroCodigo == RParametros.FormaPago)
-                .First()
-                .ParametrosDetalle
-                .ToList();
+            var formaPago = db.ParametrosDetalle
+                .Where(x => x.Parametros.ParametroCodigo == RParametros.FormaPago).ToList();
             formaPago.AgregarSeleccione();
 
-            var contactos = new List<ProveedoresContactos>();
-            contactos.AgregarSeleccione("ProveedorContactoId", "ProveedorContactoNombres");
+            var contactos = (from pc in db.ProveedoresContactos.Where(x => x.Proveedores.ProveedorId == Guid.Empty)
+                             join u in db.Usuarios on pc.UsuarioId equals u.UsuarioId
+                             select new { pc.ProveedorContactoId, Nombres = u.UsuarioNombres + " " + u.UsuarioApellidos }).ToList();
 
+            ViewBag.ProyectoId = new SelectList(proyectos, "ProyectoId", "ProyectoNombre");
             ViewBag.OrdenProveedor = new SelectList(proveedores, "ProveedorId", "ProveedorRazonSocial");
             ViewBag.OrdenTipo = new SelectList(tipo, "ParametroDetalleId", "ParametroDetalleDescripcion");
             ViewBag.OrdenFormaPago = new SelectList(formaPago, "ParametroDetalleId", "ParametroDetalleDescripcion");
-            ViewBag.OrdenContactoInterno = new SelectList(contactos, "ProveedorContactoId", "ProveedorContactoNombres");
+            ViewBag.OrdenContactoInterno = new SelectList(contactos, "ProveedorContactoId", "Nombres");
             return View();
         }
 
@@ -207,9 +203,9 @@ namespace Pagos.Controllers
                 .ToList();
             estados.AgregarSeleccione();
 
-            ViewBag.OrdenEstado=new SelectList(estados,"ParametroDetalleId", "ParametroDetalleDescripcion", orden.OrdenEstado);
+            ViewBag.OrdenEstado = new SelectList(estados, "ParametroDetalleId", "ParametroDetalleDescripcion", orden.OrdenEstado);
             ViewBag.OrdenProveedor = new SelectList(proveedores, "ProveedorId", "ProveedorRazonSocial", orden.OrdenProveedor);
-            ViewBag.OrdenTipo = new SelectList(tipo, "ParametroDetalleId", "ParametroDetalleDescripcion",orden.OrdenTipo);
+            ViewBag.OrdenTipo = new SelectList(tipo, "ParametroDetalleId", "ParametroDetalleDescripcion", orden.OrdenTipo);
             return View("_Aprobar", orden);
         }
         protected override void Dispose(bool disposing)

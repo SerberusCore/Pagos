@@ -47,9 +47,18 @@ namespace Pagos.Controllers
         // GET: Facturas/Create
         public ActionResult Create()
         {
-            ViewBag.FacturaTipo = new SelectList(db.TiposFacturas, "TipoFacturaId", "TipoFacturaDescripcion");
-            ViewBag.FacturaMoneda = new SelectList(db.Monedas, "MonedaId", "MonedaDescripcion");
-            ViewBag.FacturaProyecto = new SelectList(db.Proyectos, "ProyectoId", "ProyectoNombre");
+            var tipoFactura = db.TiposFacturas.ToList();
+            tipoFactura.AgregarSeleccione("TipoFacturaId", "TipoFacturaDescripcion");
+
+            var moneda = db.Monedas.ToList();
+            moneda.AgregarSeleccione("MonedaId", "MonedaDescripcion");
+
+            var proyecto = db.Proyectos.ToList();
+            proyecto.AgregarSeleccione("ProyectoId", "ProyectoNombre");
+
+            ViewBag.FacturaTipo = new SelectList(tipoFactura, "TipoFacturaId", "TipoFacturaDescripcion");
+            ViewBag.FacturaMoneda = new SelectList(moneda, "MonedaId", "MonedaDescripcion");
+            ViewBag.FacturaProyecto = new SelectList(proyecto, "ProyectoId", "ProyectoNombre");
             return View();
         }
 

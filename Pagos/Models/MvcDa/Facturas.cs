@@ -13,7 +13,7 @@ namespace Pagos.Models
             [Display(Name = "Proyecto")]
             [Required]
             public Nullable<System.Guid> FacturaProyecto { get; set; }
-            [Display(Name = "Tipo Proyecto")]
+            [Display(Name = "Tipo Factura")]
             [Required]
             public Nullable<System.Guid> FacturaTipo { get; set; }
             [Display(Name = "Serie y Número de Factura")]

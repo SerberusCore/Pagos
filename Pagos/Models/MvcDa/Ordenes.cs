@@ -42,9 +42,6 @@ namespace Pagos.Models
             [Display(Name = "Contacto")]
             [Required]
             public Nullable<System.Guid> OrdenContactoInterno { get; set; }
-            [Display(Name = "Lugar de Entrega")]
-            [Required]
-            public string OrdenLugarEntrega { get; set; }
             [Display(Name = "Estado")]
             public string OrdenEstado { get; set; }
             [Display(Name = "Observacion")]

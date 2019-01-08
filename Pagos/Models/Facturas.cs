@@ -44,6 +44,7 @@ namespace Pagos.Models
         public string FacturaUrl { get; set; }
         public Nullable<System.DateTime> FacturaFechaPagoProgramada { get; set; }
     
+        public virtual Proyectos Proyectos { get; set; }
         public virtual TiposFacturas TiposFacturas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FacturasDetalles> FacturasDetalles { get; set; }
@@ -57,6 +58,5 @@ namespace Pagos.Models
         public virtual ICollection<FacturasPagos> FacturasPagos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProveedoresFacturas> ProveedoresFacturas { get; set; }
-        public virtual Proyectos Proyectos { get; set; }
     }
 }
