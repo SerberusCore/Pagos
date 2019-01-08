@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b0a982c32b58407c89fb3525ca17cf00" Name="Diagram1">
+      <Diagram DiagramId="b0a982c32b58407c89fb3525ca17cf00" Name="Diagram1" ZoomLevel="76">
         <EntityTypeShape EntityType="nortonModel.Empresas" Width="1.5" PointX="0.75" PointY="21.125" IsExpanded="true" />
         <EntityTypeShape EntityType="nortonModel.EmpresasCuentasBancarias" Width="1.5" PointX="3" PointY="21.125" IsExpanded="true" />
         <EntityTypeShape EntityType="nortonModel.Facturas" Width="1.5" PointX="8.25" PointY="19.75" IsExpanded="true" />
@@ -37,7 +37,6 @@
         <EntityTypeShape EntityType="nortonModel.ProyectosResponsables" Width="1.5" PointX="8.25" PointY="43.375" IsExpanded="true" />
         <EntityTypeShape EntityType="nortonModel.Roles" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="nortonModel.RolesPaginas" Width="1.5" PointX="6" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="nortonModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="nortonModel.TiposdeCambio" Width="1.5" PointX="6" PointY="30.25" IsExpanded="true" />
         <EntityTypeShape EntityType="nortonModel.TiposDetracciones" Width="1.5" PointX="12" PointY="37.25" IsExpanded="true" />
         <EntityTypeShape EntityType="nortonModel.TiposFacturas" Width="1.5" PointX="6" PointY="26.5" IsExpanded="true" />

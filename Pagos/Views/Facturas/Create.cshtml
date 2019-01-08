@@ -121,6 +121,21 @@
                 $("#FacturaDetalleCantidad").val('');
                 $("#FacturaDetallePrecioUnitario").val('');
                 $("#FacturaDetalleImporteTotal").val('');
+
+                var calculo = function () {
+                    var precioUnitario = $("#FacturaDetallePrecioUnitario").val();
+                    var cantidad = $("#FacturaDetalleCantidad").val();
+                    precioUnitario = isNaN(parseFloat(precioUnitario)) ? 0 : parseFloat(precioUnitario);
+                    cantidad = isNaN(parseFloat(cantidad)) ? 0 : parseFloat(cantidad);
+                    var total = precioUnitario * cantidad;
+
+                    $("#FacturaDetallePrecioUnitario").val(precioUnitario.toFixed(2));
+                    $("#FacturaDetalleCantidad").val(cantidad.toFixed(2));
+                    $("#FacturaDetalleImporteTotal").val(total.toFixed(2));
+                };
+                $("#FacturaDetalleCantidad").change(calculo);
+                $("#FacturaDetallePrecioUnitario").change(calculo);
+                $("#FacturaDetalleImporteTotal").prop("readonly", true);
             });
             $("#GuardarDetalle").click(function () {
                 $.validator.unobtrusive.parse("#FacturaDetalle");

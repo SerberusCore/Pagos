@@ -192,6 +192,7 @@
     </Compile>
     <Compile Include="Models\MvcDa\Empresas.cs" />
     <Compile Include="Models\MvcDa\Facturas.cs" />
+    <Compile Include="Models\MvcDa\FacturasDetalles.cs" />
     <Compile Include="Models\MvcDa\Monedas.cs" />
     <Compile Include="Models\MvcDa\Ordenes.cs" />
     <Compile Include="Models\MvcDa\OrdenesDetalles.cs" />
@@ -265,9 +266,6 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RolesPaginas.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TiposdeCambio.cs">

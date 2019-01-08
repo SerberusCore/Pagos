@@ -98,8 +98,8 @@ namespace Pagos.Controllers
 
             ViewBag.ProyectoId = new SelectList(proyectos, "ProyectoId", "ProyectoNombre");
             ViewBag.OrdenProveedor = new SelectList(proveedores, "ProveedorId", "ProveedorRazonSocial");
-            ViewBag.OrdenTipo = new SelectList(tipo, "ParametroDetalleId", "ParametroDetalleDescripcion");
-            ViewBag.OrdenFormaPago = new SelectList(formaPago, "ParametroDetalleId", "ParametroDetalleDescripcion");
+            ViewBag.OrdenTipo = new SelectList(tipo, "ParametroDetalleCodigo", "ParametroDetalleDescripcion");
+            ViewBag.OrdenFormaPago = new SelectList(formaPago, "ParametroDetalleCodigo", "ParametroDetalleDescripcion");
             ViewBag.OrdenContactoInterno = new SelectList(contactos, "ProveedorContactoId", "Nombres");
             return View();
         }
@@ -109,7 +109,7 @@ namespace Pagos.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrdenId,OrdenCodigo,OrdenTipo,OrdenFecha,OrdenProveedor,OrdenSubtotal,OrdenIgv,OrdenTotal,OrdenPlazoEntrega,OrdenFormaPago,OrdenContactoInterno,OrdenLugarEntrega,OrdenEstado,OrdenObservacion,OrdenMotivoRechazo")] Ordenes ordenes)
+        public ActionResult Create([Bind(Include = "ProyectoId,OrdenId,OrdenCodigo,OrdenTipo,OrdenFecha,OrdenProveedor,OrdenSubtotal,OrdenIgv,OrdenTotal,OrdenPlazoEntrega,OrdenFormaPago,OrdenContactoInterno,OrdenLugarEntrega,OrdenEstado,OrdenObservacion,OrdenMotivoRechazo")] Ordenes ordenes)
         {
             if (ModelState.IsValid)
             {
@@ -190,22 +190,15 @@ namespace Pagos.Controllers
             var proveedores = db.Proveedores.ToList();
             proveedores.AgregarSeleccione("ProveedorId", "ProveedorRazonSocial");
 
-            var tipo = db.Parametros
-             .Where(x => x.ParametroCodigo == RParametros.TipoOrden)
-             .First()
-             .ParametrosDetalle
-             .ToList();
+            var tipo = db.ParametrosDetalle.Where(x => x.Parametros.ParametroCodigo == RParametros.TipoOrden).ToList();
             tipo.AgregarSeleccione();
 
-            var estados = db.Parametros.Where(x => x.ParametroCodigo == RParametros.EstadoOrden)
-                .First()
-                .ParametrosDetalle
-                .ToList();
+            var estados = db.ParametrosDetalle.Where(x => x.Parametros.ParametroCodigo == RParametros.EstadoOrden).ToList();
             estados.AgregarSeleccione();
 
-            ViewBag.OrdenEstado = new SelectList(estados, "ParametroDetalleId", "ParametroDetalleDescripcion", orden.OrdenEstado);
+            ViewBag.OrdenEstado = new SelectList(estados, "ParametroDetalleCodigo", "ParametroDetalleDescripcion", orden.OrdenEstado);
             ViewBag.OrdenProveedor = new SelectList(proveedores, "ProveedorId", "ProveedorRazonSocial", orden.OrdenProveedor);
-            ViewBag.OrdenTipo = new SelectList(tipo, "ParametroDetalleId", "ParametroDetalleDescripcion", orden.OrdenTipo);
+            ViewBag.OrdenTipo = new SelectList(tipo, "ParametroDetalleCodigo", "ParametroDetalleDescripcion", orden.OrdenTipo);
             return View("_Aprobar", orden);
         }
         protected override void Dispose(bool disposing)

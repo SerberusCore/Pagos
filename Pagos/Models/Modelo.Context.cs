@@ -57,7 +57,6 @@ namespace Pagos.Models
         public virtual DbSet<ProyectosResponsables> ProyectosResponsables { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<RolesPaginas> RolesPaginas { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TiposdeCambio> TiposdeCambio { get; set; }
         public virtual DbSet<TiposDetracciones> TiposDetracciones { get; set; }
         public virtual DbSet<TiposFacturas> TiposFacturas { get; set; }

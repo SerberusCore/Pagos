@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="nortonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="nortonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Empresas">
           <Key>
             <PropertyRef Name="EmpresaId" />
@@ -139,6 +139,7 @@
           <Property Name="OrdenPlazoEntrega" Type="datetime" />
           <Property Name="OrdenFormaPago" Type="char" MaxLength="1" />
           <Property Name="OrdenContactoInterno" Type="uniqueidentifier" />
+          <Property Name="OrdenLugarEntrega" Type="varchar" MaxLength="150" />
           <Property Name="OrdenEstado" Type="char" MaxLength="1" />
           <Property Name="OrdenObservacion" Type="varchar" MaxLength="50" />
           <Property Name="OrdenMotivoRechazo" Type="char" MaxLength="1" />
@@ -426,16 +427,6 @@
           <Property Name="RolId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PaginaId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Accion" Type="char" MaxLength="1" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TiposdeCambio">
           <Key>
@@ -828,18 +819,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Proyectos_Monedas">
-          <End Role="Monedas" Type="Self.Monedas" Multiplicity="0..1" />
-          <End Role="Proyectos" Type="Self.Proyectos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Monedas">
-              <PropertyRef Name="MonedaId" />
-            </Principal>
-            <Dependent Role="Proyectos">
-              <PropertyRef Name="ProyectoMoneda" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProyectosPresupuestos_Presupuestos">
           <End Role="Presupuestos" Type="Self.Presupuestos" Multiplicity="0..1" />
           <End Role="ProyectosPresupuestos" Type="Self.ProyectosPresupuestos" Multiplicity="*" />
@@ -969,7 +948,6 @@
           <EntitySet Name="ProyectosResponsables" EntityType="Self.ProyectosResponsables" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolesPaginas" EntityType="Self.RolesPaginas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposdeCambio" EntityType="Self.TiposdeCambio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposDetracciones" EntityType="Self.TiposDetracciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposFacturas" EntityType="Self.TiposFacturas" Schema="dbo" store:Type="Tables" />
@@ -1083,10 +1061,6 @@
             <End Role="Empresas" EntitySet="Empresas" />
             <End Role="Proyectos" EntitySet="Proyectos" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proyectos_Monedas" Association="Self.FK_Proyectos_Monedas">
-            <End Role="Monedas" EntitySet="Monedas" />
-            <End Role="Proyectos" EntitySet="Proyectos" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProyectosPresupuestos_Presupuestos" Association="Self.FK_ProyectosPresupuestos_Presupuestos">
             <End Role="Presupuestos" EntitySet="Presupuestos" />
             <End Role="ProyectosPresupuestos" EntitySet="ProyectosPresupuestos" />
@@ -1120,8 +1094,7 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="nortonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1271,14 +1244,14 @@
           </Key>
           <Property Name="OrdenId" Type="Guid" Nullable="false" />
           <Property Name="OrdenCodigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OrdenTipo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="OrdenTipo" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
           <Property Name="OrdenFecha" Type="DateTime" Precision="3" />
           <Property Name="OrdenProveedor" Type="Guid" />
           <Property Name="OrdenSubtotal" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OrdenIgv" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OrdenTotal" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OrdenPlazoEntrega" Type="DateTime" Precision="3" />
-          <Property Name="OrdenFormaPago" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="OrdenFormaPago" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
           <Property Name="OrdenContactoInterno" Type="Guid" />
           <Property Name="OrdenEstado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="OrdenObservacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1289,6 +1262,7 @@
           <NavigationProperty Name="Proyectos" Relationship="Self.FK_Ordenes_Proyectos" FromRole="Ordenes" ToRole="Proyectos" />
           <NavigationProperty Name="OrdenesDetalles" Relationship="Self.FK_OrdenesDetalles_Ordenes" FromRole="Ordenes" ToRole="OrdenesDetalles" />
           <NavigationProperty Name="OrdenesEstados" Relationship="Self.FK_OrdenesEstados_Ordenes" FromRole="Ordenes" ToRole="OrdenesEstados" />
+          <Property Name="OrdenLugarEntrega" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="OrdenesDetalles">
           <Key>
@@ -1612,16 +1586,6 @@
           <Property Name="Accion" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="Paginas" Relationship="Self.FK_RolesPaginas_Paginas" FromRole="RolesPaginas" ToRole="Paginas" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_RolesPaginas_Roles" FromRole="RolesPaginas" ToRole="Roles" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TiposdeCambio">
           <Key>
@@ -2161,7 +2125,6 @@
           <EntitySet Name="ProyectosResponsables" EntityType="Self.ProyectosResponsables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="RolesPaginas" EntityType="Self.RolesPaginas" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="TiposdeCambio" EntityType="Self.TiposdeCambio" />
           <EntitySet Name="TiposDetracciones" EntityType="Self.TiposDetracciones" />
           <EntitySet Name="TiposFacturas" EntityType="Self.TiposFacturas" />
@@ -2449,6 +2412,7 @@
           <EntitySetMapping Name="Ordenes">
             <EntityTypeMapping TypeName="nortonModel.Ordenes">
               <MappingFragment StoreEntitySet="Ordenes">
+                <ScalarProperty Name="OrdenLugarEntrega" ColumnName="OrdenLugarEntrega" />
                 <ScalarProperty Name="OrdenId" ColumnName="OrdenId" />
                 <ScalarProperty Name="OrdenCodigo" ColumnName="OrdenCodigo" />
                 <ScalarProperty Name="OrdenTipo" ColumnName="OrdenTipo" />
@@ -2767,17 +2731,6 @@
                 <ScalarProperty Name="RolId" ColumnName="RolId" />
                 <ScalarProperty Name="PaginaId" ColumnName="PaginaId" />
                 <ScalarProperty Name="Accion" ColumnName="Accion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="nortonModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
