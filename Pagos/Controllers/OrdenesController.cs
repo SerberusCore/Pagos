@@ -39,22 +39,23 @@ namespace Pagos.Controllers
         public ActionResult Index()
         {
             var ordenes = (from o in db.Ordenes
-                           join to in db.ParametrosDetalle on o.OrdenTipo equals to.ParametroDetalleCodigo
-                           join fp in db.ParametrosDetalle on o.OrdenFormaPago equals fp.ParametroDetalleCodigo
+                           join to in db.ParametrosDetalle on new { cod = o.OrdenTipo, par = RParametros.TipoOrden } equals new { cod = to.ParametroDetalleCodigo, par = to.Parametros.ParametroCodigo }
+                           join fp in db.ParametrosDetalle on new { cod = o.OrdenFormaPago, par = RParametros.FormaPago } equals new { cod = fp.ParametroDetalleCodigo, par = fp.Parametros.ParametroCodigo }
                            join c in db.ProveedoresContactos on o.OrdenContactoInterno equals c.ProveedorContactoId
+                           join u in db.Usuarios on c.UsuarioId equals u.UsuarioId
                            select new
                            {
                                Ordenes = o,
                                TipoOrden = to.ParametroDetalleDescripcion,
                                Proveedor = o.Proveedores.ProveedorRazonSocial,
                                FormaPago = fp.ParametroDetalleDescripcion,
-                               //Contacto = c.ProveedorContactoNombres + " " + c.ProveedorContactoApellidos
+                               Contacto = u.UsuarioNombres + " " + u.UsuarioApellidos
                            }).Select(x => new OrdenesDto
                            {
                                Ordenes = x.Ordenes,
                                TipoOrden = x.TipoOrden,
                                FormaPago = x.FormaPago,
-                               //Contacto = x.Contacto,
+                               Contacto = x.Contacto,
                                Proveedor = x.Proveedor
                            });
             return View(ordenes.ToList());

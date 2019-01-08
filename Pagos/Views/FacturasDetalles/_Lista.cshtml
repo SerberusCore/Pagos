@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Pagos.Models.FacturasDetalles>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FacturaDetalleDescripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacturaDetalleCantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacturaDetallePrecioUnitario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FacturaDetalleImporteTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsuarioCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaActualizacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsuarioActualizacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Facturas.FacturaSerie)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacturaDetalleDescripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacturaDetalleCantidad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacturaDetallePrecioUnitario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacturaDetalleImporteTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaCreacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsuarioCreacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaActualizacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsuarioActualizacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Facturas.FacturaSerie)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FacturaDetalleId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.FacturaDetalleId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FacturaDetalleId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -76,17 +76,69 @@
 
 }
 
-<div class="form-horizontal">
-    <h4>Detalle de la Factura</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>Detalle de la Factura</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <button class="btn btn-default" data-toggle="modal" data-target="#EdicionDetalle">Nuevo Detalle</button>
-    <br>
-    <div id="divListaDetalle"></div>
-    <br>
-    @section scripts{
-        <script type="text/javascript">
+        <button class="btn btn-default" data-toggle="modal" data-target="#EdicionDetalle">Nuevo Detalle</button>
+        <br>
+        <div id="divListaDetalle"></div>
+        <br>
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.FacturaSubtotal, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FacturaSubtotal, null, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FacturaSubtotal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.FacturaIgv, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FacturaIgv, null, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FacturaIgv, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.FacturaImporteTotal, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FacturaImporteTotal, null, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FacturaImporteTotal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.FacturaFondoGarantia, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FacturaFondoGarantia, null, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FacturaFondoGarantia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.FacturaPorcentajeDetraccion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FacturaPorcentajeDetraccion, null, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FacturaPorcentajeDetraccion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.FacturaMontoDetraccion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FacturaMontoDetraccion, null, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FacturaMontoDetraccion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.FacturaImportePagar, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FacturaImportePagar, null, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FacturaImportePagar, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+            @section scripts{
+                <script type="text/javascript">
     var id;
     var confirmador;
         $(document).ready(function () {
@@ -142,11 +194,11 @@
                 $("#FacturaDetalle").validate();
                 if ($("#FacturaDetalle").valid()) {
                     var FacturasDetalle = {
-                        FacturaDetalleId: $("#OrdenDetalleId").val(),
-                        FacturaDetalleDescripcion: $("#OrdenDetalleDescripcion").val(),
-                        FacturaDetalleCantidad: $("#OrdenDetalleCuotas").val(),
-                        FacturaDetallePrecioUnitario: $("#OrdenDetalleUnidad").val(),
-                        FacturaDetalleImporteTotal: $("#OrdenDetallePrecioUnitario").val()
+                        FacturaDetalleId: $("#FacturaDetalleId").val(),
+                        FacturaDetalleDescripcion: $("#FacturaDetalleDescripcion").val(),
+                        FacturaDetalleCantidad: $("#FacturaDetalleCantidad").val(),
+                        FacturaDetallePrecioUnitario: $("#FacturaDetallePrecioUnitario").val(),
+                        FacturaDetalleImporteTotal: $("#FacturaDetalleImporteTotal").val()
                     };
                     guardarDetalle(FacturasDetalle);
                     $("#EdicionDetalle").modal("hide");
@@ -176,40 +228,40 @@
                 });
             };
         });
-        </script>
-    }
+                </script>
+            }
 
-    <br>
-    <div class="form-group">
-        <div class="col-md-offset-1 col-md-2">
-            <input type="submit" value="Guardar Factura" class="btn btn-default" />
-        </div>
+            <br>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-2">
+                    <input type="submit" value="Guardar Factura" class="btn btn-default" />
+                </div>
 
-        <div class="col-md-offset-0">
-            <input type="submit" value="Eliminar Factura" class="btn btn-default" />
-        </div>
-    </div>
-</div>
-
-@Html.Partial("_confirmar")
-<div class="modal fade" tabindex="-1" role="dialog" id="EdicionDetalle">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Detalle de Factura</h4>
-            </div>
-            <div class="modal-body">
-                @Html.Partial("~/Views/FacturasDetalles/Create.cshtml", new Pagos.Models.FacturasDetalles())
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="GuardarDetalle">Guardar</button>
+                <div class="col-md-offset-0">
+                    <input type="submit" value="Eliminar Factura" class="btn btn-default" />
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-<div>
-    @Html.ActionLink("Regresar", "Index")
-</div>
+        @Html.Partial("_confirmar")
+        <div class="modal fade" tabindex="-1" role="dialog" id="EdicionDetalle">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Detalle de Factura</h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.Partial("~/Views/FacturasDetalles/Create.cshtml", new Pagos.Models.FacturasDetalles())
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="GuardarDetalle">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            @Html.ActionLink("Regresar", "Index")
+        </div>
