@@ -75,6 +75,7 @@ namespace Pagos.Controllers
                 facturas.FacturaEstado = "A";
                 db.Facturas.Add(facturas);
                 db.SaveChanges();
+                Session["FacturasDetalles"] = null;
                 return RedirectToAction("Index");
             }
 

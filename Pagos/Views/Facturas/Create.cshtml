@@ -74,14 +74,13 @@
     </div>
 
 
-}
 
     <div class="form-horizontal">
         <h4>Detalle de la Factura</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <button class="btn btn-default" data-toggle="modal" data-target="#EdicionDetalle">Nuevo Detalle</button>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#EdicionDetalle">Nuevo Detalle</button>
         <br>
         <div id="divListaDetalle"></div>
         <br>
@@ -136,12 +135,29 @@
                 </div>
             </div>
         </div>
+    </div>
+    <br>
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-2">
+            <input type="submit" value="Guardar Factura" class="btn btn-default" />
+        </div>
 
-            @section scripts{
-                <script type="text/javascript">
+        @*<div class="col-md-offset-0">
+            <input type="submit" value="Eliminar Factura" class="btn btn-default" />
+        </div>*@
+    </div>
+}
+
+@section scripts{
+    <script type="text/javascript">
+
     var id;
     var confirmador;
-        $(document).ready(function () {
+                    $(document).ready(function () {
+                        $("#FacturaSubtotal").prop("readonly", true);
+                        $("#FacturaIgv").prop("readonly", true);
+                        $("#FacturaImporteTotal").prop("readonly", true);
+
             $("#GuardarOrden").click(function () {
                 $.validator.unobtrusive.parse("#OrdenDetalle");
                 if ($("#OrdenDetalle").validate()) {
@@ -166,7 +182,7 @@
                     });
                 }
             });
-            $("#EdicionDetalle").on("show.bs.modal", function (event) {
+                        $("#EdicionDetalle").on("show.bs.modal", function (event) {
                 var button = $(event.relatedTarget);
                 $("#FacturaId").val('');
                 $("#FacturaDetalleDescripcion").val('');
@@ -204,10 +220,25 @@
                     $("#EdicionDetalle").modal("hide");
                 }
             });
+            var subtotal = function () {
+                var valores = $("#divListaDetalle").find('[data-content="Total"]');
+                var sum = 0;
+                $.each(valores, function (i, item) {
+                    var aux = $(item).text().trim();
+                    aux = isNaN(parseFloat(aux)) ? 0 : parseFloat(aux);
+                    sum += aux;
+                });
 
+                var igv = sum * 18 / 100;
+                var importe = sum + igv;
+                $("#FacturaSubtotal").val(sum.toFixed(2));
+                $("#FacturaIgv").val(igv.toFixed(2));
+                $("#FacturaImporteTotal").val(importe.toFixed(2));
+            };
             var guardarDetalle = function (detalle) {
                 $.post('@Url.Action("Create","FacturasDetalles")', detalle, function (data, status, jq) {
                     $("#divListaDetalle").html(data);
+                    subtotal();
                 }).always(function () {
                     $("#divListaDetalle").find("[data-target=#EdicionDetalle]").click(function () {
                         id = $(this).attr("data-id");
@@ -228,40 +259,31 @@
                 });
             };
         });
-                </script>
-            }
+    </script>
+}
 
-            <br>
-            <div class="form-group">
-                <div class="col-md-offset-1 col-md-2">
-                    <input type="submit" value="Guardar Factura" class="btn btn-default" />
-                </div>
 
-                <div class="col-md-offset-0">
-                    <input type="submit" value="Eliminar Factura" class="btn btn-default" />
-                </div>
+
+
+@*@Html.Partial("_confirmar")*@
+<div class="modal fade" tabindex="-1" role="dialog" id="EdicionDetalle">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Detalle de Factura</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("~/Views/FacturasDetalles/Create.cshtml", new Pagos.Models.FacturasDetalles())
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="GuardarDetalle">Guardar</button>
             </div>
         </div>
+    </div>
+</div>
 
-        @Html.Partial("_confirmar")
-        <div class="modal fade" tabindex="-1" role="dialog" id="EdicionDetalle">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Detalle de Factura</h4>
-                    </div>
-                    <div class="modal-body">
-                        @Html.Partial("~/Views/FacturasDetalles/Create.cshtml", new Pagos.Models.FacturasDetalles())
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="GuardarDetalle">Guardar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            @Html.ActionLink("Regresar", "Index")
-        </div>
+<div>
+    @Html.ActionLink("Regresar", "Index")
+</div>
