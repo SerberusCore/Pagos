@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Pagos.Models;
+using System;
 using System.Web.Mvc;
 
 namespace Pagos.Controllers
@@ -10,6 +8,9 @@ namespace Pagos.Controllers
     {
         public ActionResult Index()
         {
+            Session.Add("Usuario", new Usuarios {
+                UsuarioId = new Guid("AE5B8987-3884-4B48-8C80-10AB2888B7F9")
+            });
             return View();
         }
 

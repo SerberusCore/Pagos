@@ -139,10 +139,9 @@
           <Property Name="OrdenPlazoEntrega" Type="datetime" />
           <Property Name="OrdenFormaPago" Type="char" MaxLength="1" />
           <Property Name="OrdenContactoInterno" Type="uniqueidentifier" />
-          <Property Name="OrdenLugarEntrega" Type="varchar" MaxLength="150" />
           <Property Name="OrdenEstado" Type="char" MaxLength="1" />
           <Property Name="OrdenObservacion" Type="varchar" MaxLength="50" />
-          <Property Name="OrdenMotivoRechazo" Type="char" MaxLength="1" />
+          <Property Name="OrdenMotivoRechazo" Type="uniqueidentifier" />
           <Property Name="ProyectoId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="OrdenesDetalles">
@@ -1255,14 +1254,13 @@
           <Property Name="OrdenContactoInterno" Type="Guid" />
           <Property Name="OrdenEstado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="OrdenObservacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OrdenMotivoRechazo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="OrdenMotivoRechazo" Type="Guid" />
           <Property Name="ProyectoId" Type="Guid" Nullable="false" />
           <NavigationProperty Name="FacturasOrdenes" Relationship="Self.FK_FacturasOrdenes_Ordenes" FromRole="Ordenes" ToRole="FacturasOrdenes" />
           <NavigationProperty Name="Proveedores" Relationship="Self.FK_Ordenes_Proveedores" FromRole="Ordenes" ToRole="Proveedores" />
           <NavigationProperty Name="Proyectos" Relationship="Self.FK_Ordenes_Proyectos" FromRole="Ordenes" ToRole="Proyectos" />
           <NavigationProperty Name="OrdenesDetalles" Relationship="Self.FK_OrdenesDetalles_Ordenes" FromRole="Ordenes" ToRole="OrdenesDetalles" />
           <NavigationProperty Name="OrdenesEstados" Relationship="Self.FK_OrdenesEstados_Ordenes" FromRole="Ordenes" ToRole="OrdenesEstados" />
-          <Property Name="OrdenLugarEntrega" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="OrdenesDetalles">
           <Key>
@@ -2412,7 +2410,6 @@
           <EntitySetMapping Name="Ordenes">
             <EntityTypeMapping TypeName="nortonModel.Ordenes">
               <MappingFragment StoreEntitySet="Ordenes">
-                <ScalarProperty Name="OrdenLugarEntrega" ColumnName="OrdenLugarEntrega" />
                 <ScalarProperty Name="OrdenId" ColumnName="OrdenId" />
                 <ScalarProperty Name="OrdenCodigo" ColumnName="OrdenCodigo" />
                 <ScalarProperty Name="OrdenTipo" ColumnName="OrdenTipo" />

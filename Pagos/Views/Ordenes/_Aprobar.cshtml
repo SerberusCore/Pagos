@@ -2,7 +2,7 @@
 @{
     Layout = "";
 }
-@using (Html.BeginForm())
+@using (Html.BeginForm("Rechazar", "Ordenes", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -15,7 +15,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenCodigo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OrdenCodigo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.OrdenCodigo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.OrdenCodigo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -23,7 +23,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenTipo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OrdenTipo", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("OrdenTipo", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly", @disabled = true })
                 @Html.ValidationMessageFor(model => model.OrdenTipo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -31,15 +31,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenFecha, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OrdenFecha, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.OrdenFecha, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.OrdenFecha, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.OrdenProveedor, "OrdenProveedor", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.OrdenProveedor, null, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OrdenProveedor", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("OrdenProveedor", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly", @disabled = true })
                 @Html.ValidationMessageFor(model => model.OrdenProveedor, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -47,7 +47,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenSubtotal, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OrdenSubtotal, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.OrdenSubtotal, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.OrdenSubtotal, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -55,7 +55,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenIgv, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OrdenIgv, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.OrdenIgv, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.OrdenIgv, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -63,7 +63,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenTotal, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OrdenTotal, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.OrdenTotal, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.OrdenTotal, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -71,7 +71,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenPlazoEntrega, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OrdenPlazoEntrega, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.OrdenPlazoEntrega, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.OrdenPlazoEntrega, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -80,7 +80,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenEstado, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("OrdenEstado", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("OrdenEstado", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly", @disabled = true })
                 @Html.ValidationMessageFor(model => model.OrdenEstado, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -96,14 +96,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenMotivoRechazo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OrdenMotivoRechazo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("OrdenMotivoRechazo", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.OrdenMotivoRechazo, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Rechazar" class="btn btn-default" />
             </div>
         </div>
     </div>

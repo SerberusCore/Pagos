@@ -35,9 +35,8 @@ namespace Pagos.Models
         public Nullable<System.Guid> OrdenContactoInterno { get; set; }
         public string OrdenEstado { get; set; }
         public string OrdenObservacion { get; set; }
-        public string OrdenMotivoRechazo { get; set; }
+        public Nullable<System.Guid> OrdenMotivoRechazo { get; set; }
         public System.Guid ProyectoId { get; set; }
-        public string OrdenLugarEntrega { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FacturasOrdenes> FacturasOrdenes { get; set; }

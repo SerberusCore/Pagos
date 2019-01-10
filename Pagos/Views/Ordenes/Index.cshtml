@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<Pagos.Dtos.OrdenesDto>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Listado de Órdenes";
     Layout = "~/Views/Shared/_Principal.cshtml";
 }
 
 <h2>Lista de Ordenes</h2>
 
 <p>
-    @Html.ActionLink("Crear Nueva Orden", "Create")
+    @Html.ActionLink(" Crear Nueva Orden", "Create", null, htmlAttributes: new { @class = "glyphicon glyphicon-plus" })
 </p>
 <table class="table">
     <tr>
@@ -49,24 +49,22 @@
                 @Html.DisplayFor(modelItem => item.Ordenes.OrdenTotal)
             </td>
             <td>
-                <a id="evaluar" href="#" data-id="@item.Ordenes.OrdenId">Check</a>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.Ordenes.OrdenId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Ordenes.OrdenId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Ordenes.OrdenId })*@
+                <button name="ok" data-id="@item.Ordenes.OrdenId" class="glyphicon glyphicon-ok-circle btn btn-default"></button>
+                <button name="ko" data-id="@item.Ordenes.OrdenId" class="glyphicon glyphicon-remove-circle btn btn-default"></button>
             </td>
         </tr>
     }
-
 </table>
 
 <div id="Aprobar"></div>
 @section    scripts{
     <script type="text/javascript">
-        $("#evaluar").click(function (e) {
+        $("[name='ko']").click(function (e) {
             e.preventDefault();
             var id = $(this).attr("data-id");
             $.get('@Url.Action("Evaluar")', { id: id }, function (data, status, jq) {
                 $("#Aprobar").html(data);
+                $("#OrdenEstado").val("R");
             });
         });
     </script>

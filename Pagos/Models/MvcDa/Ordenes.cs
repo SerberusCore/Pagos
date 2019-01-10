@@ -9,7 +9,6 @@ namespace Pagos.Models
         public partial class OrdenesMD
         {
             [Display(Name = "Código")]
-            [Required]
             public string OrdenCodigo { get; set; }
             [Display(Name = "Tipo")]
             [Required]

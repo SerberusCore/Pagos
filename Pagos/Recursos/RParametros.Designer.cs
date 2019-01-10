@@ -88,6 +88,24 @@ namespace Pagos.Recursos {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a 06.
+        /// </summary>
+        public static string MotivoRechazo {
+            get {
+                return ResourceManager.GetString("MotivoRechazo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 05.
+        /// </summary>
+        public static string TipoFactura {
+            get {
+                return ResourceManager.GetString("TipoFactura", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a 01.
         /// </summary>
         public static string TipoOrden {

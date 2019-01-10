@@ -126,6 +126,12 @@
   <data name="FormaPago" xml:space="preserve">
     <value>02</value>
   </data>
+  <data name="MotivoRechazo" xml:space="preserve">
+    <value>06</value>
+  </data>
+  <data name="TipoFactura" xml:space="preserve">
+    <value>05</value>
+  </data>
   <data name="TipoOrden" xml:space="preserve">
     <value>01</value>
   </data>

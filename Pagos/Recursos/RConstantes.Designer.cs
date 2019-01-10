@@ -61,6 +61,24 @@ namespace Pagos.Recursos {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a P.
+        /// </summary>
+        public static string OrdenEstadoPendiente {
+            get {
+                return ResourceManager.GetString("OrdenEstadoPendiente", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a R.
+        /// </summary>
+        public static string OrdenEstadoRechazado {
+            get {
+                return ResourceManager.GetString("OrdenEstadoRechazado", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a A.
         /// </summary>
         public static string ProyectoEstadoActivo {

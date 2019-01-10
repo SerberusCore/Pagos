@@ -21,13 +21,6 @@
                 @Html.ValidationMessageFor(model => model.ProyectoId, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.OrdenCodigo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.OrdenCodigo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.OrdenCodigo, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.OrdenTipo, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -134,7 +127,7 @@
     var confirmador;
         $(document).ready(function () {
             var subtotales = function () {
-                var valores = $("#divLista  Detalle").find('[data-content="Total"]');
+                var valores = $("#divListaDetalle").find('[data-content="Total"]');
                 var sum = 0;
                 $.each(valores, function (i, item) {
                     var aux = $(item).text().trim();
@@ -230,21 +223,17 @@
                         confirmador = confirmar(function (id) {
                             $.get('@Url.Action("Delete","OrdenesDetalles")', { identificador: id }, function (data, status, jq) {
                                 $("#divListaDetalle").html(data);
+                                subtotales();
                                 borrarDetalle();
+                                edicionDetalle();
                                 confirmador.cerrar();
                             });
                         });
                         confirmador.abrir();
                     });
-        };
-            var guardarDetalle = function (detalle) {
-                $.post('@Url.Action("Create","OrdenesDetalles")', detalle, function (data, status, jq) {
-                    //carga la lista de detalles
-                    $("#divListaDetalle").html(data);
-                    subtotales();
-                }).always(function () {
-                    //carga edicion de detalle
-                    $("#divListaDetalle").find("[data-target='#EdicionDetalle']").click(function () {
+            };
+            var edicionDetalle = function () {
+                $("#divListaDetalle").find("[data-target='#EdicionDetalle']").click(function () {
                         id = $(this).attr("data-id");
                         $.get('@Url.Action("Edit","OrdenesDetalles")', { id: id }, function (data, status, jq) {
                             $("#EdicionDetalle").find(".modal-body").html(data);
@@ -252,7 +241,15 @@
                         });
                         $("#EdicionDetalle").modal('show');
                     });
-
+            };
+            var guardarDetalle = function (detalle) {
+                $.post('@Url.Action("Create","OrdenesDetalles")', detalle, function (data, status, jq) {
+                    //carga la lista de detalles
+                    $("#divListaDetalle").html(data);
+                    subtotales();
+                }).always(function () {
+                    //carga edicion de detalle
+                    edicionDetalle();
                     //carga accion de borrar detalle
                     borrarDetalle();
                 });
